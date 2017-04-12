@@ -45,16 +45,20 @@ class UserController extends Controller
 
     public function emailConfirm($code)
     {
+        //dd($code);
         //查询与之匹配的这个用户
-        $user = User::where('confirmed_code',$code)->first();
+        $user = User::where('confirmed_code', $code)->first();
         //dd($user);
         if (is_null($user)) {
-            return redirect('/');
+            return redirect('/index');
         }
         $user->confirmed_code = str_random(10);
         $user->is_confirmed = 1;
         $user->save();
-        return redirect('/login');
+
+        return redirect('/');
+
+
     }
 
     //处理登录
@@ -63,6 +67,16 @@ class UserController extends Controller
         //dd($request->all());
         Auth::attempt(['email' => $request->input('email'),'password' => $request->input('password')]);
         //dd($flag);
+
+        //邮箱判断
+        /*$result = User::where('email',$request->input('email'))->get()->toArray();
+            if ($result[0]['is_confirmed'] == 0) {
+                return back();
+            }*/
         return redirect('/index');
+
     }
+
+
+
 }
