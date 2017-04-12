@@ -23,7 +23,7 @@
 {{--头部--}}
 <div class="header" style="background-color: #d9edf7">
     <div class="head clearfix">
-        <div class="logo"><a href="index.html"><img src="{{asset('home/img/logo.jpg')}}" alt="张尼玛" style="width:90px"></a></div>
+        <div class="logo"><a href="index.html"><img src="{{asset('home/img/logo.jpg')}}" alt="张尼玛" style="width:90px;"></a></div>
         <ul class="nav clearfix" style="height: 120px;">
             <li>
                 <div class="li_m">

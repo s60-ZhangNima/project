@@ -24,7 +24,9 @@
 <div class="t_bg">
 	<div class="top">
         <a href="{{url('home/per_home')}}">个人主页</a>|
-        <a href="contact.html">与我相关</a>
+        <a href="contact.html">与我相关
+{{--        {{Auth::user()->name}}--}}
+        </a>
     </div>
 </div>
 <div class="header">

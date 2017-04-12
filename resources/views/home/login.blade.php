@@ -1,4 +1,4 @@
-@extends('master')
+@extends('layouts.master')
 @section('my-css')
     {{--自己的css样式--}}
     <style>
@@ -55,9 +55,9 @@
                         </button>
                     </div>
                     <div class="col-md-6">
-
-                            <a href="/register" class="btn btn-lg btn-info btn-block">注册</a>
-
+                        <button class="btn btn-lg btn-info btn-block" type="submit">
+                            <a href="{{url('home/register')}}">注册</a>
+                        </button>
                     </div>
 
                 </div>
@@ -71,7 +71,7 @@
     </div>
 
     {{--底部--}}
-    <div class="f_bg" style="background-color: #F3F3F3; ">
+    <div class="f_bg" style="background-color: #F3F3F3">
         <br>
         <br>
         <br>
@@ -121,7 +121,7 @@
                     <p><a href="#nogo" id="lawInfo">法律声明</a></p>
                 </dd>
                 <dt>
-                    <img src="{{asset('home/img/down-qr.jpg')}}" alt="">
+                    <img src="Assets/upload/code.jpg" alt="">
                 </dt>
             </dl>
         </div>

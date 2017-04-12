@@ -79,7 +79,14 @@ Route::get('/', 'LoginController@login');
 Route::get('/index', 'IndexController@index');
 Route::any('/singin', 'UserController@singin');
 //注册页
-Route::get('/register', 'UserController@register');
+Route::get('/home/register', 'UserController@register');
 Route::post('/store','UserController@store');
 
 Route::get('/verify/{confirmed_code}', 'UserController@emailConfirm');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
