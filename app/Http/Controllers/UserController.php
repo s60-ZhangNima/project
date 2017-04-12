@@ -21,14 +21,13 @@ class UserController extends Controller
     //保存用户信息
     public function store(UserRegisterRequest $request)
     {
-        //dd($request->all());
+
         $confirmed_code = str_random(10);
         $data = [
-            'avatar'=>'image/default.jpg',
+            'icon'=>'image/default.jpg',
             'confirmed_code' =>$confirmed_code,
         ];
         $user = User::create(array_merge($request->all(), $data ));
-        //dd($user);
         //发送邮件
         $view = 'home.emailConfirmed';
         $subject = '请验证邮箱';

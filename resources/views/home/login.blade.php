@@ -1,4 +1,4 @@
-@extends('master')
+@extends('layouts.master')
 @section('my-css')
     {{--自己的css样式--}}
     <style>

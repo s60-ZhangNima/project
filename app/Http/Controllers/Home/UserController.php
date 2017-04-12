@@ -18,19 +18,18 @@ class UserController extends Controller
     public function perHome($uid = 1)
     {
         $states = states::where('uid',$uid)->get();
-
         $story = story::where('uid',$uid)->get();
+        $icon = users::where('id',$uid)->get()->toArray();
+        if ($icon[0]['icon']){
+            $res = $icon[0]['icon'];
+        }else{
+            $res ='';
+        }
 
-      if (!empty($states) && !empty($story)){
-          return view('home.per_home',compact('states','story'));
-       }elseif(!empty($states)){
-            return view('home.per_home',compact('states'));
-      }elseif (!empty($story)){
-            return view('home.per_home',compact('story'));
-      }else{
-           return view('home.per_home');
-      }
+        return view('home.per_home',compact('states','story','res'));
+
     }
+
 
 
 
@@ -59,9 +58,9 @@ class UserController extends Controller
         return view('home.per_settings');
     }
 
-    public function perIcon()
+    public function perIcon($name = '')
     {
-    return view('home.per_icon');
+        return view('home.per_icon',compact('name'));
     }
 
     public function citys($id)
@@ -184,25 +183,25 @@ class UserController extends Controller
 
     public function upIcon(Request $request,$uid=1)
     {
+
         if($request->hasFile('pic')){
-            $result = ($request->file('pic')->store('image'));
+            $iconname = md5(time()).'.jpg';
+            $request->file('pic')->move('home/upImg',$iconname);
             $photos = photo::where('name','我的头像')->get()->toArray();
-//            dd($photos);
             if ($photos){
 
                 $icons =  new icon();
                 $icons->pid = $photos[0]['id'];
-                $icons->name = $result;
+                $icons->name =  $iconname;
                 $icons->desc = '我的头像';
                 $icons->create_time = time();
                 $icons->save();
                 $id = $icons->id;
-//                dd($id);
-                $res = icon::where('id',$id)->get();
-                if($res){
-
-                    return redirect('home/per_icon');
-                }
+                session(['cid'=>$id]);
+                $uicon = users::find($uid);
+                $uicon->icon = $iconname;
+                $uicon->save();
+                return redirect('home/per_home');
             } else {
                 $pho = new photo();
                 $pho->uid = $uid;
@@ -210,27 +209,25 @@ class UserController extends Controller
                 $pho->desc = '存放头像';
                 $pho->create_time = time();
                 $pho->save();
+
                 $id = photo::where('name','我的头像')->get()->toArray();
                 $icons =  new icon();
                 $icons->pid = $id[0]['id'];
-                $icons->name = $result;
+                $icons->name = $iconname;
                 $icons->create_time = time();
                 $icons->desc = '我的头像';
-                $id = $icons->id;
-                $res = icon::find($id)->get()->toArray();
-                if($res){
-                    return view('home.per_icon',compact('res'));
-                }
-            }
+                $icons->save();
+                session(['cid'=>$id]);
+                $uicon = users::where('id',$uid);
+                $uicon->icon = $iconname;
+                $uicon->save();
+                return redirect('home/per_home');
 
+            }
         }else{
             return back();
         }
     }
 
-    public function showIcon($id)
-    {
-        dd($id);
-    }
 
 }

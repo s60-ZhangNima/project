@@ -10,9 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 //个人主页
 Route::get('/home/per_home','Home\UserController@perHome');
@@ -62,12 +62,17 @@ Route::get('/home/per_focus','Home\UserController@perFocus');
 Route::get('/home/per_settings','Home\UserController@perSettings');
 
 //头像
-Route::get('/home/per_icon','Home\UserController@perIcon');
+Route::get('/home/per_icon/{name?}','Home\UserController@perIcon');
 
 
 //上传头像
-Route::post('/home/per_icon/up','Home\UserController@upIcon');
-//Route::get('/home/per_icon/show/{id}','Home\UserController@showIcon');
+Route::post('/home/per_icon','Home\UserController@upIcon');
+
+
+
+
+
+
 //登入页
 Route::get('/', 'LoginController@login');
 //前台首页

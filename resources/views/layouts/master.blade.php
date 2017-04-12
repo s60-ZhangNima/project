@@ -29,7 +29,7 @@
 </div>
 <div class="header">
     <div class="head clearfix">
-        <div class="logo"><a href="index.html"><img src="Assets/images/logo.png" alt="康索特"/></a></div>
+        <div class="logo"><a href="index.html"><img src="{{asset('home/img/logo.jpg')}}" style="width:90px"></a></div>
         <ul class="nav clearfix">
             <li>
                 <div class="li_m">

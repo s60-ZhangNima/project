@@ -24,11 +24,21 @@
 
             </ul>
 
-            <div style="border:5px solid #fff;width:180px" >
-                <img src="{{asset('home/img/men_main.jpg')}}" alt="" width="170">
-            </div>
-            </p>
-            <p><a class="btn btn-lg btn-success" href="{{url('home/per_icon')}}" role="button">上传头像</a></p>
+            @if(empty($res))
+                <div style="border:5px solid #fff;width:180px" >
+                    <img src="{{asset('home/img/men_main.jpg')}}" alt="" width="170">
+                </div>
+                <br>
+                <p><a class="btn btn-lg btn-success" href="{{url('home/per_icon')}}" role="button">上传头像</a></p>
+            @else
+                <div style="border:5px solid #fff;width:180px" >
+
+                    <img src="{{asset('home/upImg/'.$res)}}" alt="" width=170>
+
+                </div>
+                <br>
+                <p><a class="btn btn-lg btn-success" href="{{url('home/per_icon/'.$res)}}" role="button">上传头像</a></p>
+            @endif
         </div>
 
         <div class="row marketing">
@@ -53,51 +63,51 @@
             </div>
 
             <div class="col-lg-5" >
-                    <div id="content" >
-                        <p>我的状态：</p>
-                        @if(empty($states))
+                <div id="content" >
+                    <p>我的状态：</p>
+                    @if(empty($states))
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                暂无数据
+                            </div>
+                        </div>
+                    @else
+                        @foreach($states as $item)
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                    暂无数据
+                                    {{date('Y-m-d H:i:s',$item->create_time)}}
                                 </div>
-                            </div>
-                        @else
-                            @foreach($states as $item)
-                            <div class="panel panel-default">
-                            <div class="panel-body">
-                              {{date('Y-m-d H:i:s',$item->create_time)}}
-                            </div>
-                            <div class="panel-footer">{{$item->content}}
-                                <div style="float: right;">
-                                   <span class="glyphicon glyphicon-list-alt " aria-hidden="true" name="comments" style="cursor: pointer;"></span>
+                                <div class="panel-footer">{{$item->content}}
+                                    <div style="float: right;">
+                                        <span class="glyphicon glyphicon-list-alt " aria-hidden="true" name="comments" style="cursor: pointer;"></span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div name="comment" style="width:285px;height:auto;display: none;margin: 20px 0 ;margin-left: 5px">
-                               <form action="{{url('home/per_home/com')}}" method="post" >
-                                   {{csrf_field()}}
-                                   <input type="hidden" value="{{$item->id}}" name="sid">
-                                   <span class="glyphicon glyphicon-remove pull-right" style="border:1px solid #DDE8EF;padding:3px;" onclick="cancel(4)"></span>
-                                <textarea name="content" id="" cols="35" rows="3" style="resize: none" placeholder="评论..."></textarea>
-                                <div style="height: 55px">
-                                    <input type="submit" value="评论" style="background-color: #005EAC; width: 60px;height: 35px; border: none; color: #fff;float: right;margin-right: 60px">
+                                <div name="comment" style="width:285px;height:auto;display: none;margin: 20px 0 ;margin-left: 5px">
+                                    <form action="{{url('home/per_home/com')}}" method="post" >
+                                        {{csrf_field()}}
+                                        <input type="hidden" value="{{$item->id}}" name="sid">
+                                        <span class="glyphicon glyphicon-remove pull-right" style="border:1px solid #DDE8EF;padding:3px;" onclick="cancel(4)"></span>
+                                        <textarea name="content" id="" cols="35" rows="3" style="resize: none" placeholder="评论..."></textarea>
+                                        <div style="height: 55px">
+                                            <input type="submit" value="评论" style="background-color: #005EAC; width: 60px;height: 35px; border: none; color: #fff;float: right;margin-right: 60px">
+                                        </div>
+                                    </form>
                                 </div>
-                               </form>
-                            </div>
 
-                        </div>
-                            @endforeach
-                        @endif
+                            </div>
+                        @endforeach
+                    @endif
 
-                    </div>
+                </div>
                 <div id="state" style="width:373px;height:auto;background-color: #fff;display: none">
                     <form action="{{url('home/per_home')}}" method="post" >
                         <span class="glyphicon glyphicon-remove" style="float: right;border:1px solid #DDE8EF;padding: 3px;cursor: pointer" onclick="cancel(1)"></span>
                         <textarea  id="test" cols="46" rows="3" style="resize: none" placeholder="写下你此刻的心情吧..."  onKeyUp="cal_words()" name="content"></textarea>
                         {{csrf_field()}}
                         <div style="height:30px;line-height: 30px;font-weight: bold;">
-                        <span style="position: absolute;left: 316px;" id="num">240</span>
+                            <span style="position: absolute;left: 316px;" id="num">240</span>
                         </div>
-                           <input type="submit" value="发布" style="background-color: #005EAC; position: absolute; top: 112px;width: 90px;height: 35px; border: none; color: #fff;left: 278px;">
+                        <input type="submit" value="发布" style="background-color: #005EAC; position: absolute; top: 112px;width: 90px;height: 35px; border: none; color: #fff;left: 278px;">
 
                     </form>
                 </div>
@@ -106,7 +116,7 @@
                         <span class="glyphicon glyphicon-remove" style="float: right;border:1px solid #DDE8EF;padding: 3px;cursor: pointer"  onclick="cancel(2)"></span>
                         <input type="file"><br>
                         <textarea name="state" id="" cols="50" rows="3" style="resize: none" placeholder="描述..."></textarea>
-                            <input type="submit" value="上传" style="background-color: #005EAC; position: absolute; top: 153px;width: 90px;height: 35px; border: none; color: #fff;left: 286px;">
+                        <input type="submit" value="上传" style="background-color: #005EAC; position: absolute; top: 153px;width: 90px;height: 35px; border: none; color: #fff;left: 286px;">
 
                     </form>
                 </div>
@@ -135,7 +145,7 @@
                         <br>
                         <textarea name="content" id="" cols="50" rows="3" style="resize: none" placeholder="写下那些让你印象深刻的故事吧..."></textarea>
 
-                            <input type="submit" value="发布" style="background-color: #005EAC; position: absolute; top: 153px;width: 90px;height: 35px; border: none; color: #fff;left: 286px;">
+                        <input type="submit" value="发布" style="background-color: #005EAC; position: absolute; top: 153px;width: 90px;height: 35px; border: none; color: #fff;left: 286px;">
 
                     </form>
 
@@ -145,8 +155,8 @@
             <div class="col-lg-4">
                 <div id="gushi">
                     <p>我的故事：</p>
-                 @if(empty($story))
-                         <div class="panel panel-default">
+                    @if(empty($story))
+                        <div class="panel panel-default">
                             <div class="panel-body">
                                 暂无数据
                             </div>
@@ -219,35 +229,35 @@
         }
 
         function cancel(n) {
-                switch (n) {
-                    case 1:
-                        content.style.display = 'block';
-                        gushi.style.display = 'block';
-                        state.style.display = 'none';
-                        states.style.border ='1px solid #ccc';
+            switch (n) {
+                case 1:
+                    content.style.display = 'block';
+                    gushi.style.display = 'block';
+                    state.style.display = 'none';
+                    states.style.border ='1px solid #ccc';
                     break;
-                    case 2:
-                        gushi.style.display = 'block';
-                        content.style.display = 'block';
-                        pic.style.display = 'none';
-                        pics.style.border ='1px solid #ccc';
-                        break;
-                    case 3:
-                        content.style.display = 'block';
-                        story.style.display = 'none';
-                        stories.style.border ='1px solid #ccc';
-                        gushi.style.display = 'block';
-                        break;
-
-                    case 4:
-                        for(var i=0;i<com.length;i++){
-                            (function(i){
-                                com[i].style.display='none';
-                            })(i)
-                        }
+                case 2:
+                    gushi.style.display = 'block';
+                    content.style.display = 'block';
+                    pic.style.display = 'none';
+                    pics.style.border ='1px solid #ccc';
+                    break;
+                case 3:
+                    content.style.display = 'block';
+                    story.style.display = 'none';
+                    stories.style.border ='1px solid #ccc';
+                    gushi.style.display = 'block';
                     break;
 
-                }
+                case 4:
+                    for(var i=0;i<com.length;i++){
+                        (function(i){
+                            com[i].style.display='none';
+                        })(i)
+                    }
+                    break;
+
+            }
         }
 
         function cal_words(){
