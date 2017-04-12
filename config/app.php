@@ -38,7 +38,11 @@ return [
     |
     */
 
+<<<<<<< HEAD
     'debug' => env('APP_DEBUG', true),
+=======
+    'debug' => env('APP_DEBUG', false),
+>>>>>>> zhang
 
     /*
     |--------------------------------------------------------------------------
@@ -177,6 +181,10 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+<<<<<<< HEAD
+=======
+        Mews\Captcha\CaptchaServiceProvider::class,
+>>>>>>> zhang
 
     ],
 
@@ -225,6 +233,10 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+<<<<<<< HEAD
+=======
+        'Captcha' => Mews\Captcha\Facades\Captcha::class,
+>>>>>>> zhang
 
     ],
 

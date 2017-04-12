@@ -181,12 +181,21 @@ a:hover{ color:#005BAB;}
 
 
 /*2016-3-7修改*/
+<<<<<<< HEAD
 .f_bg{ width:100%; background:#444444; padding:25px 0;}
 .f_nav{ width:96%; min-width:1200px; margin:0px auto;}
 .f_nav ul{ width:54%; float:left; color:#eee;}
 .f_nav dl{ width:46%; float:left; color:#eee;}
 .f_nav ul li{ width:25%; float:left; padding-right:10px;}
 .f_nav b{ display:block; width:100%; height:35px; line-height:35px; font-size:16px; font-weight:normal; color:#FFF;}
+=======
+.f_bg{ width:100%; background:#444444; padding:25px 0; }
+.f_nav{ width:96%; min-width:1200px; margin:0px auto; }
+.f_nav ul{ width:54%; float:left; color:#000;}
+.f_nav dl{ width:46%; float:left; color:#000;}
+.f_nav ul li{ width:25%; float:left; padding-right:10px;}
+.f_nav b{ display:block; width:100%; height:35px; line-height:35px; font-size:16px; font-weight:normal; color:#000;}
+>>>>>>> zhang
 .f_nav p{ width:100%; padding:7px 0; font-size:13px;}
 .f_nav dl dt{ width:140px; float:right; text-align:center;}
 .f_nav dl dt img{ width:136px; height:136px; vertical-align:top;}
@@ -195,8 +204,13 @@ a:hover{ color:#005BAB;}
 .bq_bg{ width:100%; padding:10px 0; background:#333333; text-align:center; color:#FFF; font-size:13px;}
 .bq{ width:1100px; margin:0px auto;}
 .bq span{ display:inline-block; *display:inline; zoom:1; height:30px; line-height:30px; vertical-align:top; margin:0 10px;}
+<<<<<<< HEAD
 .bq a,.f_nav a{ color:#eee;}
 .bq a:hover,.f_nav a:hover{ color:#ccc;}
+=======
+.bq a,.f_nav a{ color:#000;}
+.bq a:hover,.f_nav a:hover{ color:#000;}
+>>>>>>> zhang
 
 
 .head .nav{ width:700px;}
