@@ -23,7 +23,7 @@
 {{--头部--}}
 <div class="header" style="background-color: #d9edf7">
     <div class="head clearfix">
-        <div class="logo"><a href="index.html"><img src="Assets/images/logo.png" alt="张尼玛"/></a></div>
+        <div class="logo"><a href="index.html"><img src="{{asset('home/img/logo.jpg')}}" alt="张尼玛" style="width:90px"></a></div>
         <ul class="nav clearfix" style="height: 120px;">
             <li>
                 <div class="li_m">
@@ -103,7 +103,7 @@
 </div>
 
 {{--底部--}}
-<div class="f_bg" style="background-color: #F3F3F3; ">
+<div class="f_bg" >
     <br>
     <br>
     <br>
@@ -112,7 +112,7 @@
     <div class="f_nav clearfix" style="border-top:1px solid gray;">
         <br>
         <br>
-        <ul class="clearfix ">
+        <ul class="clearfix " >
             <li>
                 <b>玩转人人</b>
                 <p><a href="http://page.renren.com/register/regGuide/" target="_blank">公共主页</a></p>
@@ -153,7 +153,7 @@
                 <p><a href="#nogo" id="lawInfo">法律声明</a></p>
             </dd>
             <dt>
-                <img src="Assets/upload/code.jpg" alt="">
+                <img src="{{asset('home/img/down-qr.jpg')}}" alt="">
             </dt>
         </dl>
     </div>
