@@ -10,8 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-<<<<<<< HEAD
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -70,21 +68,13 @@ Route::get('/home/per_icon','Home\UserController@perIcon');
 //上传头像
 Route::post('/home/per_icon/up','Home\UserController@upIcon');
 //Route::get('/home/per_icon/show/{id}','Home\UserController@showIcon');
-=======
 //登入页
 Route::get('/', 'LoginController@login');
 //前台首页
 Route::get('/index', 'IndexController@index');
-//
 Route::any('/singin', 'UserController@singin');
 //注册页
 Route::get('/register', 'UserController@register');
-//
 Route::post('/store','UserController@store');
 
 Route::get('/verify/{confirmed_code}', 'UserController@emailConfirm');
-
-
-
-
->>>>>>> zhang
