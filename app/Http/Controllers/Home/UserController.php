@@ -12,11 +12,14 @@ use App\Model\users;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+
 class UserController extends Controller
 {
     //
-    public function perHome($uid = 1)
+    public function perHome()
     {
+        $uid = Auth::user()->id;
         $states = states::where('uid',$uid)->get();
         $story = story::where('uid',$uid)->get();
         $icon = users::where('id',$uid)->get()->toArray();
@@ -25,6 +28,15 @@ class UserController extends Controller
         }else{
             $res ='';
         }
+//        dump($states->toArray());
+//        dd($story->toArray());
+        if (empty($states->toArray())){
+            $states = '';
+        }
+        if (empty($story->toArray())){
+            $story = '';
+        }
+
 
         return view('home.per_home',compact('states','story','res'));
 
@@ -40,10 +52,15 @@ class UserController extends Controller
 
     public function perState()
     {
-        $states = states::all();
+        $uid = Auth::user()->id;
 
+        $res = states::where('uid',$uid)->get()->toArray();
+       if ($res){
+           $states = states::where('uid',$uid)->get();
+       }else{
+           $states ='';
+       }
         return view('home.per_state',compact('states'));
-
     }
 
 
@@ -70,8 +87,9 @@ class UserController extends Controller
         return response()->json($result);
     }
 
-    public function writeState(Request $request,$email = '1150136605@qq.com')
+    public function writeState(Request $request)
     {
+        $email = Auth::user()->email;
         $user = users::where('email' ,$email)->first();
         $states = new states();
         $states->content = $request->input('content');
@@ -102,9 +120,12 @@ class UserController extends Controller
 
     public function showComment($id)
     {
-        $states = states::where('id',$id)->get();
 
+        $states = states::where('id',$id)->get();
         $comment = comments::where('sid',$id)->orderBy('id','desc')->get();
+        if (empty($comment->toArray())){
+            $comment = '';
+        }
         return view('home.per_comments',compact('comment','states'));
     }
 
@@ -126,9 +147,9 @@ class UserController extends Controller
         echo $praise;
     }
 
-    public function writeStory(Request $request,$uid = 1)
+    public function writeStory(Request $request)
     {
-
+        $uid = Auth::user()->id;
        $story = new story();
        $story->uid = $uid;
         $story->content = $request->input('content');
@@ -181,9 +202,9 @@ class UserController extends Controller
         echo $praise;
     }
 
-    public function upIcon(Request $request,$uid=1)
+    public function upIcon(Request $request)
     {
-
+        $uid = Auth::user()->id;
         if($request->hasFile('pic')){
             $iconname = md5(time()).'.jpg';
             $request->file('pic')->move('home/upImg',$iconname);

@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','人人网-张群艳')
+
 
 @section('content')
     <div class="container" style="width: 800px;height: auto;margin-top: 20px;margin-bottom: 10px">

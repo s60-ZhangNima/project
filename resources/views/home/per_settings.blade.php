@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','renrenwang')
+
 @section('content')
 <div class="container" style="margin: 20px 0">
     <div class="row">

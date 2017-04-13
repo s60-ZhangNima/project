@@ -24,7 +24,7 @@ class UserController extends Controller
 
         $confirmed_code = str_random(10);
         $data = [
-            'icon'=>'image/default.jpg',
+            'icon'=>'men_main.jpg',
             'confirmed_code' =>$confirmed_code,
         ];
         $user = User::create(array_merge($request->all(), $data ));

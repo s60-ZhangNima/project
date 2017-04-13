@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','人人网-张尼玛')
+
 @section('content')
     <div class="container" style="margin-top:20px;margin-bottom: 50px;width:600px;">
         <h3 class="text-muted">上传头像</h3>

@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','人人网-张群艳')
+
 
 
 @section('content')
@@ -24,7 +24,7 @@
 
             </ul>
 
-            @if(empty($res))
+            @if($res == 'men_main.jpg')
                 <div style="border:5px solid #fff;width:180px" >
                     <img src="{{asset('home/img/men_main.jpg')}}" alt="" width="170">
                 </div>
@@ -68,7 +68,7 @@
                     @if(empty($states))
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                暂无数据
+                                写一条状态吧...
                             </div>
                         </div>
                     @else
@@ -158,7 +158,7 @@
                     @if(empty($story))
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                暂无数据
+                                写出你的故事吧...
                             </div>
                         </div>
                     @else

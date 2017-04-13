@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','人人网-张群艳')
+
 
 @section('style')
 

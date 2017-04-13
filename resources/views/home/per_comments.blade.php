@@ -52,6 +52,12 @@
                             </div>
                        </div>
                        @endforeach
+                        @else
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                请先去评论一条吧...
+                            </div>
+                        </div>
                      @endif
             </div>
         </div>
