@@ -24,7 +24,7 @@ class UserController extends Controller
 
         $confirmed_code = str_random(10);
         $data = [
-            'icon'=>'image/default.jpg',
+            'icon'=>'img/default.jpg',
             'confirmed_code' =>$confirmed_code,
         ];
         $user = User::create(array_merge($request->all(), $data ));
@@ -50,7 +50,7 @@ class UserController extends Controller
         $user = User::where('confirmed_code', $code)->first();
         //dd($user);
         if (is_null($user)) {
-            return redirect('/index');
+            return redirect('/');
         }
         $user->confirmed_code = str_random(10);
         $user->is_confirmed = 1;
@@ -61,6 +61,7 @@ class UserController extends Controller
 
     }
 
+
     //处理登录
     public function singin(UserLoginRequest $request)
     {
@@ -69,10 +70,10 @@ class UserController extends Controller
         //dd($flag);
 
         //邮箱判断
-        /*$result = User::where('email',$request->input('email'))->get()->toArray();
+        $result = User::where('email',$request->input('email'))->get()->toArray();
             if ($result[0]['is_confirmed'] == 0) {
                 return back();
-            }*/
+            }
         return redirect('/index');
 
     }

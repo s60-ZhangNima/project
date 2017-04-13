@@ -82,4 +82,4 @@ Route::any('/singin', 'UserController@singin');
 Route::get('/register', 'UserController@register');
 Route::post('/store','UserController@store');
 
-Route::get('/verify/{confirmed_code}', 'UserController@emailConfirm');
+Route::get('/{confirmed_code}', 'UserController@emailConfirm');

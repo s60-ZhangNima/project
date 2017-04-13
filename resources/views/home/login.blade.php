@@ -35,7 +35,7 @@
                 <input type="password" id="inputPassword" class="form-control" placeholder="密码" name="password">
                 <br>
                 <div class="row">
-                    <div class="col-md-7">
+                    <div class="col-md-6">
                         <label for="inputPassword" class="sr-only">请输入验证码</label>
                         <br>
                         <input type="text" id="inputPassword" class="form-control" placeholder="请输入验证码" name="code">
