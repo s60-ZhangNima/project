@@ -82,6 +82,7 @@ Route::any('/singin', 'UserController@singin');
 Route::get('/home/register', 'UserController@register');
 Route::post('/store','UserController@store');
 
+<<<<<<< HEAD
 Route::get('/verify/{confirmed_code}', 'UserController@emailConfirm');
 Auth::routes();
 
@@ -90,3 +91,6 @@ Route::get('/home', 'HomeController@index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+=======
+Route::get('/{confirmed_code}', 'UserController@emailConfirm');
+>>>>>>> 1723b1e24b22e08b6e351e6cf1786bf7e1f61141
