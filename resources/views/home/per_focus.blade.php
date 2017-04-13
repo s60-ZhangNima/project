@@ -21,8 +21,8 @@
                 <ul id='select' style="margin-bottom:0px">
                     <li class="chose" id="add">添加好友</li>
                     <li id="myfriend">我的好友</li>
-                    <li>我关注的 </li>
-                    <li>关注我的</li>
+                    <li id="imind">我关注的 </li>
+                    <li id="mindme">关注我的</li>
                     <li style="background-color: #fff;border-right: 1px solid #ccc;">
                         <form action="">
                             <input type="search" placeholder="搜索..." style="width:120px;height:50px;border:none;text-align: center;">
@@ -32,8 +32,8 @@
                 </ul>
 
                 <div id='content' style="border:1px solid #ccc; border-top:none; padding:20px;height: 300px;">
-                    <div class='innerBox' style="display:block">哈哈哈哈</div>
-                    <div style="display:none">嘿嘿嘿</div>
+                    <div id="show" style="display:block;height: auto"></div>
+                    <div style="display:none" id="firends"></div>
                     <div style="display:none">呵呵呵</div>
                     <div style="display:none">好好好</div>
                 </div>
@@ -63,5 +63,86 @@
                 }
             })(i)
         }
+
+        $(function(){
+
+            $('#add').click(function(){
+                $.ajax({
+                    url:"{{url('home/per_showfriends')}}",
+                    type:'get',
+                    success:function(data){
+                        $('#show').empty();
+                        for(var i=0;i<data.length;i++){
+                            if (data[i]['icon'] == 'men_main.jpg'){
+                                $("#show").append(
+                                    '<div id="showFri'+[i]+'" style="width:172px;padding: 10px;margin: 8px;border:solid 2px #666;float: left">' +
+                                    "<img src='http://project.dev/home/img/"+data[i]['icon']+"'style='width:90px;margin-bottom: 10px;'> "+
+                                    '<span style="color:#333;margin-left: 10px">'+data[i]['name']+
+                                    '<button value="'+data[i]['id']+'"id="mind" style="margin-right:10px" class="btn btn-default">关注</button>' +
+                                    '<button value="'+data[i]['id']+'"id="addfri" class="btn btn-default">添加好友</button>' +
+                                    '</span></div>'
+                                );
+                            }else{
+                                $("#show").append(
+                                    '<div id="showFri'+[i]+'" style="width:172px;padding: 10px;margin: 8px;border:solid 2px #666;float: left">' +
+                                    "<img src='http://project.dev/home/upImg/"+data[i]['icon']+"'style='width:90px;margin-bottom: 10px;'> "+
+                                    '<span style="color:#333;margin-left: 10px">'+data[i]['name']+
+                                    '<button value="'+data[i]['id']+'"id="mind" style="margin-right:10px" class="btn btn-default">关注</button>' +
+                                    '<button value="'+data[i]['id']+'"id="addfri" class="btn btn-default">添加好友</button>' +
+                                    '</span></div>'
+                                );
+                            }
+                        }
+                    },
+                    error:function(){
+                        alert('失败！');
+                    },
+                    dataType:'json'
+
+                })
+            })
+            $('#myfriend').click(function(){
+                $.ajax({
+                    url:"{{url('home/per_myfriends')}}",
+                    type:'get',
+                    success:function (data) {
+                        if(data != ''){
+                            $('#friends').empty();
+                            $('#friends').css('display','block');
+                            for(var i=0;i<data.length;i++){
+                                if (data[i]['icon'] == 'men_main.jpg'){
+                                    $("#show").append(
+                                        '<div id="showFri'+[i]+'" style="width:172px;padding: 10px;margin: 8px;border:solid 2px #666;float: left">' +
+                                        "<img src='http://project.dev/home/img/"+data[i]['icon']+"'style='width:90px;margin-bottom: 10px;'> "+
+                                        '<span style="color:#333;margin-left: 10px">'+data[i]['name']+
+                                        '<button value="'+data[i]['id']+'"id="mind" style="margin-right:10px" class="btn btn-default">关注</button>' +
+                                        '<button value="'+data[i]['id']+'"id="addfri" class="btn btn-default">添加好友</button>' +
+                                        '</span></div>'
+                                    );
+                                }else{
+                                    $("#show").append(
+                                        '<div id="showFri'+[i]+'" style="width:172px;padding: 10px;margin: 8px;border:solid 2px #666;float: left">' +
+                                        "<img src='http://project.dev/home/upImg/"+data[i]['icon']+"'style='width:90px;margin-bottom: 10px;'> "+
+                                        '<span style="color:#333;margin-left: 10px">'+data[i]['name']+
+                                        '<button value="'+data[i]['id']+'"id="mind" style="margin-right:10px" class="btn btn-default">关注</button>' +
+                                        '<button value="'+data[i]['id']+'"id="addfri" class="btn btn-default">添加好友</button>' +
+                                        '</span></div>'
+                                    );
+                                }
+                            }
+                        }else{
+                            alert('你还没有好友，快去添加吧');
+                        }
+                    },
+                    error:function () {
+                        alert('失败！');
+                    },
+                    dataType:'json'
+                })
+            })
+            $('#imind').click(function(){})
+            $('#mindme').click(function(){})
+            $('#add').trigger('click');
+        })
     </script>
 @endsection

@@ -81,9 +81,9 @@ Route::post('/home/per_info/info','Home\UserController@writeInfo');
 Route::post('/home/per_info/feeling','Home\UserController@writeFeel');
 
 
-
-//有好友添加
-
+//展示其他用户
+Route::get('home/per_showfriends','Home\Usercontroller@showFriends');
+Route::get('home/per_myfriends','Home\Usercontroller@myFriends');
 
 
 

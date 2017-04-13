@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Home;
 
 use App\Model\comments;
 use App\Model\feeling;
+use App\Model\focus;
 use App\Model\icon;
 use App\Model\info;
 use App\Model\lamp_district;
@@ -89,7 +90,6 @@ class UserController extends Controller
        }
         return view('home.per_state',compact('states'));
     }
-
 
     public function perFocus()
     {
@@ -414,6 +414,33 @@ class UserController extends Controller
         }
 
         return redirect('home/per_info');
+    }
+
+    public  function showFriends()
+    {
+        $friends  = focus::where('uid',Auth::user()->id)->get()->toArray();
+        if(empty($friends)){
+           $fri = users::select('icon','name','id')->where('id','<>',Auth::user()->id)->get();
+        }else{
+            $ids = $friends[0][frid];
+            $fri  = users::select('icon','name','id')->whereNotIn('id',$ids)-get();
+        }
+        return response()->json($fri);
+
+    }
+
+    public function myFriends()
+    {
+        $friends  = focus::where('uid',Auth::user()->id)->get()->toArray();
+
+        if(empty($friends)){
+            return  response()->json($friends);
+        }else{
+            $ids = $friends[0][frid];
+            $fri  = users::whereIn('id',$ids)-get();
+            return response()->json($fri);
+        }
+
     }
 
 }
