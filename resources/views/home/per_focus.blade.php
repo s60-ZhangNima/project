@@ -19,8 +19,8 @@
 
             <div id='box' style="margin:100px 0;">
                 <ul id='select' style="margin-bottom:0px">
-                    <li class="chose">添加好友</li>
-                    <li>我的好友</li>
+                    <li class="chose" id="add">添加好友</li>
+                    <li id="myfriend">我的好友</li>
                     <li>我关注的 </li>
                     <li>关注我的</li>
                     <li style="background-color: #fff;border-right: 1px solid #ccc;">

@@ -30,6 +30,6 @@ class CreateIconsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('icon');
     }
 }

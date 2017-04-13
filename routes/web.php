@@ -68,7 +68,21 @@ Route::get('/home/per_icon/{name?}','Home\UserController@perIcon');
 //上传头像
 Route::post('/home/per_icon','Home\UserController@upIcon');
 
+//填写资料
+//学校信息
+Route::post('/home/per_info/school','Home\UserController@writeSchool');
+//工作信息
+Route::post('/home/per_info/work','Home\UserController@writeWork');
+//喜欢爱好信息
+Route::post('/home/per_info/like','Home\UserController@writeLike');
+//个人信息
+Route::post('/home/per_info/info','Home\UserController@writeInfo');
+//情感信息
+Route::post('/home/per_info/feeling','Home\UserController@writeFeel');
 
+
+
+//有好友添加
 
 
 
@@ -82,7 +96,7 @@ Route::any('/singin', 'UserController@singin');
 Route::get('/home/register', 'UserController@register');
 Route::post('/store','UserController@store');
 
-<<<<<<< HEAD
+
 Route::get('/verify/{confirmed_code}', 'UserController@emailConfirm');
 Auth::routes();
 
@@ -91,6 +105,6 @@ Route::get('/home', 'HomeController@index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
-=======
+
 Route::get('/{confirmed_code}', 'UserController@emailConfirm');
->>>>>>> 1723b1e24b22e08b6e351e6cf1786bf7e1f61141
+

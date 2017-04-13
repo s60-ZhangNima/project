@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 
-
 @section('content')
     <div class="container" style="width: 800px;height: auto">
         <div class="jumbotron" style="background-color: #DDE8EF">

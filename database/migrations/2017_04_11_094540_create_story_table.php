@@ -31,6 +31,6 @@ class CreateStoryTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('story');
     }
 }

@@ -5,6 +5,13 @@
         <div class="col-lg-4"></div>
         <div class="col-lg-4">
             <div id="content" >
+                @if(empty($states))
+                   <div class="panel panel-default">
+                       <div class="panel-body">
+                           先去写一条状态吧...
+                       </div>
+                   </div>
+                @else
                 <h3>状态 :</h3>
                 @foreach($states as $item)
                 <div class="panel panel-default">
@@ -39,6 +46,7 @@
                     </form>
                 </div>
                 @endforeach
+                    @endif
             </div>
         </div>
         <div class="col-lg-3"></div>

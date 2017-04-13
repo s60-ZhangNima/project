@@ -12,11 +12,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('home/css/thems.css')}}">
     <link rel="stylesheet" href="/css/bootstrap.css">
     @yield('my-css')
-    <style>
-        @yield('style')
 
 
-    </style>
 </head>
 
 <body>

@@ -3,16 +3,23 @@
 namespace App\Http\Controllers\Home;
 
 use App\Model\comments;
+use App\Model\feeling;
 use App\Model\icon;
+use App\Model\info;
 use App\Model\lamp_district;
+use App\Model\like;
 use App\Model\photo;
+use App\Model\school;
 use App\Model\states;
 use App\Model\story;
 use App\Model\users;
+use App\Model\work;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class UserController extends Controller
 {
@@ -47,22 +54,41 @@ class UserController extends Controller
 
     public function perInfo()
     {
-        return view('home.per_info');
+        $school = school::where('uid',Auth::user()->id)->get();
+        if ($school->isEmpty()){
+            $school = '';
+        }
+        $info = info::where('uid',Auth::user()->id)->get();
+        if ($info->isEmpty()){
+            $info = '';
+        }
+        $work = work::where('uid',Auth::user()->id)->get();
+        if ($work->isEmpty()){
+            $work = '';
+        }
+        $feel = feeling::where('uid',Auth::user()->id)->get();
+        if ($feel->isEmpty()){
+            $feel = '';
+        }
+        $like = like::where('uid',Auth::user()->id)->get();
+        if ($like->isEmpty()){
+            $like = '';
+        }
+
+        return view('home.per_info',compact('school','feel','work','like','info'));
     }
 
     public function perState()
     {
         $uid = Auth::user()->id;
 
-        $res = states::where('uid',$uid)->get()->toArray();
-       if ($res){
-           $states = states::where('uid',$uid)->get();
-       }else{
+        $states = states::where('uid',$uid)->get();
+       if ($states->isEmpty()){
+
            $states ='';
        }
         return view('home.per_state',compact('states'));
     }
-
 
 
     public function perFocus()
@@ -81,10 +107,13 @@ class UserController extends Controller
     }
 
     public function citys($id)
-    {   $result = lamp_district::where('upid',$id)
-                                ->get()
-                                ->toArray();
-        return response()->json($result);
+    {   $result = DB::table('lamp_district')->where('upid',$id)
+                                ->select()
+                                 ->get()
+                                ;
+
+
+        echo json_encode($result);
     }
 
     public function writeState(Request $request)
@@ -250,5 +279,141 @@ class UserController extends Controller
         }
     }
 
+    public function writeSchool(Request $request)
+    {
+
+        $res = school::where('uid',Auth::user()->id)->get()->toArray();
+
+        if (empty($res)){
+            $sch = new school();
+            $sch->uid = Auth::user()->id;
+            $sch->college = $request->input('college');
+            $sch->dept = $request->input('dept');
+            $sch->prof = $request->input('prof');
+            $sch->class = $request->input('class');
+            $sch->stn = $request->input('stn');
+            $sch->save();
+        } else {
+            $id = school::where('uid',Auth::user()->id)->get()->toArray();
+            $sch = school::find($id[0]['id']);
+            $sch->college = $request->input('college');
+            $sch->dept = $request->input('dept');
+            $sch->prof = $request->input('prof');
+            $sch->class = $request->input('class');
+            $sch->stn = $request->input('stn');
+            $sch->save();
+        }
+
+        return redirect('home/per_info');
+    }
+
+    public function writeInfo(Request $request)
+    {
+
+
+        $res = info::where('uid',Auth::user()->id)->get()->toArray();
+
+        if (empty($res)){
+            $inf = new info();
+            $inf->uid = Auth::user()->id;
+            $inf->realname = $request->input('realname');
+            $inf->nickname = $request->input('nickname');
+            $inf->sex = $request->input('sex');
+            $inf->address = $request->input('address');
+            $inf->birthday = $request->input('birthday');
+            $inf->address = $request->input('address');
+            $inf->save();
+        } else {
+            $id = info::where('uid',Auth::user()->id)->get()->toArray();
+            $inf = info::find($id[0]['id']);
+            $inf->realname = $request->input('realname');
+            $inf->nickname = $request->input('nickname');
+            $inf->sex = $request->input('sex');
+            $inf->address = $request->input('address');
+            $inf->birthday = $request->input('birthday');
+            $inf->address = $request->input('address');
+            $inf->save();
+        }
+
+        return redirect('home/per_info');
+    }
+
+    public function writeLike(Request $request)
+    {
+
+        $res = like::where('uid',Auth::user()->id)->get()->toArray();
+
+        if (empty($res)){
+            $like = new like();
+            $like->uid = Auth::user()->id;
+            $like->music = $request->input('music');
+            $like->hobby = $request->input('hobby');
+            $like->book = $request->input('book');
+            $like->movie = $request->input('movie');
+            $like->game = $request->input('game');
+            $like->animation = $request->input('animation');
+            $like->sport = $request->input('sport');
+            $like->save();
+        } else {
+            $id = like::where('uid',Auth::user()->id)->get()->toArray();
+            $like = like::find($id[0]['id']);
+            $like->music = $request->input('music');
+            $like->hobby = $request->input('hobby');
+            $like->book = $request->input('book');
+            $like->movie = $request->input('movie');
+            $like->game = $request->input('game');
+            $like->animation = $request->input('animation');
+            $like->sport = $request->input('sport');
+            $like->save();
+        }
+
+        return redirect('home/per_info');
+    }
+
+    public function writeFeel(Request $request)
+    {
+
+        $res = feeling::where('uid',Auth::user()->id)->get()->toArray();
+
+        if (empty($res)){
+            $feel = new feeling();
+            $feel->uid = Auth::user()->id;
+            $feel->feeling = $request->input('feeling');
+            $feel->save();
+        } else {
+            $id = feeling::where('uid',Auth::user()->id)->get()->toArray();
+            $feel = feeling::find($id[0]['id']);
+            $feel->feeling = $request->input('feeling');
+            $feel->save();
+        }
+
+        return redirect('home/per_info');
+    }
+
+    public function writeWork(Request $request)
+    {
+
+        $res = work::where('uid',Auth::user()->id)->get()->toArray();
+
+        if (empty($res)){
+            $work = new work();
+            $work->uid = Auth::user()->id;
+            $work->company = $request->input('company');
+            $work->industry = $request->input('industry');
+            $work->pp = $request->input('pp');
+            $work->work_time = $request->input('work_time');
+            $work->save();
+        } else {
+            $id = school::where('uid',Auth::user()->id)->get()->toArray();
+            $work = work::find($id[0]['id']);
+            $work->company = $request->input('company');
+            $work->industry = $request->input('industry');
+            $work->pp = $request->input('pp');
+            $work->work_time = $request->input('work_time');
+            $work->save();
+        }
+
+        return redirect('home/per_info');
+    }
 
 }
