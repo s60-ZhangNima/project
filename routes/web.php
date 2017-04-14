@@ -108,3 +108,20 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/{confirmed_code}', 'UserController@emailConfirm');
 
+
+
+//李进楷
+
+//Route::get('/h','IndexController@index');
+//Route::get('/photo','photoController@photo');
+//Route::get('/img','per_photoController@per_photo');
+Route::get('/admin/admin','adminController@admin');
+Route::get('/admin/login','AdminloginController@login');
+Route::get('/admin/activity','activityController@activity');
+Route::get('/admin/blank','blankController@blank');
+Route::get('/admin/files','filesController@files');
+Route::get('/admin/gallery','galleryController@gallery');
+Route::get('/admin/help','activityController@help');
+Route::get('/admin/messages','messagesController@messages');
+Route::get('/admin/profile','profileController@profile');
+Route::get('/admin/projects','projectsController@projects');
