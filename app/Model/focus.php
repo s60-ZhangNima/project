@@ -8,4 +8,5 @@ class focus extends Model
 {
     public $timestamps = false;
     public $table = 'focus';
+    protected  $primaryKey = 'uid';
 }

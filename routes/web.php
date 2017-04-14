@@ -86,6 +86,10 @@ Route::get('home/per_showfriends','Home\Usercontroller@showFriends');
 Route::get('home/per_myfriends','Home\Usercontroller@myFriends');
 
 
+//添加好友
+Route::get('home/per_addfri/{id}','Home\Usercontroller@addFriends');
+
+
 
 //登入页
 Route::get('/', 'LoginController@login');

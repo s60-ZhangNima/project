@@ -38,10 +38,10 @@ class UserController extends Controller
         }
 //        dump($states->toArray());
 //        dd($story->toArray());
-        if (empty($states->toArray())){
+        if ($states->isEmpty()){
             $states = '';
         }
-        if (empty($story->toArray())){
+        if ($story->isEmpty()){
             $story = '';
         }
 
@@ -107,13 +107,10 @@ class UserController extends Controller
     }
 
     public function citys($id)
-    {   $result = DB::table('lamp_district')->where('upid',$id)
-                                ->select()
-                                 ->get()
-                                ;
-
-
-        echo json_encode($result);
+    {  $result = lamp_district::where('upid',$id)
+        ->get()
+        ->toArray();
+        return response()->json($result);
     }
 
     public function writeState(Request $request)
@@ -310,7 +307,7 @@ class UserController extends Controller
     public function writeInfo(Request $request)
     {
 
-
+        dd($request);
         $res = info::where('uid',Auth::user()->id)->get()->toArray();
 
         if (empty($res)){
@@ -422,8 +419,14 @@ class UserController extends Controller
         if(empty($friends)){
            $fri = users::select('icon','name','id')->where('id','<>',Auth::user()->id)->get();
         }else{
-            $ids = $friends[0][frid];
-            $fri  = users::select('icon','name','id')->whereNotIn('id',$ids)-get();
+            $ids = $friends[0]['frid'];
+            $ids = $ids.','.Auth::user()->id;
+            $ids = explode(',',$ids);
+            $num = [];
+            for ($i=0;$i<count($ids);$i++){
+                $num[]=intval($ids[$i]);
+            }
+            $fri = users::select('icon','name','id')->whereNotIn('id',$num)->get();
         }
         return response()->json($fri);
 
@@ -431,16 +434,53 @@ class UserController extends Controller
 
     public function myFriends()
     {
-        $friends  = focus::where('uid',Auth::user()->id)->get()->toArray();
+        $friends = focus::where('uid', Auth::user()->id)->get()->toArray();
 
-        if(empty($friends)){
-            return  response()->json($friends);
-        }else{
-            $ids = $friends[0][frid];
-            $fri  = users::whereIn('id',$ids)-get();
+        if (empty($friends)) {
+            return response()->json($friends);
+        } else {
+
+            $ids = $friends[0]['frid'];
+            $count = strlen($ids); //判断字段长度
+            if ($count > 1) {
+                $ids = explode(',',$ids); //将字符串进行分割
+                $num = [];
+                for ($i=0;$i<count($ids);$i++){
+                    $num[]=intval($ids[$i]);
+                }
+
+                $fri = users::whereIn('id', $num)->get();
+            } else {
+                $ids= intval($ids);
+                $fri = users::select('icon', 'name', 'id')->where('id', $ids)->get();
+
+            }
             return response()->json($fri);
-        }
 
+        }
+    }
+
+    public  function addFriends($id)
+    {
+       $ids = focus::where('uid',Auth::user()->id)->get();
+       if($ids->isEmpty()){
+           $friends = new focus();
+           $friends->uid = Auth::user()->id;
+           $friends->frid = $id ;
+           $result = $friends->save();
+       } else {
+           $ids = $ids[0]['frid'];
+           $frids = $ids.','.$id;
+           $friends = focus::find(Auth::user()->id);
+           $friends->frid = $frids;
+           $result = $friends->save();
+       }
+       if ($result){
+           $res = 1;
+       }else{
+           $res =0;
+       }
+        return $res;
     }
 
 }

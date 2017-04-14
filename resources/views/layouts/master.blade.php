@@ -37,9 +37,9 @@
         <ul class="nav clearfix">
             <li>
                 <div class="li_m">
-                    <a href="about.html">
+                    <a href="{{url('home/index')}}">
                         <span>首页</span>
-                        About us
+                        Index
                     </a>
                 </div>
             </li>
@@ -47,15 +47,15 @@
                 <div class="li_m">
                     <a href="solution.html">
                         <span>我的相册</span>
-                        Solution
+                       My Photo
                     </a>
                 </div>
             </li>
             <li>
                 <div class="li_m">
-                    <a href="product.html">
+                    <a href="{{url('home/per_focus')}}">
                         <span>我的好友</span>
-                        Product
+                        My Friend
                     </a>
                 </div>
             </li>

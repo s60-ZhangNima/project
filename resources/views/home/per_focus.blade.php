@@ -32,10 +32,10 @@
                 </ul>
 
                 <div id='content' style="border:1px solid #ccc; border-top:none; padding:20px;height: 300px;">
-                    <div id="show" style="display:block;height: auto"></div>
-                    <div style="display:none" id="firends"></div>
-                    <div style="display:none">呵呵呵</div>
-                    <div style="display:none">好好好</div>
+                    <div id="show" style="height: auto" name="a"></div>
+                    <div style="display:none" id="friends" name="a"></div>
+                    <div style="display:none" name="a">呵呵呵</div>
+                    <div style="display:none" name="a">好好好</div>
                 </div>
             </div>
         </div>
@@ -46,7 +46,7 @@
         var box = document.getElementById('box');
         var lis = box.getElementsByTagName('li');  //拿到li数组
         var con = document.getElementById('content');
-        var divs = con.getElementsByTagName('div');  //拿到盒子数组
+        var divs = document.getElementsByName('a');  //拿到盒子数组
 
 
         // 进行循环绑定
@@ -78,8 +78,8 @@
                                     '<div id="showFri'+[i]+'" style="width:172px;padding: 10px;margin: 8px;border:solid 2px #666;float: left">' +
                                     "<img src='http://project.dev/home/img/"+data[i]['icon']+"'style='width:90px;margin-bottom: 10px;'> "+
                                     '<span style="color:#333;margin-left: 10px">'+data[i]['name']+
-                                    '<button value="'+data[i]['id']+'"id="mind" style="margin-right:10px" class="btn btn-default">关注</button>' +
-                                    '<button value="'+data[i]['id']+'"id="addfri" class="btn btn-default">添加好友</button>' +
+                                    '<button value="'+data[i]['id']+'"id="" style="margin-right:10px" class="btn btn-default mind">关注</button>' +
+                                    '<button value="'+data[i]['id']+'"id="" class="btn btn-default addfri">添加好友</button>' +
                                     '</span></div>'
                                 );
                             }else{
@@ -87,8 +87,8 @@
                                     '<div id="showFri'+[i]+'" style="width:172px;padding: 10px;margin: 8px;border:solid 2px #666;float: left">' +
                                     "<img src='http://project.dev/home/upImg/"+data[i]['icon']+"'style='width:90px;margin-bottom: 10px;'> "+
                                     '<span style="color:#333;margin-left: 10px">'+data[i]['name']+
-                                    '<button value="'+data[i]['id']+'"id="mind" style="margin-right:10px" class="btn btn-default">关注</button>' +
-                                    '<button value="'+data[i]['id']+'"id="addfri" class="btn btn-default">添加好友</button>' +
+                                    '<button value="'+data[i]['id']+'"id="" style="margin-right:10px" class="btn btn-default mind">关注</button>' +
+                                    '<button value="'+data[i]['id']+'"id="" class="btn btn-default addfri">添加好友</button>' +
                                     '</span></div>'
                                 );
                             }
@@ -101,6 +101,8 @@
 
                 })
             })
+
+
             $('#myfriend').click(function(){
                 $.ajax({
                     url:"{{url('home/per_myfriends')}}",
@@ -108,30 +110,33 @@
                     success:function (data) {
                         if(data != ''){
                             $('#friends').empty();
-                            $('#friends').css('display','block');
+                           
                             for(var i=0;i<data.length;i++){
                                 if (data[i]['icon'] == 'men_main.jpg'){
-                                    $("#show").append(
+                                    $("#friends").append(
                                         '<div id="showFri'+[i]+'" style="width:172px;padding: 10px;margin: 8px;border:solid 2px #666;float: left">' +
                                         "<img src='http://project.dev/home/img/"+data[i]['icon']+"'style='width:90px;margin-bottom: 10px;'> "+
                                         '<span style="color:#333;margin-left: 10px">'+data[i]['name']+
-                                        '<button value="'+data[i]['id']+'"id="mind" style="margin-right:10px" class="btn btn-default">关注</button>' +
-                                        '<button value="'+data[i]['id']+'"id="addfri" class="btn btn-default">添加好友</button>' +
+                                        '<button value="'+data[i]['id']+'"style="margin-right:10px" class="btn btn-default demind">关注</button>' +
+                                        '<button value="'+data[i]['id']+'"class="btn btn-default delete">删除好友</button>' +
                                         '</span></div>'
                                     );
                                 }else{
-                                    $("#show").append(
+                                    $("#friends").append(
                                         '<div id="showFri'+[i]+'" style="width:172px;padding: 10px;margin: 8px;border:solid 2px #666;float: left">' +
                                         "<img src='http://project.dev/home/upImg/"+data[i]['icon']+"'style='width:90px;margin-bottom: 10px;'> "+
                                         '<span style="color:#333;margin-left: 10px">'+data[i]['name']+
                                         '<button value="'+data[i]['id']+'"id="mind" style="margin-right:10px" class="btn btn-default">关注</button>' +
-                                        '<button value="'+data[i]['id']+'"id="addfri" class="btn btn-default">添加好友</button>' +
+                                        '<button value="'+data[i]['id']+'"id="addfri" class="btn btn-default">删除好友</button>' +
                                         '</span></div>'
                                     );
                                 }
                             }
                         }else{
-                            alert('你还没有好友，快去添加吧');
+                            $('#friends').empty();
+
+                            $('#friends').append('<div">你还没有好友，快去添加吧！</div>');
+//                            alert('你还没有好友，快去添加吧');
                         }
                     },
                     error:function () {
@@ -140,9 +145,29 @@
                     dataType:'json'
                 })
             })
+
+
             $('#imind').click(function(){})
             $('#mindme').click(function(){})
+
+            //自动执行
             $('#add').trigger('click');
+
+            $('.addfri').live('click',function(){
+                $.ajax({
+                    url:"http://project.dev/home/per_addfri/"+$('.addfri').val(),
+                    type:'get',
+                    success:function(data){
+                        if(data == 1){
+                            alert('添加成功！');
+                            location.reload();
+                        }
+                    },
+                    error:function(){
+                        alert('失败！');
+                    },
+                })
+            })
         })
     </script>
 @endsection
