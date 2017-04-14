@@ -34,8 +34,8 @@
                 <div id='content' style="border:1px solid #ccc; border-top:none; padding:20px;height: 300px;">
                     <div id="show" style="height: auto" name="a"></div>
                     <div style="display:none" id="friends" name="a"></div>
-                    <div style="display:none" name="a">呵呵呵</div>
-                    <div style="display:none" name="a">好好好</div>
+                    <div style="display:none" name="a" id="iminds"></div>
+                    <div style="display:none" name="a" id="mindmes"></div>
                 </div>
             </div>
         </div>
@@ -66,6 +66,7 @@
 
         $(function(){
 
+
             $('#add').click(function(){
                 $.ajax({
                     url:"{{url('home/per_showfriends')}}",
@@ -78,7 +79,8 @@
                                     '<div id="showFri'+[i]+'" style="width:172px;padding: 10px;margin: 8px;border:solid 2px #666;float: left">' +
                                     "<img src='http://project.dev/home/img/"+data[i]['icon']+"'style='width:90px;margin-bottom: 10px;'> "+
                                     '<span style="color:#333;margin-left: 10px">'+data[i]['name']+
-                                    '<button value="'+data[i]['id']+'"id="" style="margin-right:10px" class="btn btn-default mind">关注</button>' +
+                                    '<button value="'+data[i]['id']+'"id="" style="margin-right:10px" class="btn btn-default mind">' +
+                                    '关注</button>' +
                                     '<button value="'+data[i]['id']+'"id="" class="btn btn-default addfri">添加好友</button>' +
                                     '</span></div>'
                                 );
@@ -117,7 +119,7 @@
                                         '<div id="showFri'+[i]+'" style="width:172px;padding: 10px;margin: 8px;border:solid 2px #666;float: left">' +
                                         "<img src='http://project.dev/home/img/"+data[i]['icon']+"'style='width:90px;margin-bottom: 10px;'> "+
                                         '<span style="color:#333;margin-left: 10px">'+data[i]['name']+
-                                        '<button value="'+data[i]['id']+'"style="margin-right:10px" class="btn btn-default demind">关注</button>' +
+                                        '<button value="'+data[i]['id']+'"style="margin-right:10px" class="btn btn-default mind" >关注</button>' +
                                         '<button value="'+data[i]['id']+'"class="btn btn-default delete">删除好友</button>' +
                                         '</span></div>'
                                     );
@@ -126,7 +128,7 @@
                                         '<div id="showFri'+[i]+'" style="width:172px;padding: 10px;margin: 8px;border:solid 2px #666;float: left">' +
                                         "<img src='http://project.dev/home/upImg/"+data[i]['icon']+"'style='width:90px;margin-bottom: 10px;'> "+
                                         '<span style="color:#333;margin-left: 10px">'+data[i]['name']+
-                                        '<button value="'+data[i]['id']+'"id="mind" style="margin-right:10px" class="btn btn-default">关注</button>' +
+                                        '<button value="'+data[i]['id']+'"id="mind" style="margin-right:10px" class="btn btn-default mind">关注</button>' +
                                         '<button value="'+data[i]['id']+'"id="addfri" class="btn btn-default">删除好友</button>' +
                                         '</span></div>'
                                     );
@@ -147,8 +149,89 @@
             })
 
 
-            $('#imind').click(function(){})
-            $('#mindme').click(function(){})
+            $('#imind').click(function(){
+                $.ajax({
+                    url:"{{url('home/per_imind')}}",
+                    type:'get',
+                    success:function (data) {
+                        if(data != ''){
+                            $('#iminds').empty();
+
+                            for(var i=0;i<data.length;i++){
+                                if (data[i]['icon'] == 'men_main.jpg'){
+                                    $("#iminds").append(
+                                        '<div id="showFri'+[i]+'" style="width:172px;padding: 10px;margin: 8px;border:solid 2px #666;float: left">' +
+                                        "<img src='http://project.dev/home/img/"+data[i]['icon']+"'style='width:90px;margin-bottom: 10px;'> "+
+                                        '<span style="color:#333;margin-left: 10px">'+data[i]['name']+
+                                        '<button value="'+data[i]['id']+'"style="margin-right:10px" class="btn btn-default mind" >取消关注</button>' +
+                                        '<button value="'+data[i]['id']+'"id="" class="btn btn-default addfri">添加好友</button>' +
+                                        '</span></div>'
+                                    );
+                                }else{
+                                    $("#iminds").append(
+                                        '<div id="showFri'+[i]+'" style="width:172px;padding: 10px;margin: 8px;border:solid 2px #666;float: left">' +
+                                        "<img src='http://project.dev/home/upImg/"+data[i]['icon']+"'style='width:90px;margin-bottom: 10px;'> "+
+                                        '<span style="color:#333;margin-left: 10px">'+data[i]['name']+
+                                        '<button value="'+data[i]['id']+'"id="mind" style="margin-right:10px" class="btn btn-default mind">取消关注</button>' +
+                                        '<button value="'+data[i]['id']+'"id="" class="btn btn-default addfri">添加好友</button>' +
+                                        '</span></div>'
+                                    );
+                                }
+                            }
+                        }else{
+                            $('#iminds').empty();
+
+                            $('#iminds').append('<div">你还没有关注谁，快去关注吧！</div>');
+//                            alert('你还没有好友，快去添加吧');
+                        }
+                    },
+                    error:function () {
+                        alert('失败！');
+                    },
+                    dataType:'json'
+                })
+            })
+            $('#mindme').click(function(){
+                $.ajax({
+                    url:"{{url('home/per_mmind')}}",
+                    type:'get',
+                    success:function (data) {
+                        if(data != ''){
+                            $('#mindmes').empty();
+
+                            for(var i=0;i<data.length;i++){
+                                if (data[i]['icon'] == 'men_main.jpg'){
+                                    $("#mindmes").append(
+                                        '<div id="showFri'+[i]+'" style="width:172px;padding: 10px;margin: 8px;border:solid 2px #666;float: left">' +
+                                        "<img src='http://project.dev/home/img/"+data[i]['icon']+"'style='width:90px;margin-bottom: 10px;'> "+
+                                        '<span style="color:#333;margin-left: 10px">'+data[i]['name']+
+                                        '<button value="'+data[i]['id']+'"style="margin-right:10px" class="btn btn-default mind" >关注</button>' +
+                                        '<button value="'+data[i]['id']+'"id="" class="btn btn-default addfri">添加好友</button>' +
+                                        '</span></div>'
+                                    );
+                                }else{
+                                    $("#mindmes").append(
+                                        '<div id="showFri'+[i]+'" style="width:172px;padding: 10px;margin: 8px;border:solid 2px #666;float: left">' +
+                                        "<img src='http://project.dev/home/upImg/"+data[i]['icon']+"'style='width:90px;margin-bottom: 10px;'> "+
+                                        '<span style="color:#333;margin-left: 10px">'+data[i]['name']+
+                                        '<button value="'+data[i]['id']+'"id="mind" style="margin-right:10px" class="btn btn-default mind">关注</button>' +
+                                        '<button value="'+data[i]['id']+'"id="" class="btn btn-default addfri">添加好友</button>' +
+                                        '</span></div>'
+                                    );
+                                }
+                            }
+                        }else{
+                            $('#mindmes').empty();
+
+                            $('#mindmes').append('<div">还没有人关注你，先去关注别人吧！</div>');
+                        }
+                    },
+                    error:function () {
+                        alert('失败！');
+                    },
+                    dataType:'json'
+                })
+            })
 
             //自动执行
             $('#add').trigger('click');
@@ -159,7 +242,7 @@
                     type:'get',
                     success:function(data){
                         if(data == 1){
-                            alert('添加成功！');
+                            alert('取关成功！');
                             location.reload();
                         }
                     },
@@ -167,6 +250,39 @@
                         alert('失败！');
                     },
                 })
+            })
+            $(".mind").live('click',function(){
+                var $_this = $(this);
+                if ($_this.text()=='取关' || $_this.text()=='取消关注'){
+                    $.ajax({
+                        url:"http://project.dev/home/per_mind/"+$('.mind').val(),
+                        type:'get',
+                        success:function(data){
+                            if(data == 1){
+                                alert('取关成功！');
+                                $_this.text('关注');
+                            }
+                        },
+                        error:function(){
+                            alert('失败！');
+                        },
+                    })
+                } else {
+                    $.ajax({
+                        url:"http://project.dev/home/per_mind/"+$('.mind').val(),
+                        type:'get',
+                        success:function(data){
+                            if(data == 1){
+                                alert('关注成功！');
+                                $_this.text('取关');
+                            }
+                        },
+                        error:function(){
+                            alert('失败！');
+                        },
+                    })
+                }
+//
             })
         })
     </script>

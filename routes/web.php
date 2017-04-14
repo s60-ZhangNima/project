@@ -83,11 +83,20 @@ Route::post('/home/per_info/feeling','Home\UserController@writeFeel');
 
 //展示其他用户
 Route::get('home/per_showfriends','Home\Usercontroller@showFriends');
+//查看我的好友
 Route::get('home/per_myfriends','Home\Usercontroller@myFriends');
 
 
 //添加好友
 Route::get('home/per_addfri/{id}','Home\Usercontroller@addFriends');
+//添加关注和取消关注
+Route::get('home/per_mind/{id}','Home\Usercontroller@addOrdelMind');
+//查看我关注的
+Route::get('home/per_imind/','Home\Usercontroller@showImind');
+//查看谁关注我
+Route::get('home/per_mmind/','Home\Usercontroller@mindMe');
+
+
 
 
 

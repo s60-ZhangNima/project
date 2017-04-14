@@ -435,25 +435,21 @@ class UserController extends Controller
     public function myFriends()
     {
         $friends = focus::where('uid', Auth::user()->id)->get()->toArray();
-
-        if (empty($friends)) {
-            return response()->json($friends);
+        $ids = $friends[0]['frid'];
+        if (empty($ids)) {
+            return 0;
         } else {
-
-            $ids = $friends[0]['frid'];
-            $count = strlen($ids); //判断字段长度
+           $count = strlen($ids); //判断字段长度
             if ($count > 1) {
                 $ids = explode(',',$ids); //将字符串进行分割
                 $num = [];
                 for ($i=0;$i<count($ids);$i++){
                     $num[]=intval($ids[$i]);
                 }
-
                 $fri = users::whereIn('id', $num)->get();
             } else {
                 $ids= intval($ids);
                 $fri = users::select('icon', 'name', 'id')->where('id', $ids)->get();
-
             }
             return response()->json($fri);
 
@@ -481,6 +477,76 @@ class UserController extends Controller
            $res =0;
        }
         return $res;
+    }
+
+    public function showImind()
+    {
+        $imnd  = focus::where('uid',Auth::user()->id)->get()->toArray();
+        $imnds = $imnd[0]['imid'];
+        if(empty($imnds)){
+            return 0;
+        }else{
+            $ids = explode(',',$imnds);
+            $num = [];
+            for ($i=0;$i<count($ids);$i++){
+                $num[]=intval($ids[$i]);
+            }
+            $fri = users::select('icon','name','id')->whereIn('id',$num)
+                                                    ->where('id','<>',Auth::user()->id)
+                                                    ->get();
+        }
+        return response()->json($fri);
+    }
+
+    public function addOrdelMind($id)
+    {
+        $res = focus::where('imid','like','%'.$id.'%')->get();
+        if ($res->isEmpty()){
+            $imid = focus::find(Auth::user()->id);
+            $imid->imid = $id.',';
+            $imid->save();
+            $res =  $imid->save();
+        } else {
+            $arr = focus::where('uid',Auth::user()->id)->get()->toArray();
+            $arr = $arr[0]['imid'];
+            $arr = explode(',',$arr);
+            $key = array_search($id,$arr);
+            unset($arr[$key]);
+            $imids = implode(',',$arr);
+            $imid = focus::find(Auth::user()->id);
+            $imid->imid = $imids;
+            $imid->save();
+            $res =  $imid->save();
+        }
+
+        if ($res){
+            $result = 1;
+        } else {
+            $result = 0;
+        }
+        return $result;
+    }
+
+    public function mindMe()
+    {
+        $res = focus::where('imid','like','%'.Auth::user()->id.'%')
+                      ->where('uid','<>',Auth::user()->id)->get();
+
+        if($res->isEmpty()){
+            return 0;
+        }else{
+            foreach ($res as $item){
+                $mmids[]= $item['uid'];
+            }
+            $str = implode(',',$mmids);
+            $me = focus::find(Auth::user()->id);
+            $me->mmid = $str;
+            $me->save();
+            $mmid = users::select('icon','name','id')->whereIn('id',$mmids)
+                ->where('id','<>',Auth::user()->id)
+                ->get();
+            return response()->json($mmid);
+        }
     }
 
 }
