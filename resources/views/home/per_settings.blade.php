@@ -10,8 +10,8 @@
                     <div class="panel-body">
                        <h2>安全邮箱</h2>
                     </div>
-                    <div class="panel-footer">已设置12******11@163.com
-                        <span class="glyphicon glyphicon-ok-circle"></span></div>
+                    <div class="panel-footer">已设置{{$em}}
+                        <span class="glyphicon glyphicon-ok-circle" style="color:limegreen"></span></div>
                     <span>&nbsp;&nbsp;&nbsp;仅需要一封邮件,快速修改密码或其他密保</span>
                 </div>
             </a>
@@ -36,7 +36,7 @@
             <div class="panel panel-default">
                 <div class="panel-body" id="cphone">
                     更换邮箱
-                    12******11@163.com <span class="caret"></span>
+                    {{$em}} <span class="caret"></span>
                     <div id="phone" style="display: none">
                         <form action=""style="padding:10px;" >
                             <div class="form-group" style="width:200px"　>
@@ -66,20 +66,21 @@
                     <span class="caret"></span>
                 </div>
                     <div id="pwd" style="display: none">
-                        <form action=""style="padding:10px;" >
+                        <form style="padding:10px;" action="{{url('home/per_changepwd')}}" method="post">
                             <div class="form-group" style="width:200px"　>
+                                {{csrf_field()}}
                                 <label for="exampleInputFile">　原密码：</label>
-                                　<input type="text" class="form-control" id="exampleInputPassword1" placeholder="原密码" name="opwd">
+                                　<input type="password" class="form-control" id="opwd" placeholder="原密码" name="opwd">
                             </div>
                             <div class="form-group" style="width:200px">
                                 <label for="exampleInputFile">　新密码：</label>
-                                　<input type="text" class="form-control" id="exampleInputPassword1" placeholder="新密码" name="pwd">
+                                　<input type="password" class="form-control" id="npwd" placeholder="新密码" name="npwd">
                             </div>
                             <div class="form-group" style="width:200px">
                                 <label for="exampleInputFile">　再次确认：</label>
-                                　<input type="text" class="form-control" id="exampleInputPassword1" placeholder="再次确认" name="repwd">
+                                　<input type="password" class="form-control" id="repwd" placeholder="再次确认" name="repwd">
                             </div>
-                            <input type="submit" class="btn btn-default" value="提交">
+                            <input type="submit" value="提交" class="btn btn-default" id="changePwd">
                             <button class="btn btn-default" onclick="cancel(2)">取消</button>
 
                         </form>
@@ -91,8 +92,8 @@
 <script>
     var cpwd = document.getElementById('cpwd');
     var pdw = document.getElementById('pwd');
-    var cphone = document.getElementById('cphone')
-    var phone = document.getElementById('phone')
+    var cphone = document.getElementById('cphone');
+    var phone = document.getElementById('phone');
 
     cpwd.onclick = function(){
         pwd.style.display='block';
@@ -114,5 +115,6 @@
             break;
         }
     }
+
 </script>
 @endsection

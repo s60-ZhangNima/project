@@ -20,6 +20,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 
 class UserController extends Controller
@@ -98,7 +99,10 @@ class UserController extends Controller
 
     public function perSettings()
     {
-        return view('home.per_settings');
+        $em = users::select('email')->where('id',Auth::user()->id)->get()->toArray();
+        $em = $em[0]['email'];
+        $em = substr_replace($em,'******',2,6);
+        return view('home.per_settings',compact('em'));
     }
 
     public function perIcon($name = '')
@@ -456,7 +460,7 @@ class UserController extends Controller
         }
     }
 
-    public  function addFriends($id)
+    public  function addOrdelFriends($id)
     {
        $ids = focus::where('uid',Auth::user()->id)->get();
        if($ids->isEmpty()){
@@ -465,11 +469,24 @@ class UserController extends Controller
            $friends->frid = $id ;
            $result = $friends->save();
        } else {
-           $ids = $ids[0]['frid'];
-           $frids = $ids.','.$id;
-           $friends = focus::find(Auth::user()->id);
-           $friends->frid = $frids;
-           $result = $friends->save();
+           $has = focus::where('frid','like','%'.$id.'%')->where('uid',Auth::user()->id)->get();
+           if ($has->isEmpty()){
+               $ids = $ids[0]['frid'];
+               $frids = $ids.','.$id;
+               $friends = focus::find(Auth::user()->id);
+               $friends->frid = $frids;
+               $result = $friends->save();
+           }else{
+               $arr = $has->toArray();
+               $arr = $arr[0]['frid'];
+               $arr = explode(',',$arr);
+               $key = array_search($id,$arr);
+               unset($arr[$key]);
+               $frids = implode(',',$arr);
+               $frid = focus::find(Auth::user()->id);
+               $frid->frid =  $frids;
+               $result =$frid->save();
+           }
        }
        if ($result){
            $res = 1;
@@ -500,10 +517,12 @@ class UserController extends Controller
 
     public function addOrdelMind($id)
     {
+        $ids = focus::where('uid',Auth::user()->id)->get();
         $res = focus::where('imid','like','%'.$id.'%')->get();
         if ($res->isEmpty()){
             $imid = focus::find(Auth::user()->id);
-            $imid->imid = $id.',';
+            $arr = $ids[0]['imid'];
+            $imid->imid = $arr.','.$id;
             $imid->save();
             $res =  $imid->save();
         } else {
@@ -520,11 +539,11 @@ class UserController extends Controller
         }
 
         if ($res){
-            $result = 1;
+            $result =1;
+            return $result;
         } else {
-            $result = 0;
+            return 0;
         }
-        return $result;
     }
 
     public function mindMe()
@@ -547,6 +566,28 @@ class UserController extends Controller
                 ->get();
             return response()->json($mmid);
         }
+    }
+
+    public function changePwd(Request $request)
+    {
+
+        $opwd = $request->input('opwd');
+        $npwd = $request->input('npwd');
+        $rpwd = $request->input('repwd');
+        $url = "project.dev/home/per_settings";
+        if ($npwd != $rpwd){
+            return redirect('home/per_settings');
+        }
+
+        $res = users::where('id',Auth::user()->id)->select('password')->first();
+        if(!Hash::check($opwd, $res->password)){
+            return redirect('home/per_settings');
+        }
+        $result = users::find(Auth::user()->id);
+        $result->password = bcrypt($npwd);
+        $result->save();
+        return redirect('/');
+
     }
 
 }

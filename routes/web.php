@@ -88,7 +88,7 @@ Route::get('home/per_myfriends','Home\Usercontroller@myFriends');
 
 
 //添加好友
-Route::get('home/per_addfri/{id}','Home\Usercontroller@addFriends');
+Route::get('home/per_friend/{id}','Home\Usercontroller@addOrdelFriends');
 //添加关注和取消关注
 Route::get('home/per_mind/{id}','Home\Usercontroller@addOrdelMind');
 //查看我关注的
@@ -96,7 +96,8 @@ Route::get('home/per_imind/','Home\Usercontroller@showImind');
 //查看谁关注我
 Route::get('home/per_mmind/','Home\Usercontroller@mindMe');
 
-
+//修改密码
+Route::post('home/per_changepwd','Home\Usercontroller@changePwd');
 
 
 

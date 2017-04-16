@@ -81,7 +81,7 @@
                                     '<span style="color:#333;margin-left: 10px">'+data[i]['name']+
                                     '<button value="'+data[i]['id']+'"id="" style="margin-right:10px" class="btn btn-default mind">' +
                                     '关注</button>' +
-                                    '<button value="'+data[i]['id']+'"id="" class="btn btn-default addfri">添加好友</button>' +
+                                    '<button value="'+data[i]['id']+'"id="" class="btn btn-default friend">添加好友</button>' +
                                     '</span></div>'
                                 );
                             }else{
@@ -90,7 +90,7 @@
                                     "<img src='http://project.dev/home/upImg/"+data[i]['icon']+"'style='width:90px;margin-bottom: 10px;'> "+
                                     '<span style="color:#333;margin-left: 10px">'+data[i]['name']+
                                     '<button value="'+data[i]['id']+'"id="" style="margin-right:10px" class="btn btn-default mind">关注</button>' +
-                                    '<button value="'+data[i]['id']+'"id="" class="btn btn-default addfri">添加好友</button>' +
+                                    '<button value="'+data[i]['id']+'"id="" class="btn btn-default friend">添加好友</button>' +
                                     '</span></div>'
                                 );
                             }
@@ -120,7 +120,7 @@
                                         "<img src='http://project.dev/home/img/"+data[i]['icon']+"'style='width:90px;margin-bottom: 10px;'> "+
                                         '<span style="color:#333;margin-left: 10px">'+data[i]['name']+
                                         '<button value="'+data[i]['id']+'"style="margin-right:10px" class="btn btn-default mind" >关注</button>' +
-                                        '<button value="'+data[i]['id']+'"class="btn btn-default delete">删除好友</button>' +
+                                        '<button value="'+data[i]['id']+'"class="btn btn-default friend">删除好友</button>' +
                                         '</span></div>'
                                     );
                                 }else{
@@ -129,7 +129,7 @@
                                         "<img src='http://project.dev/home/upImg/"+data[i]['icon']+"'style='width:90px;margin-bottom: 10px;'> "+
                                         '<span style="color:#333;margin-left: 10px">'+data[i]['name']+
                                         '<button value="'+data[i]['id']+'"id="mind" style="margin-right:10px" class="btn btn-default mind">关注</button>' +
-                                        '<button value="'+data[i]['id']+'"id="addfri" class="btn btn-default">删除好友</button>' +
+                                        '<button value="'+data[i]['id']+'"id="friend" class="btn btn-default friend">删除好友</button>' +
                                         '</span></div>'
                                     );
                                 }
@@ -164,7 +164,7 @@
                                         "<img src='http://project.dev/home/img/"+data[i]['icon']+"'style='width:90px;margin-bottom: 10px;'> "+
                                         '<span style="color:#333;margin-left: 10px">'+data[i]['name']+
                                         '<button value="'+data[i]['id']+'"style="margin-right:10px" class="btn btn-default mind" >取消关注</button>' +
-                                        '<button value="'+data[i]['id']+'"id="" class="btn btn-default addfri">添加好友</button>' +
+                                        '<button value="'+data[i]['id']+'"id="" class="btn btn-default friend">添加好友</button>' +
                                         '</span></div>'
                                     );
                                 }else{
@@ -173,7 +173,7 @@
                                         "<img src='http://project.dev/home/upImg/"+data[i]['icon']+"'style='width:90px;margin-bottom: 10px;'> "+
                                         '<span style="color:#333;margin-left: 10px">'+data[i]['name']+
                                         '<button value="'+data[i]['id']+'"id="mind" style="margin-right:10px" class="btn btn-default mind">取消关注</button>' +
-                                        '<button value="'+data[i]['id']+'"id="" class="btn btn-default addfri">添加好友</button>' +
+                                        '<button value="'+data[i]['id']+'"id="" class="btn btn-default friend">添加好友</button>' +
                                         '</span></div>'
                                     );
                                 }
@@ -206,7 +206,7 @@
                                         "<img src='http://project.dev/home/img/"+data[i]['icon']+"'style='width:90px;margin-bottom: 10px;'> "+
                                         '<span style="color:#333;margin-left: 10px">'+data[i]['name']+
                                         '<button value="'+data[i]['id']+'"style="margin-right:10px" class="btn btn-default mind" >关注</button>' +
-                                        '<button value="'+data[i]['id']+'"id="" class="btn btn-default addfri">添加好友</button>' +
+                                        '<button value="'+data[i]['id']+'"id="" class="btn btn-default friend">添加好友</button>' +
                                         '</span></div>'
                                     );
                                 }else{
@@ -215,7 +215,7 @@
                                         "<img src='http://project.dev/home/upImg/"+data[i]['icon']+"'style='width:90px;margin-bottom: 10px;'> "+
                                         '<span style="color:#333;margin-left: 10px">'+data[i]['name']+
                                         '<button value="'+data[i]['id']+'"id="mind" style="margin-right:10px" class="btn btn-default mind">关注</button>' +
-                                        '<button value="'+data[i]['id']+'"id="" class="btn btn-default addfri">添加好友</button>' +
+                                        '<button value="'+data[i]['id']+'"id="" class="btn btn-default friend">添加好友</button>' +
                                         '</span></div>'
                                     );
                                 }
@@ -236,26 +236,44 @@
             //自动执行
             $('#add').trigger('click');
 
-            $('.addfri').live('click',function(){
-                $.ajax({
-                    url:"http://project.dev/home/per_addfri/"+$('.addfri').val(),
-                    type:'get',
-                    success:function(data){
-                        if(data == 1){
-                            alert('取关成功！');
-                            location.reload();
-                        }
-                    },
-                    error:function(){
-                        alert('失败！');
-                    },
-                })
+            $('.friend').live('click',function(){
+                var $_this = $(this);
+                if($_this.text() == '添加成功'){
+                    $.ajax({
+                        url:"http://project.dev/home/per_friend/"+$_this.val(),
+                        type:'get',
+                        success:function(data){
+                            if(data == 1){
+                                alert('添加成功！');
+                                $("#show").html(dates);//要刷新的div
+                            }
+                        },
+                        error:function(){
+                            alert('失败！');
+                        },
+                    })
+                }else{
+                    alert($_this.val());
+                    $.ajax({
+                        url:"http://project.dev/home/per_friend/"+$_this.val(),
+                        type:'get',
+                        success:function(data){
+                            if(data == 1){
+                                alert('删除成功！');
+                                location.reload();
+                            }
+                        },
+                        error:function(){
+                            alert('失败！');
+                        },
+                    })
+                }
             })
             $(".mind").live('click',function(){
                 var $_this = $(this);
                 if ($_this.text()=='取关' || $_this.text()=='取消关注'){
                     $.ajax({
-                        url:"http://project.dev/home/per_mind/"+$('.mind').val(),
+                        url:"http://project.dev/home/per_mind/"+ $_this.val(),
                         type:'get',
                         success:function(data){
                             if(data == 1){
@@ -269,7 +287,7 @@
                     })
                 } else {
                     $.ajax({
-                        url:"http://project.dev/home/per_mind/"+$('.mind').val(),
+                        url:"http://project.dev/home/per_mind/"+ $_this.val(),
                         type:'get',
                         success:function(data){
                             if(data == 1){

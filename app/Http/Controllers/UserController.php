@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRegisterRequest;
+use App\Model\users;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
@@ -25,7 +27,6 @@ class UserController extends Controller
         $confirmed_code = str_random(10);
         $data = [
             'icon'=>'men_main.jpg',
-
             'confirmed_code' =>$confirmed_code,
         ];
         $user = User::create(array_merge($request->all(), $data ));
@@ -75,6 +76,11 @@ class UserController extends Controller
             if ($result[0]['is_confirmed'] == 0) {
                 return back();
             }
+        $res = users::where('email',$request->input('email'))->get()->toArray();
+        if(!Hash::check($request->input('password'), $res[0]['password'])){
+            return back();
+        }
+
         return redirect('/index');
 
     }
