@@ -18,7 +18,7 @@
                 <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a class="brand" href="#">后台管理系统</a>
                 <div class="nav-collapse">
                     <ul class="nav">
-                        <li class="active">
+                        <li>
                             <a href="index.html">首页</a>
                         </li>
                         <li>

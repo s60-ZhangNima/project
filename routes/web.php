@@ -143,3 +143,10 @@ Route::get('/admin/projects','projectsController@projects');
 Route::get('/home/createphoto','createphotoController@createphoto');
 Route::get('/home/photolist','photolistController@photolist');
 Route::get('/home/board','boardController@board');
+
+
+//用户管理
+Route::get('/admin/info/{id}','activityController@showInfo');
+Route::get('/admin/state_story/{id}','activityController@showStaSto');
+Route::get('/admin/friends_focus/{id}','activityController@showFriFoc');
+Route::get('/admin/delete/{id}','activityController@delete');

@@ -2,167 +2,56 @@
 @section('content')
 	<div class="span9">
 					<h1>
-						Activity
+						用户管理
 					</h1>
 					<table class="table table-bordered table-striped">
 						<thead>
 							<tr>
 								<th>
-									Project
+									用户ID
 								</th>
 								<th>
-									Client
+									用户邮箱
 								</th>
 								<th>
-									Type
+									用户资料
 								</th>
 								<th>
-									Date
+									用户状态/故事
 								</th>
 								<th>
-									View
+									用户好友/关注
+								</th>
+								<th>
+									操作
 								</th>
 							</tr>
 						</thead>
 						<tbody>
+						@foreach($all as $item)
 							<tr>
 								<td>
-									Nike.com Redesign
+									{{$item->id}}
 								</td>
 								<td>
-									Monsters Inc
+									{{$item->email}}
 								</td>
 								<td>
-									New Task
+									<a href="{{url('admin/info/'.$item->id)}}">Info</a>
 								</td>
 								<td>
-									4 days ago
+									<a href="{{url('admin/state_story/'.$item->id)}}">State/Story</a>
 								</td>
 								<td>
-									<a href="#" class="view-link">View</a>
+									<a href="{{url('admin/friends_focus/'.$item->id)}}">Friends/Focus</a>
+								</td>
+								<td>
+									<a href="{{url('admin/delete/'.$item->id)}}">删除</a>
 								</td>
 							</tr>
-							<tr>
-								<td>
-									Nike.com Redesign
-								</td>
-								<td>
-									Monsters Inc
-								</td>
-								<td>
-									New Message
-								</td>
-								<td>
-									5 days ago
-								</td>
-								<td>
-									<a href="#" class="view-link">View</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									Nike.com Redesign
-								</td>
-								<td>
-									Monsters Inc
-								</td>
-								<td>
-									New Project
-								</td>
-								<td>
-									5 days ago
-								</td>
-								<td>
-									<a href="#" class="view-link">View</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									Twitter Server Consulting
-								</td>
-								<td>
-									Bad Robot
-								</td>
-								<td>
-									New Task
-								</td>
-								<td>
-									6 days ago
-								</td>
-								<td>
-									<a href="#" class="view-link">View</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									Childrens Book Illustration
-								</td>
-								<td>
-									Evil Genius
-								</td>
-								<td>
-									New Message
-								</td>
-								<td>
-									9 days ago
-								</td>
-								<td>
-									<a href="#" class="view-link">View</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									Twitter Server Consulting
-								</td>
-								<td>
-									Bad Robot
-								</td>
-								<td>
-									New Task
-								</td>
-								<td>
-									16 days ago
-								</td>
-								<td>
-									<a href="#" class="view-link">View</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									Twitter Server Consulting
-								</td>
-								<td>
-									Bad Robot
-								</td>
-								<td>
-									New Project
-								</td>
-								<td>
-									16 days ago
-								</td>
-								<td>
-									<a href="#" class="view-link">View</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									Twitter Server Proposal
-								</td>
-								<td>
-									Bad Robot
-								</td>
-								<td>
-									Completed Project
-								</td>
-								<td>
-									20 days ago
-								</td>
-								<td>
-									<a href="#" class="view-link">View</a>
-								</td>
-							</tr>
+						@endforeach
 						</tbody>
-					</table>				
+					</table>
 					<div class="pagination">
 						<ul>
 							<li class="disabled">
