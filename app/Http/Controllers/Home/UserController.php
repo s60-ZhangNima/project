@@ -576,15 +576,36 @@ class UserController extends Controller
         $rpwd = $request->input('repwd');
         $url = "project.dev/home/per_settings";
         if ($npwd != $rpwd){
-            return redirect('home/per_settings');
+            return back();
         }
 
         $res = users::where('id',Auth::user()->id)->select('password')->first();
         if(!Hash::check($opwd, $res->password)){
-            return redirect('home/per_settings');
+            return back();
         }
         $result = users::find(Auth::user()->id);
         $result->password = bcrypt($npwd);
+        $result->save();
+        return redirect('/');
+
+    }
+
+    public function changeEmaile(Request $request)
+    {
+
+        $pwd = $request->input('pwd');
+        $oemail = $request->input('oemail');
+        $nemail = $request->input('nemail');
+
+        $res = users::where('id',Auth::user()->id)->select('password','email')->first();
+        if(!Hash::check($pwd, $res->password)){
+            return back();
+        }
+        if ($oemail != $res->email){
+            return back();
+        }
+        $result = users::find(Auth::user()->id);
+        $result->email = $nemail;
         $result->save();
         return redirect('/');
 

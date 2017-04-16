@@ -244,11 +244,11 @@
                         </div>
                         <div class="form-group" style="width:200px">
                             <label for="exampleInputFile">家乡：</label>
-                            {{--<textarea name='address' id="" cols="30" rows="2" style="resize: none"></textarea>--}}
-                            <select name="prov" id="prov"></select>
-                            <select name="city" id="city"></select>
-                            <select name="area" id="area"></select>
-                            <select name="street" id="street"></select>
+                            <textarea name='address' id="" cols="30" rows="2" style="resize: none"></textarea>
+                            {{--<select name="prov" id="prov"></select>--}}
+                            {{--<select name="city" id="city"></select>--}}
+                            {{--<select name="area" id="area"></select>--}}
+                            {{--<select name="street" id="street"></select>--}}
                         </div>
                         <div class="form-group" style="width:200px">
                             <label for="exampleInputFile">生日：</label>
@@ -276,11 +276,11 @@
                                 </div>
                                 <div class="form-group" style="width:200px">
                                     <label for="exampleInputFile">家乡：</label>
-                                    {{--<textarea name='address' id="" cols="30" rows="2" style="resize: none" >{{$pitem->address}}</textarea>--}}
-                                    <select name="prov" id="prov"></select>
-                                    <select name="city" id="city"></select>
-                                    <select name="area" id="area"></select>
-                                    <select name="street" id="street"></select>
+                                    <textarea name='address' id="" cols="30" rows="2" style="resize: none" >{{$pitem->address}}</textarea>
+                                    {{--<select name="prov" id="prov"></select>--}}
+                                    {{--<select name="city" id="city"></select>--}}
+                                    {{--<select name="area" id="area"></select>--}}
+                                    {{--<select name="street" id="street"></select>--}}
                                 </div>
                                 <div class="form-group" style="width:200px">
                                     <label for="exampleInputFile">生日：</label>
@@ -295,7 +295,7 @@
             </div>
         </div>
     </div>
-    <script>
+  {{--  <script>
         $(function(){
             //1、载入页面完成后即对php请求数据添加省一级列表项
             $.ajax({
@@ -316,40 +316,39 @@
             });
 
             //2、当前三级出现change事件时触发ajax获取value当作upid寻找下一级数据
-//            $('#prov,#city,#area').change(function(){
-//                var $upid = $(this).val();
-//                alert($upid);
-//                //在外层用变量存储$(this);
-//                var $_this = $(this);
+           $('#prov,#city,#area').change(function(){
+               var $upid = $(this).val();
+               alert($upid);
+               //在外层用变量存储$(this);
+              var $_this = $(this);
 
                 //根据传入的upid为下一级select添加选项
-                {{--$.ajax({--}}
-                    {{--url:"{{url('home/per_info/pid/'.$upid.')}}",--}}
-                    {{--success:function(data){--}}
-                        {{--//判断数据是否存在，如果没有隐藏下几级--}}
-                        {{--if(!data){--}}
-                            {{--$_this.nextAll('select').hide();--}}
-                            {{--return;--}}
-                        {{--}--}}
+                $.ajax({
+                    url:"{{url('home/per_info/pid/'.$upid.')}}",
+                    success:function(data){
+                        //判断数据是否存在，如果没有隐藏下几级
+                        if(!data){
+                            $_this.nextAll('select').hide();
+                            return;
+                        }
 
-                        {{--//在添加新数据之前清空select--}}
-                        {{--$_this.next('select').empty().show();--}}
+                        //在添加新数据之前清空select
+                        $_this.next('select').empty().show();
 
-                        {{--for (var i = 0;i < da.ta.length; i++ ) {--}}
-                            {{--$_this.next('select').append("<option value='"+data[i].id+' name='+data[i].name+"'>"+data[i].name+"</option>");--}}
-                        {{--};--}}
-                        {{--//添加完为下一级选中一下--}}
-                        {{--$_this.next('select').trigger('change');--}}
-                    {{--},--}}
-                    {{--error:function(){--}}
-                        {{--alert('失败！');--}}
-                    {{--},--}}
-                    {{--dataType:'json'--}}
-                {{--});--}}
-//            })
+                        for (var i = 0;i < da.ta.length; i++ ) {
+                            $_this.next('select').append("<option value='"+data[i].id+' name='+data[i].name+"'>"+data[i].name+"</option>");
+                        };
+                        //添加完为下一级选中一下
+                        $_this.next('select').trigger('change');
+                    },
+                    error:function(){
+                        alert('失败！');
+                    },
+                    dataType:'json'
+                });
+            })
 
-            $('#prov').trigger('change');
-
-        })
-    </script>
+          $('#prov').trigger('change');
+       })
+    </script>--}}
 @endsection

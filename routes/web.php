@@ -98,7 +98,8 @@ Route::get('home/per_mmind/','Home\Usercontroller@mindMe');
 
 //修改密码
 Route::post('home/per_changepwd','Home\Usercontroller@changePwd');
-
+//修改邮箱
+Route::post('home/per_changeEmail','Home\Usercontroller@changeEmaile');
 
 
 //登入页

@@ -12,7 +12,7 @@
                     </div>
                     <div class="panel-footer">已设置{{$em}}
                         <span class="glyphicon glyphicon-ok-circle" style="color:limegreen"></span></div>
-                    <span>&nbsp;&nbsp;&nbsp;仅需要一封邮件,快速修改密码或其他密保</span>
+                    <span>&nbsp;&nbsp;&nbsp;修改邮箱时，需要输入原邮箱和密码。</span>
                 </div>
             </a>
         </div>
@@ -20,11 +20,11 @@
             <div class="col-lg-4" >
                 <div class="panel panel-default" >
                     <div class="panel-body">
-                        <h2>实名认证</h2>
+                        <h2>安全密码</h2>
                     </div>
-                    <div class="panel-footer">未设置
-                    <span class="glyphicon glyphicon-remove-circle"></span></div>
-                    <span>&nbsp;&nbsp;&nbsp;身份证实线实名认证</span>
+                    <div class="panel-footer">已设置 ********
+                    <span class="glyphicon glyphicon-ok-circle" style="color:limegreen"></span></div>
+                    <span>&nbsp;&nbsp;&nbsp;修改密码时，需要输入原密码和新密码。</span>
                 </div>
             </div>
         </a>
@@ -38,19 +38,20 @@
                     更换邮箱
                     {{$em}} <span class="caret"></span>
                     <div id="phone" style="display: none">
-                        <form action=""style="padding:10px;" >
+                        <form action="{{url('home/per_changeEmail')}}"style="padding:10px;"  method="post">
+                            {{csrf_field()}}
                             <div class="form-group" style="width:200px"　>
                                 <label for="exampleInputFile">　邮箱：</label>
-                                　<input type="text" class="form-control" id="exampleInputPassword1" placeholder="原邮箱" name="opwd">
+                                　<input type="email" class="form-control" id="exampleInputPassword1" placeholder="原邮箱" name="oemail">
                             </div>
                             <div class="form-group" style="width:200px">
-                                <label for="exampleInputFile">邮箱验证：
-                                <button class="btn btn-default">发送邮件</button></label>
+                                <label for="exampleInputFile">密码验证：
+                                    　<input type="password" class="form-control" id="exampleInputPassword1" placeholder="请输入密码" name="pwd">
                                 　
                             </div>
                             <div class="form-group" style="width:200px">
                                 <label for="exampleInputFile">　新邮箱：</label>
-                                　<input type="text" class="form-control" id="exampleInputPassword1" placeholder="新邮箱" name="repwd">
+                                　<input type="email" class="form-control" id="exampleInputPassword1" placeholder="新邮箱" name="nemail">
                             </div>
                             <input type="submit" class="btn btn-default" value="提交">
                             <button class="btn btn-default" onclick="cancel(1)">取消</button>
