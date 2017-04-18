@@ -5,10 +5,12 @@
     <meta charset="utf-8">
     <title>后台管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('admin/css/bootstrap.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/bootstrap-responsive.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/site.css')}}">
+    <script type="text/javascript" src="{{asset('home/js/jquery-1.8.3.min.js')}}"></script>
+ @yield('mycss')
 </head>
 <body>
 <div class="container">
@@ -79,19 +81,19 @@
                         菜单
                     </li>
                     <li class="active">
-                        <a href="./index"><i class="icon-white icon-home"></i>首页</a>
+                        <a href="{{url('admin/admin')}}"><i class="icon-white icon-home"></i>首页</a>
                     </li>
                     <li>
-                        <a href="./projects"><i class="icon-folder-open"></i> 项目</a>
+                        <a href="{{url('admin/projects')}}"><i class="icon-folder-open"></i> 项目</a>
                     </li>
                     <li>
-                        <a href="./messages"><i class="icon-envelope"></i> 邮件</a>
+                        <a href="{{url('admin/messages')}}"><i class="icon-envelope"></i> 邮件</a>
                     </li>
                     <li>
-                        <a href="./files"><i class="icon-file"></i> 文件</a>
+                        <a href="{{url('admin/files')}}"><i class="icon-file"></i> 文件</a>
                     </li>
                     <li>
-                        <a href="./activity"><i class="icon-list-alt"></i> 用户列表</a>
+                        <a href="{{url('admin/activity')}}"><i class="icon-list-alt"></i> 用户列表</a>
                     </li>
                     <li class="nav-header">
                         权限管理
@@ -125,8 +127,8 @@
                 </ul>
             </div>
         </div>
-        @section('content')
-        <div class="span9">
+        <div class="span9" style="width:855px">
+            @section('content')
             <h1>
                 首页
             </h1>
@@ -324,8 +326,8 @@
                     <a href="./activity">More &rarr;</a>
                 </li>
             </ul>
+            @show
         </div>
-        @show
     </div>
 </div>
 <script type="text/javascript" src="{{asset('admin/js/jquery.min.js')}}"></script>

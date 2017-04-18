@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="container" style="width: 800px;height: auto;margin-top: 20px;margin-bottom: 10px">
+    <div class="container" style="width: 900px;height: auto;margin-top: 20px;margin-bottom: 10px">
         <div class="row">
             <div class="col-lg-6">
                 <div style="width:400px;height:auto;border: 1px solid #ccc;padding: 10px" >
@@ -190,6 +190,7 @@
                         <form action="{{url('home/per_info/feeling')}}" method="post" >
                             {{csrf_field()}}
                             <label for="exampleInputFile" style="float: left;line-height: 34px;">感情状况：</label>
+                            <input type="hidden" value="">
                             <select name="feeling" id="" class="form-control" style="width:200px;float: left;margin-right: 20px;">
                                 <option value="不填写">不填写</option>
                                 <option value="单身">单身</option>
@@ -244,11 +245,10 @@
                         </div>
                         <div class="form-group" style="width:200px">
                             <label for="exampleInputFile">家乡：</label>
-                            <textarea name='address' id="" cols="30" rows="2" style="resize: none"></textarea>
-                            {{--<select name="prov" id="prov"></select>--}}
-                            {{--<select name="city" id="city"></select>--}}
-                            {{--<select name="area" id="area"></select>--}}
-                            {{--<select name="street" id="street"></select>--}}
+                            <select name="prov" id="prov" class="form-control"></select>
+                            <select name="city" id="city" class="form-control"></select>
+                            <select name="area" id="area" class="form-control"></select>
+                            <select name="street" id="street" class="form-control"></select>
                         </div>
                         <div class="form-group" style="width:200px">
                             <label for="exampleInputFile">生日：</label>
@@ -271,16 +271,16 @@
                                 </div>
                                 <div class="form-group" style="width:200px">
                                     <label for="exampleInputFile">性别：</label>
-                                    <input type="radio" name="sex" id="inlineRadio3" value="0" checked> 男
-                                    <input type="radio" name="sex" id="inlineRadio3" value="1" > 女
+                                    <input type="radio"  value="0" name="sex" {{$pitem->sex ==1 ?'':'checked'}}>女
+                                    <input type="radio" value="1" name="sex" {{$pitem->sex ==1 ?'checked':''}}>男
                                 </div>
                                 <div class="form-group" style="width:200px">
-                                    <label for="exampleInputFile">家乡：</label>
-                                    <textarea name='address' id="" cols="30" rows="2" style="resize: none" >{{$pitem->address}}</textarea>
-                                    {{--<select name="prov" id="prov"></select>--}}
-                                    {{--<select name="city" id="city"></select>--}}
-                                    {{--<select name="area" id="area"></select>--}}
-                                    {{--<select name="street" id="street"></select>--}}
+                                    <label for="exampleInputFile">家乡：</label><br>
+                                    <textarea name="" id="" cols="30" rows="2" disabled style="resize: none;">{{$pitem->address}}</textarea>
+                                    <select name="prov" id="prov" class="form-control"></select>
+                                    <select name="city" id="city" class="form-control"></select>
+                                    <select name="area" id="area" class="form-control"></select>
+                                    <select name="street" id="street" class="form-control"></select>
                                 </div>
                                 <div class="form-group" style="width:200px">
                                     <label for="exampleInputFile">生日：</label>
@@ -295,21 +295,20 @@
             </div>
         </div>
     </div>
-  {{--  <script>
+    <script>
         $(function(){
             //1、载入页面完成后即对php请求数据添加省一级列表项
             $.ajax({
-                url:"{{url('home/per_info/upid/0')}}",
+                url:"{{url('home/per_info/upid')}}",
+                data:{'upid':0},
                 success:function(data){
                     for (var i = 0;i < data.length; i++ ) {
-                        $('#prov').append("<option value='"+data[i].id+' name='+data[i].name+"'>"+data[i].name+"</option>");
+                        $('#prov').append("<option value='"+data[i].id+"' name='"+data[i].name+"'>"+data[i].name+" </option>");
                     };
                 },
                 error:function(){
                     alert('失败！');
                 },
-                type:'post',
-
                 dataType:'json',
                 //同步，如果没有第一级的数据第二级触发时自动为0
                 async:false
@@ -318,16 +317,16 @@
             //2、当前三级出现change事件时触发ajax获取value当作upid寻找下一级数据
            $('#prov,#city,#area').change(function(){
                var $upid = $(this).val();
-               alert($upid);
                //在外层用变量存储$(this);
               var $_this = $(this);
 
                 //根据传入的upid为下一级select添加选项
                 $.ajax({
-                    url:"{{url('home/per_info/pid/'.$upid.')}}",
+                    url:"{{url('home/per_info/upid')}}",
+                    data:{'upid':$upid},
                     success:function(data){
-                        //判断数据是否存在，如果没有隐藏下几级
                         if(!data){
+                            //判断数据是否存在，如果没有隐藏下几级
                             $_this.nextAll('select').hide();
                             return;
                         }
@@ -335,8 +334,9 @@
                         //在添加新数据之前清空select
                         $_this.next('select').empty().show();
 
-                        for (var i = 0;i < da.ta.length; i++ ) {
-                            $_this.next('select').append("<option value='"+data[i].id+' name='+data[i].name+"'>"+data[i].name+"</option>");
+                        for (var i = 0;i < data.length; i++ ) {
+
+                            $_this.next('select').append("<option value='"+data[i].id+"' name='"+data[i].name+"'>"+data[i].name+" </option>");
                         };
                         //添加完为下一级选中一下
                         $_this.next('select').trigger('change');
@@ -350,5 +350,5 @@
 
           $('#prov').trigger('change');
        })
-    </script>--}}
+    </script>
 @endsection

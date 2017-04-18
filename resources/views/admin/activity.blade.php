@@ -1,6 +1,6 @@
 @extends('mmm\admin')
 @section('content')
-	<div class="span9">
+
 					<h1>
 						用户管理
 					</h1>
@@ -74,7 +74,7 @@
 							</li>
 						</ul>
 					</div>
-				</div>
+
 @endsection
 
 

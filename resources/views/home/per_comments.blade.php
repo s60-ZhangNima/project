@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','人人网-小张')
+
 
 @section('content')
     <div class="container" style="height: auto;">
@@ -27,7 +27,7 @@
                         </div>
                             @endforeach
                         </div>
-                <h3>评论：</h3>
+                <h6>评论：</h6>
                     @if(!empty($comment))
                        @foreach($comment as $value)
                         <div class="panel panel-default">

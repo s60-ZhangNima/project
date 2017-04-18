@@ -110,11 +110,12 @@ class UserController extends Controller
         return view('home.per_icon',compact('name'));
     }
 
-    public function citys($id)
-    {  $result = lamp_district::where('upid',$id)
-        ->get()
-        ->toArray();
+    public function citys()
+    {
+        $upid = empty($_GET['upid'])?0:$_GET['upid'];
+        $result = lamp_district::where('upid',$upid)->get()->toArray();
         return response()->json($result);
+
     }
 
     public function writeState(Request $request)
@@ -237,10 +238,9 @@ class UserController extends Controller
         $uid = Auth::user()->id;
         if($request->hasFile('pic')){
             $iconname = md5(time()).'.jpg';
-            $request->file('pic')->move('home/upImg',$iconname);
+            dd($request->file('pic')->move('home/upImg',$iconname));
             $photos = photo::where('name','我的头像')->get()->toArray();
             if ($photos){
-
                 $icons =  new icon();
                 $icons->pid = $photos[0]['id'];
                 $icons->name =  $iconname;
@@ -311,9 +311,21 @@ class UserController extends Controller
     public function writeInfo(Request $request)
     {
 
-        dd($request);
-        $res = info::where('uid',Auth::user()->id)->get()->toArray();
 
+        $res = info::where('uid',Auth::user()->id)->get()->toArray();
+        //省
+        $prov = lamp_district::select('name')->where('id',$request->input('prov'))->get()->toArray();
+        $prov = $prov[0]['name'];
+        //市
+        $city = lamp_district::select('name')->where('id',$request->input('city'))->get()->toArray();
+        $city = $city[0]['name'];
+        //城镇
+        $area = lamp_district::select('name')->where('id',$request->input('area'))->get()->toArray();
+        $area = $area[0]['name'];
+        //街道
+        $street = lamp_district::select('name')->where('id',$request->input('street'))->get()->toArray();
+        $street = $street[0]['name'];
+        $address = $prov.'-'.$city.'-'.$area.'-'.$street;
         if (empty($res)){
             $inf = new info();
             $inf->uid = Auth::user()->id;
@@ -322,7 +334,7 @@ class UserController extends Controller
             $inf->sex = $request->input('sex');
             $inf->address = $request->input('address');
             $inf->birthday = $request->input('birthday');
-            $inf->address = $request->input('address');
+            $inf->address = $address;
             $inf->save();
         } else {
             $id = info::where('uid',Auth::user()->id)->get()->toArray();
@@ -332,7 +344,7 @@ class UserController extends Controller
             $inf->sex = $request->input('sex');
             $inf->address = $request->input('address');
             $inf->birthday = $request->input('birthday');
-            $inf->address = $request->input('address');
+            $inf->address = $address;
             $inf->save();
         }
 

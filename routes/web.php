@@ -43,7 +43,7 @@ Route::get('/home/per_comments/pra/{id}','Home\UserController@perCpraise');
 Route::get('/home/per_info','Home\UserController@perInfo');
 
 //地址
-Route::post('home/per_info/upid/{id}','Home\UserController@citys');
+Route::get('home/per_info/upid','Home\UserController@citys');
 
 
 //状态
@@ -145,8 +145,42 @@ Route::get('/home/photolist','photolistController@photolist');
 Route::get('/home/board','boardController@board');
 
 
-//用户管理
+//用户管理：
+
+//用户信息
 Route::get('/admin/info/{id}','activityController@showInfo');
+//编辑感情
+Route::post('/admin/info/feeling','activityController@writeFeel');
+//编辑基本信息
+Route::post('/admin/info/baseInfo','activityController@writeInfo');
+//编辑爱好
+Route::post('/admin/info/like','activityController@writeLike');
+//编辑工作信息
+Route::post('/admin/info/work','activityController@writeWork');
+//编辑学校信息
+Route::post('/admin/info/school','activityController@writeSchool');
+
+//删除状态
+Route::get('admin/deleteState/{id}','activityController@delStates');
+
+//删除故事
+Route::get('admin/deleteStory/{id}','activityController@delStory');
+//编辑状态
+Route::post('/admin/editState','activityController@editStates');
+
+//编辑故事editStory
+Route::post('/admin/editStory','activityController@editStory');
+
+
+
+
+//查看评论
+Route::get('admin/showComments/{id}','activityController@showComents');
+//删除评论
+Route::get('admin/delComment/{id}','activityController@delComments');
+
+
+
 Route::get('/admin/state_story/{id}','activityController@showStaSto');
 Route::get('/admin/friends_focus/{id}','activityController@showFriFoc');
 Route::get('/admin/delete/{id}','activityController@delete');
