@@ -5,12 +5,22 @@
     <meta charset="utf-8">
     <title>后台管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
+=======
+   {{--<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>--}}
+>>>>>>> 584356ed9f575db344ecf08b60de1db3a50c779a
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/bootstrap.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/bootstrap-responsive.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/site.css')}}">
+<<<<<<< HEAD
     <script type="text/javascript" src="{{asset('home/js/jquery-1.8.3.min.js')}}"></script>
  @yield('mycss')
+=======
+    <style>
+        @yield('style')
+    </style>
+>>>>>>> 584356ed9f575db344ecf08b60de1db3a50c779a
 </head>
 <body>
 <div class="container">
@@ -102,14 +112,14 @@
                         <a href="./activity"><i class="icon-list-alt"></i> 权限管理</a>
                     </li>
                     <li>
-                        <a href="./activity"><i class="icon-list-alt"></i> 角色分配</a>
+                        <a href="./role-list"><i class="icon-list-alt"></i> 角色管理</a>
                     </li>
-                    <li>
-                        <a href="./profile"><i class="icon-user"></i> 修改</a>
-                    </li>
-                    <li>
+                    {{--<li>
+                        <a href="./alter"><i class="icon-user"></i> 修改</a>
+                    </li>--}}
+                    {{--<li>
                         <a href="./profile"><i class="icon-user"></i> 添加</a>
-                    </li>
+                    </li>--}}
                     <li class="divider">
                     </li>
                     <li>

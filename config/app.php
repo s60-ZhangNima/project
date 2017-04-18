@@ -182,7 +182,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-
+        Zizaco\Entrust\EntrustServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class,
 
 
@@ -235,6 +235,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Captcha' => Mews\Captcha\Facades\Captcha::class,
+
+        //权限管理
+        'Entrust' => Zizaco\Entrust\EntrustFacade::class,
 
 
     ],
