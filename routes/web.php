@@ -130,16 +130,56 @@ Route::get('/{confirmed_code}', 'UserController@emailConfirm');
 //Route::get('/h','IndexController@index');
 Route::get('/home/photo','photoController@photo');
 Route::get('/home/per_photo','per_photoController@per_photo');
+//后台主页
 Route::get('/admin/admin','adminController@admin');
+//后台登录
 Route::get('/admin/login','AdminloginController@login');
-Route::get('/admin/activity','activityController@activity');
 Route::get('/admin/blank','blankController@blank');
 Route::get('/admin/files','filesController@files');
 Route::get('/admin/gallery','galleryController@gallery');
 Route::get('/admin/help','activityController@help');
 Route::get('/admin/messages','messagesController@messages');
-Route::get('/admin/profile','profileController@profile');
 Route::get('/admin/projects','projectsController@projects');
 Route::get('/home/createphoto','createphotoController@createphoto');
 Route::get('/home/photolist','photolistController@photolist');
 Route::get('/home/board','boardController@board');
+
+
+
+
+
+//权限管理
+    //权限列表,分页显示
+Route::get('/admin/activity','Auth\PermissionController@activity');
+    //添加
+Route::any('/admin/profile','Auth\PermissionController@permissionAdd');
+    //修改
+Route::any('/admin/alter/{permission_id}', 'Auth\PermissionController@permissionUpdate')/*->middleware('rbac')*/;
+    //删除
+Route::get('/admin/alter/{permission_id}', 'Auth\PermissionController@permissionDelete');
+
+
+//角色管理
+Route::get('/admin/role-list', 'Admin\RoleController@roleList')/*->middleware('rbac')*/;
+Route::any('/admin/role-add', 'Admin\RoleController@roleAdd')/*->middleware('rbac')*/;
+Route::any('/admin/role-update/{role_id}', 'RoleController@roleUpdate')/*->middleware('rbac')*/;
+Route::get('/admin/role-delete/{role_id}', 'RoleController@roleDelete')/*->middleware('rbac')*/;
+Route::any('/admin/attach-permission/{role_id}', 'RoleController@attachPermission')/*->middleware('rbac')*/;
+
+
+//管理员管理
+//Route::get('/user-list', 'UserController@userList')->middleware('rbac');
+//Route::any('/user-add', 'UserController@userAdd');
+//Route::any('/attach-role/{user_id}', 'UserController@attachRole');
+
+
+
+
+
+
+
+
+
+
+
+

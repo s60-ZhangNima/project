@@ -1,191 +1,47 @@
 @extends('mmm\admin')
 @section('content')
 	<div class="span9">
-					<h1>
-						Activity
-					</h1>
-					<table class="table table-bordered table-striped">
-						<thead>
-							<tr>
-								<th>
-									Project
-								</th>
-								<th>
-									Client
-								</th>
-								<th>
-									Type
-								</th>
-								<th>
-									Date
-								</th>
-								<th>
-									View
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>
-									Nike.com Redesign
-								</td>
-								<td>
-									Monsters Inc
-								</td>
-								<td>
-									New Task
-								</td>
-								<td>
-									4 days ago
-								</td>
-								<td>
-									<a href="#" class="view-link">View</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									Nike.com Redesign
-								</td>
-								<td>
-									Monsters Inc
-								</td>
-								<td>
-									New Message
-								</td>
-								<td>
-									5 days ago
-								</td>
-								<td>
-									<a href="#" class="view-link">View</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									Nike.com Redesign
-								</td>
-								<td>
-									Monsters Inc
-								</td>
-								<td>
-									New Project
-								</td>
-								<td>
-									5 days ago
-								</td>
-								<td>
-									<a href="#" class="view-link">View</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									Twitter Server Consulting
-								</td>
-								<td>
-									Bad Robot
-								</td>
-								<td>
-									New Task
-								</td>
-								<td>
-									6 days ago
-								</td>
-								<td>
-									<a href="#" class="view-link">View</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									Childrens Book Illustration
-								</td>
-								<td>
-									Evil Genius
-								</td>
-								<td>
-									New Message
-								</td>
-								<td>
-									9 days ago
-								</td>
-								<td>
-									<a href="#" class="view-link">View</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									Twitter Server Consulting
-								</td>
-								<td>
-									Bad Robot
-								</td>
-								<td>
-									New Task
-								</td>
-								<td>
-									16 days ago
-								</td>
-								<td>
-									<a href="#" class="view-link">View</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									Twitter Server Consulting
-								</td>
-								<td>
-									Bad Robot
-								</td>
-								<td>
-									New Project
-								</td>
-								<td>
-									16 days ago
-								</td>
-								<td>
-									<a href="#" class="view-link">View</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									Twitter Server Proposal
-								</td>
-								<td>
-									Bad Robot
-								</td>
-								<td>
-									Completed Project
-								</td>
-								<td>
-									20 days ago
-								</td>
-								<td>
-									<a href="#" class="view-link">View</a>
-								</td>
-							</tr>
-						</tbody>
-					</table>				
-					<div class="pagination">
-						<ul>
-							<li class="disabled">
-								<a href="#">&laquo;</a>
-							</li>
-							<li class="active">
-								<a href="#">1</a>
-							</li>
-							<li>
-								<a href="#">2</a>
-							</li>
-							<li>
-								<a href="#">3</a>
-							</li>
-							<li>
-								<a href="#">4</a>
-							</li>
-							<li>
-								<a href="#">&raquo;</a>
-							</li>
-						</ul>
-					</div>
-				</div>
+		<h1>
+			权限管理
+		</h1>
+
+		<div>
+			<ul>
+				<li><a href="{{url('admin/profile')}}">新增权限</a></li>
+			</ul>
+		</div>
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>权限路由</th>
+					<th>权限名称</th>
+					<th>权限描述</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach($activitys as $activity)
+
+					<tr>
+						<td>{{$activity->id}}</td>
+						<td>{{$activity->name}}</td>
+						<td>{{$activity->display_name}}</td>
+						<td>{{$activity->description}}</td>
+						<td>
+							<a href="alter/{{$activity->id}}">修改</a>
+							<a href="alter/{{$activity->id}}">删除</a>
+						</td>
+					</tr>
+				@endforeach
+			</tbody>
+
+		</table>
+
+		<div class="pagination">
+			{{$activitys->links()}}
+		</div>
+	</div>
 @endsection
 
 
