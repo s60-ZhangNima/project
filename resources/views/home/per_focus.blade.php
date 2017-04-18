@@ -240,8 +240,9 @@
                 var $_this = $(this);
                 if($_this.text() == '添加成功'){
                     $.ajax({
-                        url:"http://project.dev/home/per_friend/"+$_this.val(),
+                        url:"{{url('home/per_friend')}}",
                         type:'get',
+                        data:{'id':$_this.val()},
                         success:function(data){
                             if(data == 1){
                                 alert('添加成功！');
@@ -253,10 +254,10 @@
                         },
                     })
                 }else{
-                    alert($_this.val());
                     $.ajax({
-                        url:"http://project.dev/home/per_friend/"+$_this.val(),
+                        url:"{{url('home/per_friend')}}",
                         type:'get',
+                        data:{'id':$_this.val()},
                         success:function(data){
                             if(data == 1){
                                 alert('删除成功！');
@@ -273,8 +274,9 @@
                 var $_this = $(this);
                 if ($_this.text()=='取关' || $_this.text()=='取消关注'){
                     $.ajax({
-                        url:"http://project.dev/home/per_mind/"+ $_this.val(),
+                        url:"{{url('home/per_mind')}}",
                         type:'get',
+                        data:{'id':$_this.val()},
                         success:function(data){
                             if(data == 1){
                                 alert('取关成功！');
@@ -287,8 +289,9 @@
                     })
                 } else {
                     $.ajax({
-                        url:"http://project.dev/home/per_mind/"+ $_this.val(),
+                        url:"{{url('home/per_mind')}}",
                         type:'get',
+                        data:{'id':$_this.val()},
                         success:function(data){
                             if(data == 1){
                                 alert('关注成功！');

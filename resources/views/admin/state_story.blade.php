@@ -17,20 +17,24 @@
             <button class="pull-right delete" style="border:none;background-color: inherit"value="{{$state->id}}">
                <span class="glyphicon glyphicon-trash"></span>
             </button>
+             <button class="pull-right count" value="{{$state->id}}" style="background-color: inherit;border: none;cursor: default"></button>
             <a href="{{url('admin/showComments/'.$state->id)}}" class="pull-right">查看评论&nbsp;&nbsp;</a>
             {{date('Y-m-d H:i:s',$state->create_time)}}
 
          </div>
-         <div class="panel-footer">
-             <textarea name="content" id="" cols="30" rows="2" style="resize: none">{{$state->content}}</textarea>
-            <div style="float: right;">
-               @if($state->praise ==  1)
-                 <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" style="color:red;"></span>
-               @else
-                 <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" ></span>
+         <div class="panel-footer" id="test">
+             <div class="showFace" style="margin-bottom: 10px">
+                 <div style="float: right;">
+                   @if($state->praise ==  1)
+                     <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" style="color:red;"></span>
+                   @else
+                     <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" ></span>
 
-               @endif
-            </div>
+                   @endif
+                 </div>
+             </div>
+
+             <textarea class='faceCon' name="content" id="" cols="30" rows="2" style="resize: none">{{$state->content}}</textarea>
              <br>
              <input type="submit" value="修改状态" class="btn btn-default">
 
@@ -91,7 +95,8 @@
           $('.delete').click(function(){
               var $_this = $(this);
               $.ajax({
-                  url:"http://project.dev/admin/deleteState/"+$_this.val(),
+                  url:"{{url('admin/deleteState')}}",
+                  data:{'id':$_this.val()},
                   success:function(data){
                       if(data == 1){
                           alert('删除成功!');
@@ -108,7 +113,8 @@
           $('.delStory').click(function(){
               var $_this = $(this);
               $.ajax({
-                  url:"http://project.dev/admin/deleteStory/"+$_this.val(),
+                  url:"{{url('admin/deleteStory')}}",
+                  data:{'id':$_this.val()},
                   success:function(data){
                       if(data == 1){
                           alert('删除成功!');
@@ -121,6 +127,53 @@
                   type:'get'
               })
           })
+
+          $('.count').html(function(){
+//              $(this).html('aaaa');
+              var $_this = $(this);
+              $.ajax({
+                  url:"{{url('admin/count')}}",
+                  data:{'sid':$_this.val()},
+                  success:function(data){
+                    $_this.html('共'+data+'条评论');
+                  },
+                  error:function(){
+                      alert("失败！");
+                  }
+              })
+          })
+
       })
+
+      function replace_em(str){
+
+          str = str.replace(/\</g,'&lt;');
+
+          str = str.replace(/\>/g,'&gt;');
+
+          str = str.replace(/\n/g,'<br/>');
+
+          str = str.replace(/\[em_([0-9]*)\]/g,'<img src="{{url("home/arclist/$1.gif")}}" border="0" />');
+
+          return str;
+
+      }
+     $('.emotion').qqFace({
+
+                  id : 'facebox',
+
+                  assign:'test',
+
+                  path:'arclist/'	//表情存放的路径
+
+              });
+
+              $(".faceCon").val(function(){
+                  var str = $(this).val();
+                  var $img = replace_em(str);
+                  $(this).prev('.showFace').append($img);
+
+              });
+
    </script>
 @endsection

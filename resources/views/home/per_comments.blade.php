@@ -11,19 +11,18 @@
                         @foreach($states as $item)
                         <div class="panel-body">
                             {{date('Y-m-d H:i:s',$item->create_time)}}
-                            <button class="pull-right" style="border:none;background-color: inherit">
+                            <button class="pull-right" style="border:none;background-color: inherit"></button>
                         </div>
-                        <div class="panel-footer">{{$item->content}}
+                        <div class="panel-footer" id="test">
+                            <input type="hidden" class="faceCon" value="{{$item->content}}">
+                            <div class="showFace">
                             <div style="float: right;">
                                 @if($item->praise ==  1)
                                     <button id='praises' onclick="praise({{$item->id}})" style="border:none;background-color: inherit;color:red"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" ></span></button>
                                 @else
                                     <button id='praises' onclick="praise({{$item->id}})" style="border:none;background-color: inherit"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" ></span></button>
-
                                 @endif
-                                &nbsp;
-
-                            </div>
+                            </div></div>
                         </div>
                             @endforeach
                         </div>
@@ -67,6 +66,7 @@
         var n = 0;
         var praises = document.getElementById('praises');
         var cpras = document.getElementsByName('cpras');
+        var test = document.getElementById('test');
 
         var praise = function(n){
             if(window.XMLHttpRequest){
@@ -129,6 +129,7 @@
             xhr.onreadystatechange = function(){
                 if(xhr.readyState == 4 && xhr.status == 200){
                     if(xhr.responseText == 1){
+                        alert('删除成功！！');
                         location.reload(true);
                     }
                 }
@@ -137,6 +138,42 @@
             xhr.open('get', "/home/per_comments/cid/"+n, true);
             xhr.send();
         }
+
+        function replace_em(str){
+
+            str = str.replace(/\</g,'&lt;');
+
+            str = str.replace(/\>/g,'&gt;');
+
+            str = str.replace(/\n/g,'<br/>');
+
+            str = str.replace(/\[em_([0-9]*)\]/g,'<img src="{{url("home/arclist/$1.gif")}}" border="0" />');
+
+            return str;
+
+        }
+
+        $(function() {
+
+            $('.emotion').qqFace({
+
+                id: 'facebox',
+
+                assign: 'test',
+
+                path: 'arclist/'	//表情存放的路径
+
+            });
+
+            $(".faceCon").val(function(){
+                var str = $(this).val();
+                var $img = replace_em(str);
+//                alert($img);
+                $(this).next('.showFace').append($img);
+
+            });
+
+        })
 
     </script>
     @endsection

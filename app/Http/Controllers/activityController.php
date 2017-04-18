@@ -126,14 +126,14 @@ class activityController extends Controller
 
     }
 
-    public function delStates($id)
-    {
+    public function delStates()
+    {   $id = $_GET['id'];
         $res = states::find($id);
         $result = $res->delete();
         if ($result){
             return 1;
         }else {
-            return back();
+            return 0;
         }
 
     }
@@ -158,34 +158,54 @@ class activityController extends Controller
         return redirect('admin/state_story/'.$request->input('uid'));
 
     }
-    public function delStory($id)
+
+    public function delStory()
     {
+        $id = $_GET['id'];
         $res = story::find($id);
         $result = $res->delete();
         if ($result){
             return 1;
         }else {
-            return back();
+            return 0;
         }
 
     }
 
-    public function showComents($id)
+    public function showComments($id)
     {
         $comments = comments::where('sid',$id)->get();
         $states = states::where('id',$id)->get();
         return view('admin.comments',compact('comments','states'));
     }
 
-    public function delComments($id)
+    public function delComments()
     {
+        $id = $_GET['id'];
         $com = comments::find($id);
         $result = $com->delete();
         if ($result){
             return 1;
         }else {
-            return back();
+            return 0;
         }
 
+    }
+
+    public function editComments(Request $request)
+    {
+        $com = comments::find($request->input('id'));
+        $com->content = $request->input('content');
+        $com->save();
+        return redirect('admin/showComments/'.$request->input('sid'));
+
+    }
+
+    public function count()
+    {
+        $sid = $_GET['sid'];
+        $count = comments::where('sid',$sid)->get();
+        $count = count($count);
+        return $count;
     }
 }

@@ -5,22 +5,26 @@
     <meta charset="utf-8">
     <title>后台管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
-=======
-   {{--<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>--}}
->>>>>>> 584356ed9f575db344ecf08b60de1db3a50c779a
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/bootstrap.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/bootstrap-responsive.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/site.css')}}">
-<<<<<<< HEAD
+    <link rel="stylesheet" type="text/css" href="{{asset('admin/ICON/iconfont.css')}}">
+    {{--<script  src="{{asset('home/js/jquery.min.js')}}"></script>--}}
     <script type="text/javascript" src="{{asset('home/js/jquery-1.8.3.min.js')}}"></script>
- @yield('mycss')
-=======
+    <script type="text/javascript" src="{{asset('home/js/jquery.qqFace.js')}}"></script>
+    @yield('mycss')
+
     <style>
+        .icon {
+            width: 1em; height: 1em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
         @yield('style')
     </style>
->>>>>>> 584356ed9f575db344ecf08b60de1db3a50c779a
+
 </head>
 <body>
 <div class="container">

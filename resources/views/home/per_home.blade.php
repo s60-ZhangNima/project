@@ -1,5 +1,11 @@
 @extends('layouts.master')
+@section('mycss')
 
+    .qqFace { margin-top: 4px; background: #fff; padding: 2px; border: 1px #dfe6f6 solid; }
+    .qqFace table td { padding: 0px; }
+    .qqFace table td img { cursor: pointer; border: 1px #fff solid; }
+    .qqFace table td img:hover { border: 1px #0066cc solid; }
+    @endsection
 
 @section('content')
     <div class="container" style="width: 800px;height: auto">
@@ -75,11 +81,14 @@
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     {{date('Y-m-d H:i:s',$item->create_time)}}
-                                </div>
-                                <div class="panel-footer">{{$item->content}}
                                     <div style="float: right;">
                                         <span class="glyphicon glyphicon-list-alt " aria-hidden="true" name="comments" style="cursor: pointer;"></span>
                                     </div>
+                                </div>
+                                <div class="panel-footer">
+                                    <input type="hidden" class="faceCon" value="{{$item->content}}">
+                                    <div class="showFace"></div>
+
                                 </div>
                                 <div name="comment" style="width:285px;height:auto;display: none;margin: 20px 0 ;margin-left: 5px">
                                     <form action="{{url('home/per_home/com')}}" method="post" >
@@ -98,15 +107,18 @@
                     @endif
 
                 </div>
-                <div id="state" style="width:373px;height:auto;background-color: #fff;display: none">
+                <div id="state" style="width:373px;height:400px;background-color: #fff;display: none">
                     <form action="{{url('home/per_home')}}" method="post" >
                         <span class="glyphicon glyphicon-remove" style="float: right;border:1px solid #DDE8EF;padding: 3px;cursor: pointer" onclick="cancel(1)"></span>
-                        <textarea  id="test" cols="46" rows="3" style="resize: none" placeholder="写下你此刻的心情吧..."  onKeyUp="cal_words()" name="content"></textarea>
                         {{csrf_field()}}
+                        <textarea  id="test" cols="46" rows="3" style="resize: none" placeholder="写下你此刻的心情吧..."  onKeyUp="cal_words()" name="content"></textarea>
                         <div style="height:30px;line-height: 30px;font-weight: bold;">
-                            <span style="position: absolute;left: 316px;" id="num">240</span>
+                           <span class="emotion"><i class="iconfont icon-expression"></i></span>
+                            <span style="position: absolute;left:240px;" id="num" >
+                               240</span>
+                            <input type="submit" value="发布" id="sub_btn" class="pull-right btn-default btn" >
                         </div>
-                        <input type="submit" value="发布" style="background-color: #005EAC; position: absolute; top: 112px;width: 90px;height: 35px; border: none; color: #fff;left: 278px;">
+
 
                     </form>
                 </div>
@@ -190,6 +202,7 @@
         var stories = document.getElementById('stories');
         var coms = document.getElementsByName('comments');
         var com = document.getElementsByName('comment');
+        var test = document.getElementById('test');
 
 
         states.onclick = function(){
@@ -234,6 +247,7 @@
                     gushi.style.display = 'block';
                     state.style.display = 'none';
                     states.style.border ='1px solid #ccc';
+                    test.value = '';
                     break;
                 case 2:
                     gushi.style.display = 'block';
@@ -295,5 +309,42 @@
             xhr.open('get', "/home/per_home/"+n, true);
             xhr.send();
         }
+
+        function replace_em(str){
+
+            str = str.replace(/\</g,'&lt;');
+
+            str = str.replace(/\>/g,'&gt;');
+
+            str = str.replace(/\n/g,'<br/>');
+
+            str = str.replace(/\[em_([0-9]*)\]/g,'<img src="{{url("home/arclist/$1.gif")}}" border="0" />');
+
+            return str;
+
+        }
+
+        $(function(){
+
+            $('.emotion').qqFace({
+
+                id : 'facebox',
+
+                assign:'test',
+
+                path:'arclist/'	//表情存放的路径
+
+            });
+
+//            alert($('.aa').html());
+            $(".faceCon").val(function(){
+                var str = $(this).val();
+                var $img = replace_em(str);
+//                alert($img);
+                $(this).next('.showFace').append($img);
+
+            });
+
+        });
     </script>
 @endsection

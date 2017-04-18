@@ -88,9 +88,9 @@ Route::get('home/per_myfriends','Home\Usercontroller@myFriends');
 
 
 //添加好友
-Route::get('home/per_friend/{id}','Home\Usercontroller@addOrdelFriends');
+Route::get('home/per_friend}','Home\Usercontroller@addOrdelFriends');
 //添加关注和取消关注
-Route::get('home/per_mind/{id}','Home\Usercontroller@addOrdelMind');
+Route::get('home/per_mind','Home\Usercontroller@addOrdelMind');
 //查看我关注的
 Route::get('home/per_imind/','Home\Usercontroller@showImind');
 //查看谁关注我
@@ -101,6 +101,11 @@ Route::post('home/per_changepwd','Home\Usercontroller@changePwd');
 //修改邮箱
 Route::post('home/per_changeEmail','Home\Usercontroller@changeEmaile');
 
+//删除状态
+Route::get('home/deleteState','Home\UserController@delStates');
+
+//短信验证
+Route::get('/sendSMS','Home\Usercontroller@sendSMS');
 
 //登入页
 Route::get('/', 'LoginController@login');
@@ -143,9 +148,9 @@ Route::get('/admin/projects','projectsController@projects');
 Route::get('/home/createphoto','createphotoController@createphoto');
 Route::get('/home/photolist','photolistController@photolist');
 Route::get('/home/board','boardController@board');
+Route::get('/admin/activity','activityController@activity');
 
 
-<<<<<<< HEAD
 //用户管理：
 
 //用户信息
@@ -162,36 +167,67 @@ Route::post('/admin/info/work','activityController@writeWork');
 Route::post('/admin/info/school','activityController@writeSchool');
 
 //删除状态
-Route::get('admin/deleteState/{id}','activityController@delStates');
+Route::get('admin/deleteState','activityController@delStates');
 
 //删除故事
-Route::get('admin/deleteStory/{id}','activityController@delStory');
+Route::get('admin/deleteStory','activityController@delStory');
 //编辑状态
 Route::post('/admin/editState','activityController@editStates');
 
 //编辑故事editStory
 Route::post('/admin/editStory','activityController@editStory');
-=======
+
+//查看评论
+Route::get('admin/showComments/{id}','activityController@showComments');
+//删除评论
+Route::get('admin/delComments','activityController@delComments');
+//编辑评论
+Route::post('admin/editComment','activityController@editComments');
+
+//统计评论
+Route::get('admin/count','activityController@count');
+
+
+
+Route::get('/admin/state_story/{id}','activityController@showStaSto');
+Route::get('/admin/friends_focus/{id}','activityController@showFriFoc');
+Route::get('/admin/delete/{id}','activityController@delete');
+
+
+
+
+
+
+
+
+
+
 
 
 
 //权限管理
     //权限列表,分页显示
-Route::get('/admin/activity','Auth\PermissionController@activity');
+//Route::get('/admin/activity','Auth\PermissionController@activity');
     //添加
-Route::any('/admin/profile','Auth\PermissionController@permissionAdd');
-    //修改
-Route::any('/admin/alter/{permission_id}', 'Auth\PermissionController@permissionUpdate')/*->middleware('rbac')*/;
-    //删除
-Route::get('/admin/alter/{permission_id}', 'Auth\PermissionController@permissionDelete');
+//Route::any('/admin/profile','Auth\PermissionController@permissionAdd');
+//    //修改
+//Route::any('/admin/alter/{permission_id}', 'Auth\PermissionController@permissionUpdate')/*->middleware('rbac')*/;
+//    //删除
+//Route::get('/admin/alter/{permission_id}', 'Auth\PermissionController@permissionDelete');
+
+
+
+
+
+
 
 
 //角色管理
-Route::get('/admin/role-list', 'Admin\RoleController@roleList')/*->middleware('rbac')*/;
-Route::any('/admin/role-add', 'Admin\RoleController@roleAdd')/*->middleware('rbac')*/;
-Route::any('/admin/role-update/{role_id}', 'RoleController@roleUpdate')/*->middleware('rbac')*/;
-Route::get('/admin/role-delete/{role_id}', 'RoleController@roleDelete')/*->middleware('rbac')*/;
-Route::any('/admin/attach-permission/{role_id}', 'RoleController@attachPermission')/*->middleware('rbac')*/;
+//Route::get('/admin/role-list', 'Admin\RoleController@roleList')/*->middleware('rbac')*/;
+//Route::any('/admin/role-add', 'Admin\RoleController@roleAdd')/*->middleware('rbac')*/;
+//Route::any('/admin/role-update/{role_id}', 'RoleController@roleUpdate')/*->middleware('rbac')*/;
+//Route::get('/admin/role-delete/{role_id}', 'RoleController@roleDelete')/*->middleware('rbac')*/;
+//Route::any('/admin/attach-permission/{role_id}', 'RoleController@attachPermission')/*->middleware('rbac')*/;
 
 
 //管理员管理
@@ -203,24 +239,7 @@ Route::any('/admin/attach-permission/{role_id}', 'RoleController@attachPermissio
 
 
 
->>>>>>> 584356ed9f575db344ecf08b60de1db3a50c779a
 
 
 
 
-<<<<<<< HEAD
-//查看评论
-Route::get('admin/showComments/{id}','activityController@showComents');
-//删除评论
-Route::get('admin/delComment/{id}','activityController@delComments');
-
-
-
-Route::get('/admin/state_story/{id}','activityController@showStaSto');
-Route::get('/admin/friends_focus/{id}','activityController@showFriFoc');
-Route::get('/admin/delete/{id}','activityController@delete');
-=======
-
-
-
->>>>>>> 584356ed9f575db344ecf08b60de1db3a50c779a

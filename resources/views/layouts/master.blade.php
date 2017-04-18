@@ -10,7 +10,9 @@
 <link rel="shortcut icon" type="image/x-icon" href="{{asset('home/img/logo.jpg')}}" />
 <script type="text/javascript" src="{{asset('home/js/jquery-1.8.3.min.js')}}"></script>
 <link rel="stylesheet" type="text/css" href="{{asset('home/css/thems.css')}}">
-
+    <script  src="{{asset('home/js/jquery.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('home/js/jquery.qqFace.js')}}"></script>
+    <link rel="stylesheet" type="text/css" href="{{asset('home/face/iconfont.css')}}">
     <style>
         @yield('style')
         a:hover{

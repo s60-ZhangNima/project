@@ -15,6 +15,7 @@ use App\Model\states;
 use App\Model\story;
 use App\Model\users;
 use App\Model\work;
+use App\Tool\SMS\SendTemplateSMS;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
@@ -213,6 +214,17 @@ class UserController extends Controller
         $com = comments::find($id);
         $result = $com->delete();
         echo $result;
+    }
+
+    public function delStates()
+    {
+        $id = $_GET['id'];
+        $res = states::find($id);
+        $result = $res->delete();
+        if($result){
+            return 1;
+        }
+
     }
 
     public function perCpraise($id)
@@ -472,8 +484,9 @@ class UserController extends Controller
         }
     }
 
-    public  function addOrdelFriends($id)
+    public  function addOrdelFriends()
     {
+        $id = $_GET['id'];
        $ids = focus::where('uid',Auth::user()->id)->get();
        if($ids->isEmpty()){
            $friends = new focus();
@@ -527,8 +540,10 @@ class UserController extends Controller
         return response()->json($fri);
     }
 
-    public function addOrdelMind($id)
+    public function addOrdelMind()
     {
+        $id = $_GET['id'];
+
         $ids = focus::where('uid',Auth::user()->id)->get();
         $res = focus::where('imid','like','%'.$id.'%')->get();
         if ($res->isEmpty()){
@@ -622,5 +637,16 @@ class UserController extends Controller
         return redirect('/');
 
     }
+
+    public function sendSMS()
+    {
+        return 1111;
+//        $sms = new SendTemplateSMS();
+//        $result = $sms->sendSMS('15801986376', array('1234', 5), 1);
+//        //dd($result);
+//
+//        return $result->toJosn();
+    }
+
 
 }
