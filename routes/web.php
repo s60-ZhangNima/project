@@ -145,45 +145,19 @@ Route::get('/home/photolist','photolistController@photolist');
 Route::get('/home/board','boardController@board');
 
 
-<<<<<<< HEAD
-//用户管理：
 
-//用户信息
-Route::get('/admin/info/{id}','activityController@showInfo');
-//编辑感情
-Route::post('/admin/info/feeling','activityController@writeFeel');
-//编辑基本信息
-Route::post('/admin/info/baseInfo','activityController@writeInfo');
-//编辑爱好
-Route::post('/admin/info/like','activityController@writeLike');
-//编辑工作信息
-Route::post('/admin/info/work','activityController@writeWork');
-//编辑学校信息
-Route::post('/admin/info/school','activityController@writeSchool');
-
-//删除状态
-Route::get('admin/deleteState/{id}','activityController@delStates');
-
-//删除故事
-Route::get('admin/deleteStory/{id}','activityController@delStory');
-//编辑状态
-Route::post('/admin/editState','activityController@editStates');
-
-//编辑故事editStory
-Route::post('/admin/editStory','activityController@editStory');
-=======
 
 
 
 //权限管理
     //权限列表,分页显示
-Route::get('/admin/activity','Auth\PermissionController@activity');
+Route::get('/admin/privilege','Auth\PermissionController@privilege');
     //添加
 Route::any('/admin/profile','Auth\PermissionController@permissionAdd');
     //修改
 Route::any('/admin/alter/{permission_id}', 'Auth\PermissionController@permissionUpdate')/*->middleware('rbac')*/;
     //删除
-Route::get('/admin/alter/{permission_id}', 'Auth\PermissionController@permissionDelete');
+Route::get('/admin/delete/{permission_id}', 'Auth\PermissionController@permissionDelete');
 
 
 //角色管理
@@ -203,12 +177,12 @@ Route::any('/admin/attach-permission/{role_id}', 'RoleController@attachPermissio
 
 
 
->>>>>>> 584356ed9f575db344ecf08b60de1db3a50c779a
 
 
 
 
-<<<<<<< HEAD
+
+
 //查看评论
 Route::get('admin/showComments/{id}','activityController@showComents');
 //删除评论
@@ -219,8 +193,4 @@ Route::get('admin/delComment/{id}','activityController@delComments');
 Route::get('/admin/state_story/{id}','activityController@showStaSto');
 Route::get('/admin/friends_focus/{id}','activityController@showFriFoc');
 Route::get('/admin/delete/{id}','activityController@delete');
-=======
 
-
-
->>>>>>> 584356ed9f575db344ecf08b60de1db3a50c779a
