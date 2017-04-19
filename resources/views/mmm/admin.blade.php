@@ -34,7 +34,7 @@
                             <a href="help.htm" class="dropdown-toggle" data-toggle="dropdown">更多 <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="./activity">管理员管理</a>
+                                    <a href="{{url('admin/user-list')}}">管理员管理</a>
                                 </li>
                                 <li>
                                     <a href="./activity">用户管理</a>

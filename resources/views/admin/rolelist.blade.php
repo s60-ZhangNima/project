@@ -30,8 +30,8 @@
                 <td>{{$role->description}}</td>
                 <td>{{$role->perms}}</td>
                 <td>
-                    <a href="allot-permission/{{$role->id}}">分配权限</a>
-                    <a href="role-update/{{$role->id}}">修改</a>
+                    <a href="assignment/{{$role->id}}">分配权限</a>
+                    <a href="/admin/role-update/{{$role->id}}">修改</a>
                     <a href="role-delete/{{$role->id}}">删除</a>
                 </td>
             </tr>

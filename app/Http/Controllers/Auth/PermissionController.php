@@ -14,7 +14,7 @@ class PermissionController extends Controller
     public function Privilege()
     {
         //查询所有的权限,分页显示
-        $activitys = Permission::paginate(4);
+        $activitys = Permission::paginate(2);
         return view('admin.privilege', compact('activitys'));
     }
 
@@ -45,6 +45,7 @@ class PermissionController extends Controller
     public function permissionDelete($permission_id)
     {
         //删除信息
+
         Permission::destroy([$permission_id]);
         return redirect('admin/privilege');
     }

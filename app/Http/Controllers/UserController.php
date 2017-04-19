@@ -78,8 +78,8 @@ class UserController extends Controller
             }
         $res = users::where('email',$request->input('email'))->get()->toArray();
         if(!Hash::check($request->input('password'), $res[0]['password'])){
-            return back();
-        }
+        return back();
+    }
 
         return redirect('/index');
 

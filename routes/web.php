@@ -155,23 +155,30 @@ Route::get('/admin/privilege','Auth\PermissionController@privilege');
     //添加
 Route::any('/admin/profile','Auth\PermissionController@permissionAdd');
     //修改
-Route::any('/admin/alter/{permission_id}', 'Auth\PermissionController@permissionUpdate')/*->middleware('rbac')*/;
+Route::any('/admin/alter/{permission_id}', 'Auth\PermissionController@permissionUpdate')->middleware('rbac');
     //删除
 Route::get('/admin/delete/{permission_id}', 'Auth\PermissionController@permissionDelete');
 
 
 //角色管理
-Route::get('/admin/role-list', 'Admin\RoleController@roleList')/*->middleware('rbac')*/;
-Route::any('/admin/role-add', 'Admin\RoleController@roleAdd')/*->middleware('rbac')*/;
-Route::any('/admin/role-update/{role_id}', 'RoleController@roleUpdate')/*->middleware('rbac')*/;
-Route::get('/admin/role-delete/{role_id}', 'RoleController@roleDelete')/*->middleware('rbac')*/;
-Route::any('/admin/attach-permission/{role_id}', 'RoleController@attachPermission')/*->middleware('rbac')*/;
+    //角色列表
+Route::get('/admin/role-list', 'Admin\RoleController@roleList')->middleware('rbac');
+    //增加
+Route::any('/admin/role-add', 'Admin\RoleController@roleAdd')->middleware('rbac');
+    //修改
+Route::any('/admin/role-update/{role_id}', 'Admin\RoleController@roleUpdate')->middleware('rbac');
+    //删除
+Route::get('/admin/role-delete/{role_id}', 'Admin\RoleController@roledelete')->middleware('rbac');
+    //分配权限
+Route::any('/admin/assignment/{role_id}', 'Admin\RoleController@assignment')->middleware('rbac');
 
 
 //管理员管理
-//Route::get('/user-list', 'UserController@userList')->middleware('rbac');
-//Route::any('/user-add', 'UserController@userAdd');
-//Route::any('/attach-role/{user_id}', 'UserController@attachRole');
+Route::get('/admin/user-list', 'Admin\UserController@userList')->middleware('rbac') ;
+Route::any('/admin/user-add', 'Admin\UserController@userAdd');
+Route::any('/admin/user-update/{user_id}', 'Admin\UserController@userupdate');
+Route::any('/admin/user-delete/{user_id}', 'Admin\UserController@userdelete');
+Route::any('/admin/attach-role/{user_id}', 'Admin\UserController@allotrole');
 
 
 
