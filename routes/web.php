@@ -82,19 +82,19 @@ Route::post('/home/per_info/feeling','Home\UserController@writeFeel');
 
 
 //展示其他用户
-Route::get('home/per_showfriends','Home\Usercontroller@showFriends');
+//Route::get('home/per_myfri','Home\Usercontroller@showFriends');
 //查看我的好友
-Route::get('home/per_myfriends','Home\Usercontroller@myFriends');
+Route::get('home/per_myFri','Home\Usercontroller@myFriends');
 
 
 //添加好友
-Route::get('home/per_friend}','Home\Usercontroller@addOrdelFriends');
+Route::get('home/per_friend','Home\Usercontroller@addOrdelFriends');
 //添加关注和取消关注
 Route::get('home/per_mind','Home\Usercontroller@addOrdelMind');
 //查看我关注的
-Route::get('home/per_imind/','Home\Usercontroller@showImind');
+Route::get('home/per_Ifocus/','Home\Usercontroller@showImind');
 //查看谁关注我
-Route::get('home/per_mmind/','Home\Usercontroller@mindMe');
+Route::get('home/per_FocusMe/','Home\Usercontroller@mindMe');
 
 //修改密码
 Route::post('home/per_changepwd','Home\Usercontroller@changePwd');
@@ -166,6 +166,30 @@ Route::post('/admin/info/work','activityController@writeWork');
 //编辑学校信息
 Route::post('/admin/info/school','activityController@writeSchool');
 
+
+//删除感情信息
+Route::get('/admin/delFel/{id}','activityController@delFeel');
+
+//删除基本信息
+Route::get('/admin/baseInfo/{id}','activityController@delBaseInfo');
+
+//删除爱好
+Route::get('/admin/like/{id}','activityController@delLike');
+
+//删除工作信息
+Route::get('/admin/work/{id}','activityController@delWork');
+
+//删除学校信息
+Route::get('/admin/school/{id}','activityController@delSchool');
+
+
+
+
+
+
+
+
+
 //删除状态
 Route::get('admin/deleteState','activityController@delStates');
 
@@ -187,14 +211,22 @@ Route::post('admin/editComment','activityController@editComments');
 //统计评论
 Route::get('admin/count','activityController@count');
 
-
-
+//状态
 Route::get('/admin/state_story/{id}','activityController@showStaSto');
-Route::get('/admin/friends_focus/{id}','activityController@showFriFoc');
+//朋友关心
+Route::get('/admin/friends_focus/{id}','activityController@showMyfri');
+Route::get('/admin/iFocus/{id}','activityController@showIfocus');
+Route::get('/admin/focusMe/{id}','activityController@showFocusMe');
+Route::get('/admin/friends_addFri/{id}','activityController@showFriFoc');
+
+//删除用户
 Route::get('/admin/delete/{id}','activityController@delete');
 
+//删除好友
+Route::get('/admin/delOrAddFri/{id}/{fid}','activityController@delOrAddFri');
 
-
+//取消关注和关注
+Route::get('/admin/delOrAddMind/{id}/{fid}','activityController@delOrAddMind');
 
 
 

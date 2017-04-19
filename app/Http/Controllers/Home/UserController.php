@@ -95,7 +95,22 @@ class UserController extends Controller
 
     public function perFocus()
     {
-        return view('home.per_focus');
+        $friends  = focus::where('uid',Auth::user()->id)->get()->toArray();
+        if(empty($friends)){
+            $fri = users::select('icon','name','id')->where('id','<>',Auth::user()->id)->get();
+        }else{
+            $ids = $friends[0]['frid'];
+            $ids = $ids.','.Auth::user()->id;
+            $ids = explode(',',$ids);
+            $num = [];
+            for ($i=0;$i<count($ids);$i++){
+                $num[]=intval($ids[$i]);
+            }
+            $fri = users::select('icon','name','id')->whereNotIn('id',$num)->get();
+        }
+        $nums = $friends[0]['imid'];
+        $arr = explode(',',$nums);
+        return view('home/per_focus',compact('fri','arr'));
     }
 
     public function perSettings()
@@ -456,7 +471,8 @@ class UserController extends Controller
             }
             $fri = users::select('icon','name','id')->whereNotIn('id',$num)->get();
         }
-        return response()->json($fri);
+        dd($fri);
+        return view('home/per_focus',compact('fri'));
 
     }
 
@@ -465,7 +481,7 @@ class UserController extends Controller
         $friends = focus::where('uid', Auth::user()->id)->get()->toArray();
         $ids = $friends[0]['frid'];
         if (empty($ids)) {
-            return 0;
+            $fri = '';
         } else {
            $count = strlen($ids); //判断字段长度
             if ($count > 1) {
@@ -479,9 +495,11 @@ class UserController extends Controller
                 $ids= intval($ids);
                 $fri = users::select('icon', 'name', 'id')->where('id', $ids)->get();
             }
-            return response()->json($fri);
-
         }
+        $nums = $friends[0]['imid'];
+        $arr = explode(',',$nums);
+        return view('home/per_myFri',compact('fri','arr'));
+
     }
 
     public  function addOrdelFriends()
@@ -526,7 +544,7 @@ class UserController extends Controller
         $imnd  = focus::where('uid',Auth::user()->id)->get()->toArray();
         $imnds = $imnd[0]['imid'];
         if(empty($imnds)){
-            return 0;
+            $fri = '';
         }else{
             $ids = explode(',',$imnds);
             $num = [];
@@ -537,7 +555,9 @@ class UserController extends Controller
                                                     ->where('id','<>',Auth::user()->id)
                                                     ->get();
         }
-        return response()->json($fri);
+        $nums = $imnd[0]['frid'];
+        $arr = explode(',',$nums);
+        return view('home/per_Ifocus',compact('fri','arr'));
     }
 
     public function addOrdelMind()
@@ -579,7 +599,7 @@ class UserController extends Controller
                       ->where('uid','<>',Auth::user()->id)->get();
 
         if($res->isEmpty()){
-            return 0;
+            $mmid = '';
         }else{
             foreach ($res as $item){
                 $mmids[]= $item['uid'];
@@ -591,8 +611,13 @@ class UserController extends Controller
             $mmid = users::select('icon','name','id')->whereIn('id',$mmids)
                 ->where('id','<>',Auth::user()->id)
                 ->get();
-            return response()->json($mmid);
         }
+        $friends = focus::where('uid', Auth::user()->id)->get()->toArray();
+        $nums = $friends[0]['frid'];
+        $arr = explode(',',$nums);
+
+        return view('home/per_FocusMe',compact('mmid','arr'));
+
     }
 
     public function changePwd(Request $request)

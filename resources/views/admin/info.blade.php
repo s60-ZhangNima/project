@@ -39,7 +39,7 @@
              </select>
          </div>
              <input type="submit" class="btn btn-default" value="编辑">
-             <a href="" class="btn btn-default">删除</a>
+             <a href="{{url('/admin/delFel/'.$feel->id)}}" class="btn btn-default">删除</a>
          </form>
          @endforeach
          @endif
@@ -76,7 +76,7 @@
               <input type="text" name='address' class="form-control" value="{{$infos->address}}" name="address">
           </div>
           <input type="submit" class="btn btn-default" value="编辑">
-          <a href="" class="btn btn-default">删除</a>
+          <a href="{{url('/admin/baseInfo/'.$infos->id)}}" class="btn btn-default">删除</a>
       </form>
       @endforeach
          @endif
@@ -113,7 +113,7 @@
              <input type="text" class="form-control" value="{{$schools->stn}}" name="stn">
           </div>
               <input type="submit" class="btn btn-default" value="编辑">
-              <a href="" class="btn btn-default">删除</a>
+              <a href="{{url('/admin/school/'.$schools->id)}}" class="btn btn-default">删除</a>
           </form>
           @endforeach
          @endif
@@ -147,7 +147,7 @@
                <input type="text" class="form-control" value="{{$works->work_time}}" name="work_time">
             </div>
               <input type="submit" class="btn btn-default" value="编辑">
-              <a href="" class="btn btn-default">删除</a>
+              <a href="{{url('/admin/work/'.$works->id)}}" class="btn btn-default">删除</a>
           </form>
          @endforeach
          @endif
@@ -192,7 +192,7 @@
                    <input type="text" class="form-control" value="{{$likes->sport}}" name="sport">
                 </div>
               <input type="submit" class="btn btn-default" value="编辑">
-              <a href="" class="btn btn-default">删除</a>
+              <a href="{{url('/admin/like/'.$likes->id)}}" class="btn btn-default">删除</a>
           </form>
           @endforeach
          @endif

@@ -11,18 +11,20 @@
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/site.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin/ICON/iconfont.css')}}">
     {{--<script  src="{{asset('home/js/jquery.min.js')}}"></script>--}}
+    <script src="{{asset('admin/ICON/iconfont.js')}}"></script>
     <script type="text/javascript" src="{{asset('home/js/jquery-1.8.3.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('home/js/jquery.qqFace.js')}}"></script>
     @yield('mycss')
+    @show
 
     <style>
+        @yield('style')
         .icon {
             width: 1em; height: 1em;
             vertical-align: -0.15em;
             fill: currentColor;
             overflow: hidden;
         }
-        @yield('style')
     </style>
 
 </head>

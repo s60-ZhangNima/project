@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\comments;
 use App\Model\feeling;
+use App\Model\focus;
 use App\Model\info;
 use App\Model\like;
 use App\Model\school;
@@ -45,7 +46,25 @@ class activityController extends Controller
 
     public function showFriFoc($id)
     {
-        return view('admin.friends_focus');
+        $friends  = focus::where('uid',$id)->get()->toArray();
+        if(empty($friends)){
+            $fri = users::select('icon','name','id')->where('id','<>',$id)->orderBy('id','asc')->get();
+        }else{
+            $ids = $friends[0]['frid'];
+            $ids = $ids.','.$id;
+            $ids = explode(',',$ids);
+            $num = [];
+            for ($i=0;$i<count($ids);$i++){
+                $num[]=intval($ids[$i]);
+            }
+            $fri = users::select('icon','name','id')->whereNotIn('id',$num)->orderBy('id','asc')->get();
+        }
+        $ids = explode(',',$friends[0]['imid']);
+        $nums = [];
+        for ($i=0;$i<count($ids);$i++){
+            $nums[]=intval($ids[$i]);
+        }
+        return view('admin.addFri',compact('fri','id','nums'));
 
     }
 
@@ -56,7 +75,6 @@ class activityController extends Controller
         return redirect('admin/activity');
 
     }
-
 
     public function writeSchool(Request $request)
     {
@@ -88,7 +106,6 @@ class activityController extends Controller
 
     public function writeLike(Request $request)
     {
-
             $id = like::where('uid',$request->input('uid'))->get()->toArray();
             $like = like::find($id[0]['id']);
             $like->music = $request->input('music');
@@ -207,5 +224,180 @@ class activityController extends Controller
         $count = comments::where('sid',$sid)->get();
         $count = count($count);
         return $count;
+    }
+
+    public function showIfocus($id)
+    {
+        $imnd  = focus::where('uid',$id)->get()->toArray();
+        $imnds = $imnd[0]['imid'];
+        if(empty($imnds)){
+            $fri = '';
+        }else{
+            $ids = explode(',',$imnds);
+            $num = [];
+            for ($i=0;$i<count($ids);$i++){
+                $num[]=intval($ids[$i]);
+            }
+            $fri = users::select('icon','name','id')->whereIn('id',$num)
+                ->where('id','<>',$id)
+                ->get();
+        }
+
+        $arr = $imnd[0]['frid'];
+        $arr = explode(',',$arr);
+        return view('admin/iFocus',compact('fri','id','arr'));
+    }
+
+    public function showFocusMe($id)
+    {
+        $res = focus::where('imid','like','%'.$id.'%')
+            ->where('uid','<>',$id)->get();
+
+        if($res->isEmpty()){
+            $mmid = '';
+        }else{
+            foreach ($res as $item){
+                $mmids[]= $item['uid'];
+            }
+            $str = implode(',',$mmids);
+            $me = focus::find($id);
+            $me->mmid = $str;
+            $me->save();
+            $mmid = users::select('icon','name','id')->whereIn('id',$mmids)
+                ->where('id','<>',$id)
+                ->get();
+        }
+        $ids = focus::where('uid',$id)->get()->toArray();
+        $arr = $ids[0]['frid'];
+        $arr = explode(',',$arr);
+        return view('admin/focusMe',compact('mmid','id','arr'));
+
+    }
+
+    public function showMyfri($id)
+    {
+
+
+        $friends = focus::where('uid', $id)->get()->toArray();
+        $ids = $friends[0]['frid'];
+        $imnds = $friends[0]['imid'];
+
+        if (empty($ids)) {
+            $fri = '';
+        } else {
+            $count = strlen($ids); //判断字段长度
+            if ($count > 1) {
+                $ids = explode(',',$ids); //将字符串进行分割
+                $num = [];
+                for ($i=0;$i<count($ids);$i++){
+                    $num[]=intval($ids[$i]);
+                }
+                $fri = users::whereIn('id', $num)->get();
+            } else {
+                $ids= intval($ids);
+                $fri = users::select('icon', 'name', 'id')->where('id', $ids)->get();
+            }
+
+        }
+                //获取我已关注的人的id数组`
+            $ids = explode(',',$imnds);
+            $nums = [];
+            for ($i=0;$i<count($ids);$i++){
+                $nums[]=intval($ids[$i]);
+            }
+        return view('admin.friends_focus',compact('fri','id','nums'));
+
+    }
+
+    public function delOrAddFri($id,$fid)
+    {
+        $ids = focus::where('uid',$id)->get();
+        if($ids->isEmpty()){
+            $friends = new focus();
+            $friends->uid = $id;
+            $friends->frid = $fid ;
+             $friends->save();
+        } else {
+            $has = focus::where('frid','like','%'.$fid.'%')->where('uid',$id)->get();
+            if ($has->isEmpty()){
+                $ids = $ids[0]['frid'];
+                $frids = $ids.','.$fid;
+                $friends = focus::find($id);
+                $friends->frid = $frids;
+                $friends->save();
+            }else{
+                $arr = $has->toArray();
+                $arr = $arr[0]['frid'];
+                $arr = explode(',',$arr);
+                $key = array_search($fid,$arr);
+                unset($arr[$key]);
+                $frids = implode(',',$arr);
+                $frid = focus::find($id);
+                $frid->frid =  $frids;
+                $frid->save();
+            }
+        }
+        return back();
+    }
+
+    public function delOrAddMind($id,$mid)
+    {
+        $ids = focus::where('uid',$id)->get();
+        $res = focus::where('imid','like','%'.$mid.'%')->get();
+        if ($res->isEmpty()){
+            $imid = focus::find($id);
+            $arr = $ids[0]['imid'];
+            $imid->imid = $arr.','.$mid;
+            $imid->save();
+            $res =  $imid->save();
+        } else {
+            $arr = focus::where('uid',$id)->get()->toArray();
+            $arr = $arr[0]['imid'];
+            $arr = explode(',',$arr);
+            $key = array_search($mid,$arr);
+            unset($arr[$key]);
+            $imids = implode(',',$arr);
+            $imid = focus::find($id);
+            $imid->imid = $imids;
+            $imid->save();
+            $res =  $imid->save();
+        }
+
+        return back();
+    }
+
+    public function delFeel($id)
+    {
+        $res = feeling::find($id);
+        $res->delete();
+        return back();
+    }
+
+    public function delBaseInfo($id)
+    {
+        $res = info::find($id);
+        $res->delete();
+        return back();
+    }
+
+    public function delLike($id)
+    {
+        $res =like::find($id);
+        $res->delete();
+        return back();
+    }
+
+    public function delWork($id)
+    {
+        $res = work::find($id);
+        $res->delete();
+        return back();
+    }
+
+    public function delSchool($id)
+    {
+        $res = school::find($id);
+        $res->delete();
+        return back();
     }
 }

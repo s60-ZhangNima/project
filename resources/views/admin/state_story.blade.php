@@ -29,13 +29,14 @@
                      <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" style="color:red;"></span>
                    @else
                      <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" ></span>
-
                    @endif
                  </div>
              </div>
+             <input type="hidden"  class='faceCon' value="{{$state->content}}">
+             <textarea name="content" id="aaa" cols="30" rows="2" style="resize: none"></textarea>
+             <span class="emotion"><i class="iconfont icon-expression"></i>表情</span>
 
-             <textarea class='faceCon' name="content" id="" cols="30" rows="2" style="resize: none">{{$state->content}}</textarea>
-             <br>
+             {{--<br>--}}
              <input type="submit" value="修改状态" class="btn btn-default">
 
          </div>
@@ -162,9 +163,9 @@
 
                   id : 'facebox',
 
-                  assign:'test',
+                  assign:'aaa',
 
-                  path:'arclist/'	//表情存放的路径
+                  path:'/home/arclist/'	//表情存放的路径
 
               });
 

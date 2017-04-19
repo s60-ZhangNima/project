@@ -17,15 +17,18 @@
                     {{date('Y-m-d H:i:s',$state->create_time)}}
 
                 </div>
-                <div class="panel-footer">{{$state->content}}
-                    <div style="float: right;">
-                        @if($state->praise ==  1)
+                <div class="panel-footer">
+
+                        <div class="showFace">
+                            <div style="float: right;">
+                            @if($state->praise ==  1)
                             <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" style="color:red;"></span>
                         @else
                             <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" ></span>
-
                         @endif
-                    </div>
+                        </div>
+                        </div>
+                           {{$state->content}}
                 </div>
             </div>
         @endforeach
@@ -73,7 +76,9 @@
                     type:'get'
                 })
             })
-        })
+
+        });
+
     </script>
 
 @endsection

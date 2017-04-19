@@ -9,28 +9,55 @@
 						<thead>
 							<tr>
 								<th>
-									<i class="iconfont icon-ID"></i>
+									<svg class="icon" aria-hidden="true">
+										<use xlink:href="#icon-ysid"></use>
+									</svg>
 									用户ID
 								</th>
 								<th>
-									<i class="iconfont icon-youxiang"></i>
+									<svg class="icon" aria-hidden="true">
+										<use xlink:href="#icon-jinlingyingcaiwangtubiao31"></use>
+									</svg>
 									用户邮箱
 								</th>
 								<th>
-									<i class="iconfont icon-gerenziliao"></i>&nbsp;
+									<svg class="icon" aria-hidden="true">
+										<use xlink:href="#icon-ziliaojilu"></use>
+									</svg>
+
 									用户资料
 								</th>
 								<th>
-									<i class="iconfont icon-comiisfashuoshuo"></i>
-									用户状态 /  <i class="iconfont icon-gushi"></i>
+									<svg class="icon" aria-hidden="true">
+										<use xlink:href="#icon-zhuangtai"></use>
+									</svg>
+									用户状态 /
+									<svg class="icon" aria-hidden="true">
+										<use xlink:href="#icon-riji-neirong"></use>
+									</svg>
 									故事
 								</th>
 								<th>
-									<i class="iconfont icon-haoyou-copy"></i>
-									用户好友/关注
+									<svg class="icon" aria-hidden="true">
+										<use xlink:href="#icon-haoyou"></use>
+									</svg>
+
+									用户好友 /
+									<svg class="icon" aria-hidden="true">
+										<use xlink:href="#icon-guanzhu1"></use>
+									</svg>
+									关注
 								</th>
 								<th>
-									<i class="iconfont icon-shanchu"></i>
+									<svg class="icon" aria-hidden="true">
+										<use xlink:href="#icon-yingyong"></use>
+									</svg>
+									应用
+								</th>
+								<th>
+									<svg class="icon" aria-hidden="true">
+										<use xlink:href="#icon-shanchu"></use>
+									</svg>
 									操作
 								</th>
 							</tr>
@@ -53,6 +80,9 @@
 								</td>
 								<td>
 									<a href="{{url('admin/friends_focus/'.$item->id)}}">Friends/Focus</a>
+								</td>
+								<td>
+									APP
 								</td>
 								<td>
 									<a href="{{url('admin/delete/'.$item->id)}}">删除</a>
