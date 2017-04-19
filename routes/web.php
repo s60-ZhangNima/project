@@ -151,6 +151,7 @@ Route::get('/home/board','boardController@board');
 Route::get('/admin/activity','activityController@activity');
 
 
+<<<<<<< HEAD
 //用户管理：
 
 //用户信息
@@ -234,11 +235,15 @@ Route::get('/admin/delOrAddMind/{id}/{fid}','activityController@delOrAddMind');
 
 
 
+=======
+
+>>>>>>> 1c21a3bdfc4b25581ef52cb2ebcc20cdf87abdd2
 
 
 
 //权限管理
     //权限列表,分页显示
+<<<<<<< HEAD
 //Route::get('/admin/activity','Auth\PermissionController@activity');
     //添加
 //Route::any('/admin/profile','Auth\PermissionController@permissionAdd');
@@ -250,6 +255,38 @@ Route::get('/admin/delOrAddMind/{id}/{fid}','activityController@delOrAddMind');
 
 
 
+=======
+Route::get('/admin/privilege','Auth\PermissionController@privilege');
+    //添加
+Route::any('/admin/profile','Auth\PermissionController@permissionAdd');
+    //修改
+Route::any('/admin/alter/{permission_id}', 'Auth\PermissionController@permissionUpdate')->middleware('rbac');
+    //删除
+Route::get('/admin/delete/{permission_id}', 'Auth\PermissionController@permissionDelete');
+
+
+//角色管理
+    //角色列表
+Route::get('/admin/role-list', 'Admin\RoleController@roleList')->middleware('rbac');
+    //增加
+Route::any('/admin/role-add', 'Admin\RoleController@roleAdd')->middleware('rbac');
+    //修改
+Route::any('/admin/role-update/{role_id}', 'Admin\RoleController@roleUpdate')->middleware('rbac');
+    //删除
+Route::get('/admin/role-delete/{role_id}', 'Admin\RoleController@roledelete')->middleware('rbac');
+    //分配权限
+Route::any('/admin/assignment/{role_id}', 'Admin\RoleController@assignment')->middleware('rbac');
+
+
+//管理员管理
+Route::get('/admin/user-list', 'Admin\UserController@userList')->middleware('rbac') ;
+Route::any('/admin/user-add', 'Admin\UserController@userAdd');
+Route::any('/admin/user-update/{user_id}', 'Admin\UserController@userupdate');
+Route::any('/admin/user-delete/{user_id}', 'Admin\UserController@userdelete');
+Route::any('/admin/attach-role/{user_id}', 'Admin\UserController@allotrole');
+
+
+>>>>>>> 1c21a3bdfc4b25581ef52cb2ebcc20cdf87abdd2
 
 
 
@@ -269,9 +306,22 @@ Route::get('/admin/delOrAddMind/{id}/{fid}','activityController@delOrAddMind');
 
 
 
+<<<<<<< HEAD
 
 
 
 
 
+=======
+//查看评论
+Route::get('admin/showComments/{id}','activityController@showComents');
+//删除评论
+Route::get('admin/delComment/{id}','activityController@delComments');
+
+
+
+Route::get('/admin/state_story/{id}','activityController@showStaSto');
+Route::get('/admin/friends_focus/{id}','activityController@showFriFoc');
+Route::get('/admin/delete/{id}','activityController@delete');
+>>>>>>> 1c21a3bdfc4b25581ef52cb2ebcc20cdf87abdd2
 

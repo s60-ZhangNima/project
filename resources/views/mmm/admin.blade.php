@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/bootstrap.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/bootstrap-responsive.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/site.css')}}">
+<<<<<<< HEAD
     <link rel="stylesheet" type="text/css" href="{{asset('admin/ICON/iconfont.css')}}">
     {{--<script  src="{{asset('home/js/jquery.min.js')}}"></script>--}}
     <script src="{{asset('admin/ICON/iconfont.js')}}"></script>
@@ -26,6 +27,10 @@
             overflow: hidden;
         }
     </style>
+=======
+    <script type="text/javascript" src="{{asset('home/js/jquery-1.8.3.min.js')}}"></script>
+ @yield('mycss')
+>>>>>>> 1c21a3bdfc4b25581ef52cb2ebcc20cdf87abdd2
 
 </head>
 <body>
@@ -49,7 +54,7 @@
                             <a href="help.htm" class="dropdown-toggle" data-toggle="dropdown">更多 <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="./activity">管理员管理</a>
+                                    <a href="{{url('admin/user-list')}}">管理员管理</a>
                                 </li>
                                 <li>
                                     <a href="./activity">用户管理</a>
@@ -115,10 +120,11 @@
                         权限管理
                     </li>
                     <li>
-                        <a href="./activity"><i class="icon-list-alt"></i> 权限管理</a>
+                        <a href="{{url('admin/privilege')}}"><i class="icon-list-alt"></i> 权限管理</a>
                     </li>
                     <li>
-                        <a href="./role-list"><i class="icon-list-alt"></i> 角色管理</a>
+                    <li>
+                        <a href="{{url('admin/role-list')}}"><i class="icon-list-alt"></i> 角色管理</a>
                     </li>
                     {{--<li>
                         <a href="./alter"><i class="icon-user"></i> 修改</a>

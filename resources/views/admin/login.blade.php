@@ -9,6 +9,9 @@
 		<link rel="stylesheet" type="text/css" href="{{asset('admin/css/bootstrap.min.css')}}">
 		<link rel="stylesheet" type="text/css" href="{{asset('admin/css/bootstrap-responsive.min.css')}}">
 		<link rel="stylesheet" type="text/css" href="{{asset('admin/css/site.css')}}">
+		<style>
+			#login-page{margin-top: 10%}
+		</style>
 	</head>
 	<body>
 		<div id="login-page" class="container">
