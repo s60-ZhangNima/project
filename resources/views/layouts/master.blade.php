@@ -26,17 +26,11 @@
 <div class="t_bg">
 	<div class="top">
         欢迎 【 {{Auth::user()->name}} 】
-<<<<<<< HEAD
+
         <a href="{{url('home/per_home')}}">个人主页</a> |
-        <a href="{{url('home/per_character')}}">我的人品</a>
-        <!-- Single button -->
-=======
-        <a href="{{url('home/per_home')}}">个人主页</a>|
-        <a href="{{url('home/logout')}}">退出
+        <a href="{{url('home/per_character')}}">我的人品</a> |
 
-        </a>
->>>>>>> e41957e048fab85fd9fd77343e2e0a6c53357049
-
+        <a href="{{url('home/logout')}}">退出 </a>
     </div>
 </div>
 <div class="header">

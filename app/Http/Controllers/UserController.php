@@ -90,7 +90,7 @@ class UserController extends Controller
         }
 
     }
-<<<<<<< HEAD
+
    $has = quantity::where('uid',Auth::user()->id)->get();
         if ($has->isEmpty()){
             $login_time = time();
@@ -109,12 +109,7 @@ class UserController extends Controller
             $add->rand_get = 0;
             $add->save();
         }
-        return redirect('/index');
-=======
-
         return redirect('/home/index');
->>>>>>> e41957e048fab85fd9fd77343e2e0a6c53357049
-
     }
 
 

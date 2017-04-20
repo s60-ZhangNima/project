@@ -64,7 +64,7 @@
 
         <body>
         <!--百度地图容器-->
-        <span style='position: relative;left: 1200px;' onclick="up()">收起地图</span>
+        <span style='position: relative;left: 1100px;top:-20px;' onclick="up()">收起地图</span>
         <div style="width:290px;height:250px;border:#ccc solid 1px;left:1050px;top:-10px" id="dituContent">
 
         </div>

@@ -250,7 +250,7 @@ Route::get('/admin/like/{id}','activityController@delLike');
 //删除工作信息
 Route::get('/admin/work/{id}','activityController@delWork');
 
-<<<<<<< HEAD
+
 //删除学校信息
 Route::get('/admin/school/{id}','activityController@delSchool');
 
@@ -300,7 +300,9 @@ Route::get('admin/quantity','activityController@showQuantity');
 Route::get('admin/RP','activityController@showAddRp');
 //删除商品
 Route::get('admin/deleteGoods/{id}','activityController@deleteGoods');
+//编辑的页面
 Route::get('admin/editGoods/{id}','activityController@showeditGoods');
+//提交
 Route::post('admin/editGOODS','activityController@editGoods');
 
 //添加人品商品
@@ -309,7 +311,7 @@ Route::post('admin/addGoods','activityController@addGoods');
 Route::get('admin/exchange','activityController@exchange');
 //删除订单
 Route::get('admin/deleteEx/{id}','activityController@exchangeDel');
-=======
+
 //主模板
 Route::get('/layouts/master', 'MasterController@Master');
 
@@ -325,7 +327,6 @@ Route::any('/singin', 'UserController@singin');
 Route::get('/home/register', 'UserController@register');
 Route::post('/store','UserController@store');
 
->>>>>>> e41957e048fab85fd9fd77343e2e0a6c53357049
 
 //后台登录
 Route::get('/admin/login','AdminLoginController@login');
@@ -336,12 +337,9 @@ Route::any('/admin/login-verify','Admin\LoginController@loginVerify');
 
 //权限管理
     //权限列表,分页显示
-<<<<<<< HEAD
 
-Route::get('/admin/privilege','Auth\PermissionController@privilege');
-=======
 Route::get('/admin/privilege','Auth\PermissionController@privilege')->middleware('rbac');
->>>>>>> e41957e048fab85fd9fd77343e2e0a6c53357049
+
     //添加
 Route::any('/admin/profile','Auth\PermissionController@permissionAdd')->middleware('rbac');
     //修改

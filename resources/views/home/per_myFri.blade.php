@@ -32,7 +32,11 @@
                     @else
                  @foreach( $fri as $friends)
                 <div style="width:172px;padding: 10px;border:solid 2px #666;float: left;margin: 10px">
-                    <img src='{{url('home/img').'/'.$friends->icon}}' width=60 style="margin-bottom: 5px">
+                    @if($friends->icon == 'men_main.jpg')
+                        <img src='{{url('home/img').'/'.$friends->icon}}' width=60 style="margin-bottom: 5px">
+                    @else
+                        <img src='{{url('home/upImg').'/'.$friends->icon}}' width=60 style="margin-bottom: 5px">
+                    @endif
                    <span style="color:#333;margin-left: 10px" >{{$friends->name}}
                        @if(in_array($friends->id,$arr))
                            <button value="{{$friends->id}}"id="" style="" class="btn btn-default mind">取关</button>
