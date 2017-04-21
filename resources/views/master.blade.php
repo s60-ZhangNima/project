@@ -10,7 +10,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('home/img/logo.jpg')}}" />
     <script type="text/javascript" src="{{asset('home/js/jquery-1.8.3.min.js')}}"></script>
     <link rel="stylesheet" type="text/css" href="{{asset('home/css/thems.css')}}">
-    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link href="{{url('/home/css/bootstrap.min.css')}}" rel="stylesheet">
     @yield('my-css')
 
 

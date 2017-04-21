@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserLoginRequest extends FormRequest
+class AdminloginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,6 +13,7 @@ class UserLoginRequest extends FormRequest
      */
     public function authorize()
     {
+//        dd(111);
         return true;
     }
 
@@ -24,9 +25,8 @@ class UserLoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required',
-            'password' => 'required',
-            'code' => 'required|captcha',
+           'email' => 'required',
+            'password' => 'required'
         ];
     }
 
@@ -35,8 +35,7 @@ class UserLoginRequest extends FormRequest
         return [
             'email.required' => '邮箱不能为空',
             'password.required' => '密码不能为空',
-            'code.captcha' => '验证码错误',
-            'code.required' => '验证码不能为空',
+
         ];
     }
 }

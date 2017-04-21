@@ -1,8 +1,19 @@
 @extends('master')
 @section('my-css')
     {{--自己的css样式--}}
+    <link href="{{url('/home/css/bootstrap.min.css')}}" rel="stylesheet">
+    <script src="{{url('/home/js/jquery-2.1.4.min.js')}}"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{{url('/home/js/bootstrap.min.js')}}"></script>
     <style>
         p a{color:#000}
+        .f_bg{background: #F3F3F3;}
+        .f_nav b{color: #0e0e0e;}
+        .bq a, .f_nav a{color: #0e0e0e;}
+        .f_nav dl{color: #0e0e0e;}
+
+        /*轮播图图片宽高*/
+        #lunbotu img{height: 450px;}
     </style>
     @endsection
 @section('content')
@@ -65,8 +76,44 @@
         </div>
         <br>
         {{--右边--}}
-        <div class="col-md-4 clearfix">
-            <img src="/home/img/mk.jpg" alt="" style="width: 800px; height: 450px;">
+        <div class="col-md-7     clearfix">
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox" id="lunbotu">
+                    <div class="item active">
+                        <img src="{{url('/home/img/dog.jpg')}}" alt="..." style="height=450px;">
+                        <div class="carousel-caption">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="" alt="..." >
+                        <div class="carousel-caption">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="" alt="...">
+                        <div class="carousel-caption">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controls -->
+                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
         </div>
     </div>
 
@@ -126,4 +173,5 @@
             </dl>
         </div>
     </div>
+
 @endsection

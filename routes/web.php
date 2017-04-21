@@ -132,8 +132,7 @@ Route::get('/home/photo','photoController@photo');
 Route::get('/home/per_photo','per_photoController@per_photo');
 //后台主页
 Route::get('/admin/admin','adminController@admin');
-//后台登录
-Route::get('/admin/login','AdminloginController@login');
+
 Route::get('/admin/blank','blankController@blank');
 Route::get('/admin/files','filesController@files');
 Route::get('/admin/gallery','galleryController@gallery');
@@ -144,8 +143,10 @@ Route::get('/home/createphoto','createphotoController@createphoto');
 Route::get('/home/photolist','photolistController@photolist');
 Route::get('/home/board','boardController@board');
 
-
-
+//后台登录
+Route::get('/admin/login','AdminLoginController@login');
+//后台登录判断
+Route::any('/admin/login-verify','Admin\LoginController@loginVerify');
 
 
 
@@ -181,6 +182,8 @@ Route::any('/admin/user-delete/{user_id}', 'Admin\UserController@userdelete');
 Route::any('/admin/attach-role/{user_id}', 'Admin\UserController@allotrole');
 
 
+//轮播图管理
+Route::get('/admin/image-list','Admin\ImageController@ImageList');
 
 
 

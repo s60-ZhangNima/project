@@ -10,17 +10,21 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('home/img/logo.jpg')}}" />
     <script type="text/javascript" src="{{asset('home/js/jquery-1.8.3.min.js')}}"></script>
     <link rel="stylesheet" type="text/css" href="{{asset('home/css/thems.css')}}">
-    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="{{asset('home/css/bootstrap.css')}}">
     @yield('my-css')
     <style>
         @yield('style')
 
-
+        .f_bg{background: #F3F3F3;}
+        .f_nav b{color: #0e0e0e;}
+        .bq a, .f_nav a{color: #0e0e0e;}
+        .f_nav dl{color: #0e0e0e;}
     </style>
 </head>
 
 <body>
 {{--头部--}}
+
 <div class="header" style="background-color: #d9edf7">
     <div class="head clearfix">
         <div class="logo"><a href="index.html"><img src="{{asset('home/img/logo.jpg')}}" alt="张尼玛" style="width:90px;"></a></div>

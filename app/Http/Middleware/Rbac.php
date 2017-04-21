@@ -19,7 +19,7 @@ class Rbac
     {
 
         /*$route = Route::current()->uri();
-        dump($route);
+        //dump($route);
         $user = User::find(8);
             if (!$user->can($route)){
                 return back();

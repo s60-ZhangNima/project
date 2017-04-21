@@ -37,6 +37,9 @@
                                     <a href="{{url('admin/user-list')}}">管理员管理</a>
                                 </li>
                                 <li>
+                                    <a href="{{url('admin/image-list')}}">封面管理</a>
+                                </li>
+                                <li>
                                     <a href="./activity">用户管理</a>
                                 </li>
                                 <li>
@@ -64,7 +67,7 @@
                     </form> -->
                     <ul class="nav pull-right">
                         <li>
-                            <a href="profile.htm">用户</a>
+                            <a>欢迎 【 {{Auth::user()->name}} 】</a>
                         </li>
                         <li>
                             <a href="./login">退出</a>
