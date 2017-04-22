@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Home;
 
 use App\Model\comments;
+use App\Model\exchange;
 use App\Model\feeling;
 use App\Model\focus;
+use App\Model\goods;
 use App\Model\icon;
 use App\Model\info;
 use App\Model\lamp_district;
 use App\Model\like;
 use App\Model\photo;
+use App\Model\quantity;
 use App\Model\school;
 use App\Model\states;
 use App\Model\story;
@@ -51,9 +54,6 @@ class UserController extends Controller
         return view('home.per_home',compact('states','story','res'));
 
     }
-
-
-
 
     public function perInfo()
     {
@@ -176,8 +176,8 @@ class UserController extends Controller
         return view('home.per_comments',compact('comment','states'));
     }
 
-    public function perPraise($id)
-    {
+    public function perPraise()
+    {       $id = $_GET['praises'];
             $state = states::find($id);
             if($state->praise  == 0)
             {
@@ -223,9 +223,9 @@ class UserController extends Controller
         echo $result;
     }
 
-    public function delComments($id)
+    public function delComments()
     {
-
+        $id = $_GET['id'];
         $com = comments::find($id);
         $result = $com->delete();
         echo $result;
@@ -242,8 +242,9 @@ class UserController extends Controller
 
     }
 
-    public function perCpraise($id)
+    public function perCpraise()
     {
+        $id = $_GET['id'];
         $com = comments::find($id);
         if($com->praise  == 0)
         {
@@ -265,7 +266,7 @@ class UserController extends Controller
         $uid = Auth::user()->id;
         if($request->hasFile('pic')){
             $iconname = md5(time()).'.jpg';
-            dd($request->file('pic')->move('home/upImg',$iconname));
+           $request->file('pic')->move('home/upImg',$iconname);
             $photos = photo::where('name','我的头像')->get()->toArray();
             if ($photos){
                 $icons =  new icon();
@@ -296,7 +297,7 @@ class UserController extends Controller
                 $icons->desc = '我的头像';
                 $icons->save();
                 session(['cid'=>$id]);
-                $uicon = users::where('id',$uid);
+                $uicon = users::find($uid);
                 $uicon->icon = $iconname;
                 $uicon->save();
                 return redirect('home/per_home');
@@ -626,7 +627,6 @@ class UserController extends Controller
         $opwd = $request->input('opwd');
         $npwd = $request->input('npwd');
         $rpwd = $request->input('repwd');
-        $url = "project.dev/home/per_settings";
         if ($npwd != $rpwd){
             return back();
         }
@@ -673,5 +673,112 @@ class UserController extends Controller
 //        return $result->toJosn();
     }
 
+    public function showCharacter()
+    {
+        $quans = quantity::where('uid',Auth::user()->id)->get();
+        return  view('home/per_character',compact('quans'));
+    }
 
+    public function showStore()
+    {
+        $goods = goods::all();
+        return view('home/per_store',compact('goods'));
+    }
+
+    public function descRp($id)
+    {
+        $goods = goods::where('id',$id)->get();
+        $users = users::select('name','icon')->where('id',Auth::user()->id)->get();
+        $quans = quantity::select('level','surplus')->where('uid',Auth::user()->id)->get();
+        $all = goods::all();
+        return view('home/RP_desc',compact('goods','users','quans','all'));
+    }
+
+    public function canChange()
+    {
+        $do = quantity::select('surplus')->where('uid',Auth::user()->id)->get()->toArray();
+        $do = $do[0]['surplus'];
+        $res = goods::all()->toArray();
+        foreach ($res as $va){
+            $can[] = $va['quantity'];
+        }
+        $result ='';
+        $change = [];
+        for($i = 0;$i<count($can);$i++){
+            if($do > $can[$i]){
+                if(empty($result)){
+                    $result = 'has';
+                }
+                $change[] =$can[$i];
+            }
+        }
+
+        if (!empty($change)){
+            $goods = goods::whereIn('quantity',$change)->get();
+        }else{
+            $goods = '';
+        }
+        $RP_goods = goods::all();
+        return view('home/per_change',compact('result','goods','RP_goods'));
+    }
+
+    public function getRP()
+    {
+        $num = rand(30,90);
+        $quan = quantity::where('uid',Auth::user()->id)->get()->toArray();
+        $first = time();
+        $time = date('Y-m-d',$first);
+        if ($time == date('Y-m-d',$quan[0]['time'])){
+            return 1;
+        }else{
+            $chr = quantity::find(Auth::user()->id);
+            $chr->time = $first;
+            $chr->rand_get = $num;
+            $chr->surplus += $num;
+            $chr->save();
+            return $num;
+        }
+    }
+
+    public function buyGoods()
+    {
+        $gid = $_GET['gid'];
+        $good = goods::select('name','pic','quantity')->where('id',$gid)->get()->toArray();
+
+        $order = new exchange();
+        $order->uid = Auth::user()->id;
+        $order->gid = $gid;
+        $order->user_name = Auth::user()->name;
+        $order->count = 1;
+        $order->pic = $good[0]['pic'];
+        $order->name = $good[0]['name'];
+        $order->need_qua = $good[0]['quantity'];
+        $order->time = time();
+        $res =  $order->save();
+        $oid = $order->id;
+       if ($res){
+           $quan = quantity::find(Auth::user()->id);
+           $quan->surplus -= $good[0]['quantity'];
+           $quan->save();
+           $goods = goods::find($gid);
+           $goods->count -= 1;
+           $goods->save();
+           return 1;
+       } else {
+           $or = exchange::find($oid);
+           $or->delete();
+           return 2;
+       }
+        
+    }
+
+    public function exchange()
+    {
+       $exchange = exchange::where('uid',Auth::user()->id)->get();
+        $users = users::select('name','icon')->where('id',Auth::user()->id)->get();
+        $quans = quantity::select('level','surplus')->where('uid',Auth::user()->id)->get();
+
+
+       return view('home/per_exchange',compact('exchange','users','quans'));
+    }
 }

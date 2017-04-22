@@ -26,16 +26,15 @@
 <div class="t_bg">
 	<div class="top">
         欢迎 【 {{Auth::user()->name}} 】
-        <a href="{{url('home/per_home')}}">个人主页</a>|
-        <a href="contact.html">与我相关
-
-        </a>
+        <a href="{{url('home/per_home')}}">个人主页</a> |
+        <a href="{{url('home/per_character')}}">我的人品</a>
+        <!-- Single button -->
 
     </div>
 </div>
 <div class="header">
     <div class="head clearfix">
-        <div class="logo"><a href="index.html"><img src="{{asset('home/img/logo.jpg')}}" style="width:90px"></a></div>
+        <div class="logo"><a href="index.html"><img src="{{asset('home/img/logo.jpg')}}" style="width:90px;height: 90px"></a></div>
         <ul class="nav clearfix">
             <li>
                 <div class="li_m">
@@ -77,6 +76,7 @@
                     </a>
                 </div>
             </li>
+
         </ul>
     </div>
 </div>
@@ -139,5 +139,6 @@
 </div>
 <div class="bq_bg">
 </div>
+
 </body>
 </html>

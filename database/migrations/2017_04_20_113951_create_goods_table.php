@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLikeTable extends Migration
+class CreateGoodsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,14 @@ class CreateLikeTable extends Migration
      */
     public function up()
     {
-        Schema::create('like', function (Blueprint $table) {
+        Schema::create('goods', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('uid');
-            $table->string('music');
-            $table->string('hobby');
-            $table->string('book');
-            $table->string('movie');
-            $table->string('game');
-            $table->string('animation');
-            $table->string('sport');
+            $table->integer('quantity');
+            $table->integer('count');
+            $table->string('desc');
+            $table->tinyInteger('conversion')->default(1);
+            $table->string('name');
+            $table->string('pic');
             $table->timestamps();
         });
     }
@@ -34,6 +32,6 @@ class CreateLikeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('like');
+        Schema::dropIfExists('goods');
     }
 }

@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/bootstrap.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/bootstrap-responsive.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/site.css')}}">
-<<<<<<< HEAD
+
     <link rel="stylesheet" type="text/css" href="{{asset('admin/ICON/iconfont.css')}}">
     {{--<script  src="{{asset('home/js/jquery.min.js')}}"></script>--}}
     <script src="{{asset('admin/ICON/iconfont.js')}}"></script>
@@ -27,10 +27,9 @@
             overflow: hidden;
         }
     </style>
-=======
-    <script type="text/javascript" src="{{asset('home/js/jquery-1.8.3.min.js')}}"></script>
+
  @yield('mycss')
->>>>>>> 1c21a3bdfc4b25581ef52cb2ebcc20cdf87abdd2
+
 
 </head>
 <body>
@@ -105,10 +104,14 @@
                         <a href="{{url('admin/admin')}}"><i class="icon-white icon-home"></i>首页</a>
                     </li>
                     <li>
-                        <a href="{{url('admin/projects')}}"><i class="icon-folder-open"></i> 项目</a>
+                        <a href="{{url('admin/quantity')}}">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-haoyouxuanzhong"></use>
+                            </svg>
+                            RP商品管理</a>
                     </li>
                     <li>
-                        <a href="{{url('admin/messages')}}"><i class="icon-envelope"></i> 邮件</a>
+                        <a href="{{url('admin/exchange')}}"><i class="icon-envelope"></i> RP兑换</a>
                     </li>
                     <li>
                         <a href="{{url('admin/files')}}"><i class="icon-file"></i> 文件</a>

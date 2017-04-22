@@ -18,9 +18,9 @@
                             <div class="showFace">
                             <div style="float: right;">
                                 @if($item->praise ==  1)
-                                    <button id='praises' onclick="praise({{$item->id}})" style="border:none;background-color: inherit;color:red"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" ></span></button>
+                                    <button value="{{$item->id}}" class="praises" style="border:none;background-color: inherit;color:red"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" ></span></button>
                                 @else
-                                    <button id='praises' onclick="praise({{$item->id}})" style="border:none;background-color: inherit"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" ></span></button>
+                                    <button value="{{$item->id}}" class="praises" style="border:none;background-color: inherit"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" ></span></button>
                                 @endif
                             </div></div>
                         </div>
@@ -34,15 +34,14 @@
                                {{date('Y-m-d H:i:s',$value->create_time)}}
                                 <div style="float: right;">
                                     @if($value->praise ==  1)
-                                        <button name='cpras' onclick="cpra({{$value->id}})" style="border:none;background-color: inherit;color:red"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" ></span></button>
+                                        <button class='cpras' value="{{$value->id}}" style="border:none;background-color: inherit;color:red"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" ></span></button>
                                     @else
-                                        <button name='cpras' onclick="cpra({{$value->id}})" style="border:none;background-color: inherit"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" ></span></button>
-
+                                        <button class='cpras' value="{{$value->id}}" style="border:none;background-color: inherit"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" ></span></button>
                                     @endif
                                     &nbsp;
 
                                 </div>
-                                <button onclick = "del({{$value->id}})" class="pull-right" style="border:none;background-color: inherit"><span class="glyphicon glyphicon-trash"></span></button>
+                                <button value = "{{$value->id}}" class="pull-right del" style="border:none;background-color: inherit"><span class="glyphicon glyphicon-trash"></span></button>
                                 <div class="panel-footer">
                                     {{$value->content}}
 
@@ -64,80 +63,67 @@
     </div>
     <script>
         var n = 0;
-        var praises = document.getElementById('praises');
-        var cpras = document.getElementsByName('cpras');
         var test = document.getElementById('test');
 
-        var praise = function(n){
-            if(window.XMLHttpRequest){
-                var xhr = new XMLHttpRequest();
-            }else{
-                var xhr = new ActiveXObject('Microsoft.XMLHTTP');
-            }
+        jQuery(function(){
+            $('.praises').click(function(){
+                var $_this = $(this);
+                $.ajax({
+                    url:"{{url('/home/praises')}}",
+                    data:{'praises':$_this.val()},
+                    success:function(data){
+                        if(data == 1){
 
-            xhr.onreadystatechange = function(){
-                if(xhr.readyState == 4 && xhr.status == 200){
-                    if(xhr.responseText == 1){
-                        praises.style.color = "red";
-                    }else{
-                        praises.style.color = "#444444";
-                    }
-                }
-            }
-
-            xhr.open('get', "/home/per_state/"+n, true);
-            xhr.send();
-        }
-
-        var cpra = function(n){
-            if(window.XMLHttpRequest){
-                var xhr = new XMLHttpRequest();
-            }else{
-                var xhr = new ActiveXObject('Microsoft.XMLHTTP');
-            }
-
-            xhr.onreadystatechange = function(){
-                if(xhr.readyState == 4 && xhr.status == 200){
-                    if(xhr.responseText == 1){
-                        for (var i=0;i<cpra.length;i++){
-                            (function (i) {
-                                cpras[i].style.color = "red";
-                            })(i)
-
+                            $_this.css('color','red');
+                        }else{
+                            $_this.css('color' ,'#444');
                         }
-                    }else{
-                        for (var i=0;i<cpra.length;i++){
-                            (function (i) {
-                                cpras[i].style.color = "#444444";
-                            })(i)
+                    },
+                    error:function(){
+                        alert('失败！');
+                    }
+                })
+            })
+
+            $('.cpras').click(function(){
+                var $_this = $(this);
+                $.ajax({
+                    url:"{{url('/home/pra')}}",
+                    data:{'id':$_this.val()},
+                    success:function(data){
+                        if(data == 1){
+
+                            $_this.css('color','red');
+                        }else{
+                            $_this.css('color' ,'#444');
                         }
+                    },
+                    error:function(){
+                        alert('失败！');
                     }
-                }
-            }
+                })
+            })
 
-            xhr.open('get', "/home/per_comments/pra/"+n, true);
-            xhr.send();
-        }
-
-        var del = function(n){
-            if(window.XMLHttpRequest){
-                var xhr = new XMLHttpRequest();
-            }else{
-                var xhr = new ActiveXObject('Microsoft.XMLHTTP');
-            }
-
-            xhr.onreadystatechange = function(){
-                if(xhr.readyState == 4 && xhr.status == 200){
-                    if(xhr.responseText == 1){
-                        alert('删除成功！！');
-                        location.reload(true);
+            $('.del').click(function(){
+                var $_this = $(this);
+                $.ajax({
+                    url:"{{url('/home/delC')}}",
+                    data:{'id':$_this.val()},
+                    success:function(data){
+                        if(data == 1){
+                            alert('删除成功！！');
+                            location.reload(true);
+                        }
+                    },
+                    error:function(){
+                        alert('失败！');
                     }
-                }
-            }
+                })
+            })
 
-            xhr.open('get', "/home/per_comments/cid/"+n, true);
-            xhr.send();
-        }
+
+        })
+
 
         function replace_em(str){
 

@@ -82,7 +82,7 @@
 									<a href="{{url('admin/friends_focus/'.$item->id)}}">Friends/Focus</a>
 								</td>
 								<td>
-									APP
+									<a href="{{url('admin/app/'.$item->id)}}">APP</a>
 								</td>
 								<td>
 									<a href="{{url('admin/delete/'.$item->id)}}">删除</a>

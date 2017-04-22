@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Model\comments;
+use App\Model\exchange;
 use App\Model\feeling;
 use App\Model\focus;
+use App\Model\goods;
 use App\Model\info;
 use App\Model\like;
 use App\Model\school;
@@ -398,6 +400,93 @@ class activityController extends Controller
     {
         $res = school::find($id);
         $res->delete();
+        return back();
+    }
+
+    public function myApp($id)
+    {
+        return view('admin.app');
+    }
+
+    public function showQuantity()
+    {
+        $goods = goods::all();
+        return view('admin.quantity',compact('goods'));
+    }
+
+    public function showAddRp()
+    {
+
+        return view('admin.RP');
+    }
+
+    public function addGoods(Request $request)
+    {
+      if($request->hasFile('pic')){
+          $picName = md5(time()).'.jpg';
+          $request->pic->move('home/upImg',$picName);
+          $goods = new goods;
+          $goods->name = $request->input('name');
+          $goods->quantity = $request->input('quantity');
+          $goods->count = $request->input('count');
+          $goods->desc = $request->input('desc');
+          $goods->conversion = $request->input('conversion');
+          $goods->pic = $picName;
+          $goods->save();
+      }else{
+          return back();
+      }
+        return redirect('admin/quantity');
+    }
+
+    public function deleteGoods($id)
+    {
+        $res = goods::find($id);
+        $res->delete();
+        return back();
+    }
+
+    public function showeditGoods($id)
+    {
+        $goods = goods::where('id',$id)->get();
+        return view('admin/editGoods',compact('goods'));
+    }
+
+    public function editGoods(Request $request)
+    {
+        if(!$request->has('pic')){
+            $goods = goods::find($request->input('id'));
+            $goods->name = $request->input('name');
+            $goods->desc = $request->input('desc');
+            $goods->quantity = $request->input('quantity');
+            $goods->count = $request->input('count');
+            $goods->conversion = $request->input('conversion');
+            $goods->save();
+        }else{
+            $picName = md5(time()).'.jpg';
+            $request->pic->move('home/upImg',$picName);
+            $goods = goods::find($request->input('id'));
+            $goods->name = $request->input('name');
+            $goods->desc = $request->input('desc');
+            $goods->quantity = $request->input('quantity');
+            $goods->count = $request->input('count');
+            $goods->conversion = $request->input('conversion');
+            $goods->icon = $picName;
+            $goods->save();
+        }
+        return redirect('admin/quantity');
+    }
+
+    public function exchange()
+    {
+        $exchange = exchange::all();
+        return view('admin/exchange',compact('exchange'));
+    }
+
+    public function exchangeDel($id)
+    {
+        $del = exchange::find($id);
+        $del->delete();
         return back();
     }
 }

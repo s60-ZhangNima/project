@@ -94,7 +94,7 @@
                                     <form action="{{url('home/per_home/com')}}" method="post" >
                                         {{csrf_field()}}
                                         <input type="hidden" value="{{$item->id}}" name="sid">
-                                        <span class="glyphicon glyphicon-remove pull-right" style="border:1px solid #DDE8EF;padding:3px;" onclick="cancel(4)"></span>
+                                        <span class="glyphicon glyphicon-remove pull-right quxiao" style="border:1px solid #DDE8EF;padding:3px;" ></span>
                                         <textarea name="content" id="" cols="35" rows="3" style="resize: none" placeholder="评论..."></textarea>
                                         <div style="height: 55px">
                                             <input type="submit" value="评论" style="background-color: #005EAC; width: 60px;height: 35px; border: none; color: #fff;float: right;margin-right: 60px">
@@ -290,6 +290,12 @@
                 }
             })(i)
         }
+
+        jQuery(function(){
+            $('.quxiao').click(function(){
+                $(this).parent().parent().css('display','none');
+            })
+        })
 
         var del = function(n){
             if(window.XMLHttpRequest){

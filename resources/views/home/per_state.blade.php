@@ -26,9 +26,9 @@
                         <div class="showFace">
                         <div style="float: right;">
                             @if($item->praise ==  1)
-                                <button name='praises' onclick="praise({{$item->id}})" style="border:none;background-color: inherit;color:red"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" ></span></button>
+                                <button  value="{{$item->id}}"  class="praises" style="border:none;background-color: inherit;color:red"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" ></span></button>
                             @else
-                                <button name='praises' onclick="praise({{$item->id}})" style="border:none;background-color: inherit"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" ></span></button>
+                                <button value="{{$item->id}}" class="praises" style="border:none;background-color: inherit"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" ></span></button>
 
                             @endif
                                 <span class="glyphicon glyphicon-list-alt" aria-hidden="true" name="comments" style="cursor: pointer;"></span>
@@ -81,34 +81,26 @@
                 })(i)
         }
 
-    var praise = function(n){
-        if(window.XMLHttpRequest){
-            var xhr = new XMLHttpRequest();
-        }else{
-            var xhr = new ActiveXObject('Microsoft.XMLHTTP');
-        }
+       jQuery(function(){
+            $('.praises').click(function(){
+                var $_this = $(this);
+                $.ajax({
+                    url:"{{url('/home/praises')}}",
+                    data:{'praises':$_this.val()},
+                    success:function(data){
+                        if(data == 1){
 
-        xhr.onreadystatechange = function(){
-            if(xhr.readyState == 4 && xhr.status == 200){
-                 if(xhr.responseText == 1){
-                     for (var i=0;i<praises.length;i++){
-                         (function (i) {
-                             praises[i].style.color = "red";
-                         })(i)
-                     }
-                 }else{
-                     for (var j=0;j<praises.length;j++){
-                         (function (j) {
-                             praises[j].style.color = "#444444";
-                         })(j)
-                     }
-                 }
-            }
-        }
-
-        xhr.open('get', "/home/per_state/"+n, true);
-        xhr.send();
-        }
+                            $_this.css('color','red');
+                        }else{
+                            $_this.css('color' ,'#444');
+                        }
+                    },
+                    error:function(){
+                        alert('失败！');
+                    }
+                })
+            })
+        })
 
 
         function replace_em(str){

@@ -33,10 +33,10 @@ Route::post('/home/per_home/story','Home\UserController@writeStory');
 Route::get('/home/per_home/{id}','Home\UserController@delStory');
 
 //删除评论
-Route::get('/home/per_comments/cid/{id}','Home\UserController@delComments');
+Route::get('/home/delC','Home\UserController@delComments');
 
 //评论点赞
-Route::get('/home/per_comments/pra/{id}','Home\UserController@perCpraise');
+Route::get('/home/pra','Home\UserController@perCpraise');
 
 
 //资料
@@ -50,7 +50,7 @@ Route::get('home/per_info/upid','Home\UserController@citys');
 Route::get('/home/per_state','Home\UserController@perState');
 
 //点赞
-Route::get('/home/per_state/{id}','Home\UserController@perPraise');
+Route::get('/home/praises','Home\UserController@perPraise');
 
 
 
@@ -97,15 +97,31 @@ Route::get('home/per_Ifocus/','Home\Usercontroller@showImind');
 Route::get('home/per_FocusMe/','Home\Usercontroller@mindMe');
 
 //修改密码
-Route::post('home/per_changepwd','Home\Usercontroller@changePwd');
+Route::post('home/per_changepwd','Home\UserController@changePwd');
 //修改邮箱
-Route::post('home/per_changeEmail','Home\Usercontroller@changeEmaile');
+Route::post('home/per_changeEmail','Home\UserController@changeEmaile');
 
 //删除状态
 Route::get('home/deleteState','Home\UserController@delStates');
 
 //短信验证
-Route::get('/sendSMS','Home\Usercontroller@sendSMS');
+Route::get('/sendSMS','Home\UserController@sendSMS');
+
+
+//查看我的积分
+Route::get('home/per_character','Home\UserController@showCharacter');
+//人品商品商城
+Route::get('home/per_store','Home\UserController@showStore');
+//查看商品的详情
+Route::get('home/RP_desc/{id}','Home\UserController@descRp');
+//我可兑换的
+Route::get('home/per_canChange','Home\UserController@canChange');
+//获得随机人品
+Route::get('home/get_RP','Home\UserController@getRP');
+//购买rp商品
+Route::get('home/buy_goods','Home\UserController@buyGoods');
+//跳转到我兑换的页面
+Route::get('home/exchange','Home\UserController@exchange');
 
 //登入页
 Route::get('/', 'LoginController@login');
@@ -151,7 +167,7 @@ Route::get('/home/board','boardController@board');
 Route::get('/admin/activity','activityController@activity');
 
 
-<<<<<<< HEAD
+
 //用户管理：
 
 //用户信息
@@ -182,13 +198,6 @@ Route::get('/admin/work/{id}','activityController@delWork');
 
 //删除学校信息
 Route::get('/admin/school/{id}','activityController@delSchool');
-
-
-
-
-
-
-
 
 
 //删除状态
@@ -229,33 +238,34 @@ Route::get('/admin/delOrAddFri/{id}/{fid}','activityController@delOrAddFri');
 //取消关注和关注
 Route::get('/admin/delOrAddMind/{id}/{fid}','activityController@delOrAddMind');
 
+//查看评论
+Route::get('admin/showComments/{id}','activityController@showComents');
+//删除评论
+Route::get('admin/delComment/{id}','activityController@delComments');
 
+//人品管理
+Route::get('admin/quantity','activityController@showQuantity');
+//人品添加页面
+Route::get('admin/RP','activityController@showAddRp');
+//删除商品
+Route::get('admin/deleteGoods/{id}','activityController@deleteGoods');
+Route::get('admin/editGoods/{id}','activityController@showeditGoods');
+Route::post('admin/editGOODS','activityController@editGoods');
 
-
-
-
-
-=======
-
->>>>>>> 1c21a3bdfc4b25581ef52cb2ebcc20cdf87abdd2
+//添加人品商品
+Route::post('admin/addGoods','activityController@addGoods');
+//rp兑换订单
+Route::get('admin/exchange','activityController@exchange');
+//删除订单
+Route::get('admin/deleteEx/{id}','activityController@exchangeDel');
+//我的应用
+Route::get('admin/app/{id}','activityController@myApp');
 
 
 
 //权限管理
     //权限列表,分页显示
-<<<<<<< HEAD
-//Route::get('/admin/activity','Auth\PermissionController@activity');
-    //添加
-//Route::any('/admin/profile','Auth\PermissionController@permissionAdd');
-//    //修改
-//Route::any('/admin/alter/{permission_id}', 'Auth\PermissionController@permissionUpdate')/*->middleware('rbac')*/;
-//    //删除
-//Route::get('/admin/alter/{permission_id}', 'Auth\PermissionController@permissionDelete');
 
-
-
-
-=======
 Route::get('/admin/privilege','Auth\PermissionController@privilege');
     //添加
 Route::any('/admin/profile','Auth\PermissionController@permissionAdd');
@@ -286,42 +296,11 @@ Route::any('/admin/user-delete/{user_id}', 'Admin\UserController@userdelete');
 Route::any('/admin/attach-role/{user_id}', 'Admin\UserController@allotrole');
 
 
->>>>>>> 1c21a3bdfc4b25581ef52cb2ebcc20cdf87abdd2
-
-
-
-
-//角色管理
-//Route::get('/admin/role-list', 'Admin\RoleController@roleList')/*->middleware('rbac')*/;
-//Route::any('/admin/role-add', 'Admin\RoleController@roleAdd')/*->middleware('rbac')*/;
-//Route::any('/admin/role-update/{role_id}', 'RoleController@roleUpdate')/*->middleware('rbac')*/;
-//Route::get('/admin/role-delete/{role_id}', 'RoleController@roleDelete')/*->middleware('rbac')*/;
-//Route::any('/admin/attach-permission/{role_id}', 'RoleController@attachPermission')/*->middleware('rbac')*/;
-
-
-//管理员管理
-//Route::get('/user-list', 'UserController@userList')->middleware('rbac');
-//Route::any('/user-add', 'UserController@userAdd');
-//Route::any('/attach-role/{user_id}', 'UserController@attachRole');
-
-
-
-<<<<<<< HEAD
 
 
 
 
 
-=======
-//查看评论
-Route::get('admin/showComments/{id}','activityController@showComents');
-//删除评论
-Route::get('admin/delComment/{id}','activityController@delComments');
 
 
-
-Route::get('/admin/state_story/{id}','activityController@showStaSto');
-Route::get('/admin/friends_focus/{id}','activityController@showFriFoc');
-Route::get('/admin/delete/{id}','activityController@delete');
->>>>>>> 1c21a3bdfc4b25581ef52cb2ebcc20cdf87abdd2
 

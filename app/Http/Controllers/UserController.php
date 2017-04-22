@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRegisterRequest;
+use App\Model\quantity;
 use App\Model\users;
 use App\User;
 use Illuminate\Http\Request;
@@ -80,7 +81,23 @@ class UserController extends Controller
         if(!Hash::check($request->input('password'), $res[0]['password'])){
         return back();
     }
-
+   $has = quantity::where('uid',Auth::user()->id)->get();
+        if ($has->isEmpty()){
+            $login_time = time();
+            $quan = new quantity();
+            $quan->uid = Auth::user()->id;
+            $quan->login_time = $login_time;
+            $quan->save();
+        }
+        $now =time();
+        $login = $has->toArray();
+        if(date('Y-m-d',$now) != date('Y-m-d',$login[0]['login_time']))
+        {
+            $add = quantity::find(Auth::user()->id);
+            $add->surplus += 30;
+            $add->login_time = $now;
+            $add->save();
+        }
         return redirect('/index');
 
     }
