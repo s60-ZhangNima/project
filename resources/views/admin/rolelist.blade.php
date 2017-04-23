@@ -7,7 +7,7 @@
 
     <div>
         <ul>
-            <li><a href="{{url('admin/role-add')}}">新增角色</a></li>
+            <li><a href="{{url('admin/role_add')}}">新增角色</a></li>
         </ul>
     </div>
     <table class="table table-bordered table-striped">

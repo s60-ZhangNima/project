@@ -152,7 +152,7 @@ Route::any('/admin/login-verify','Admin\LoginController@loginVerify');
 
 //权限管理
     //权限列表,分页显示
-Route::get('/admin/privilege','Auth\PermissionController@privilege');
+Route::get('/admin/privilege','Auth\PermissionController@privilege')->middleware('rbac');
     //添加
 Route::any('/admin/profile','Auth\PermissionController@permissionAdd');
     //修改
@@ -184,8 +184,15 @@ Route::any('/admin/attach-role/{user_id}', 'Admin\UserController@allotrole');
 
 //轮播图管理
 Route::get('/admin/image-list','Admin\ImageController@ImageList');
+Route::post('/admin/image-add','Admin\ImageController@imageAdd');
+Route::get('/admin/image-delete/{image_id}','Admin\ImageController@imageDelete');
 
 
+//友情链接
+Route::get('/admin/link-list','Admin\LinkController@LinkList');
+Route::any('/admin/link-add','Admin\LinkController@LinkAdd');
+Route::any('/admin/link-update/{link_id}','Admin\LinkController@LinkUpdate');
+Route::get('/admin/link-delete/{link_id}','Admin\LinkController@LinkDelete');
 
 
 

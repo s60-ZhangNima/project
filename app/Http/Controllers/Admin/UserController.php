@@ -70,12 +70,10 @@ class UserController extends Controller
 
 //dd($request->input('permission_id'));
             DB::table('role_user')->where('user_id', $user_id)->delete();
-            foreach($request->input('role_id') as $role_id){
-
-                $result =  DB::table('role_user')->insert([
-                    'role_id'=>$role_id,
-                    'user_id' => $user_id,
-                ]);
+            if($request->input('role_id')) {
+                foreach ($request->input('role_id') as $role_id) {
+                    $user->attachRole(Role::find($role_id));
+                }
             }
 
             return redirect('admin/user-list');

@@ -12,16 +12,17 @@
         .bq a, .f_nav a{color: #0e0e0e;}
         .f_nav dl{color: #0e0e0e;}
 
+
         /*轮播图图片宽高*/
-        #lunbotu img{height: 450px;}
+        #lunbotu img{height: 100%; width:100%;}
     </style>
     @endsection
 @section('content')
 
-    <div class="row" style="background-color: #F3F3F3">
+    <div class="row" style="background-color: #F3F3F3; ">
         {{--左边--}}
         <br>
-        <div class="col-md-3 col-md-offset-1 clearfix">
+        <div class="col-md-3 col-md-offset-1 clearfix" style="margin-left: 13%;">
             <form class="form-signin" action="/singin" method="post">
                 {{csrf_field()}}
                 <br>
@@ -76,7 +77,7 @@
         </div>
         <br>
         {{--右边--}}
-        <div class="col-md-7     clearfix">
+        <div class="col-md-6   clearfix">
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                 <!-- Indicators -->
                 <ol class="carousel-indicators">
@@ -88,20 +89,17 @@
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox" id="lunbotu">
                     <div class="item active">
-                        <img src="{{url('/home/img/dog.jpg')}}" alt="..." style="height=450px;">
+                        <img src="{{url('img/lunbo/2f06037ab0c506ad4c165c9c564cf335.jpg')}}" alt="..." style="height=450px;">
                         <div class="carousel-caption">
                         </div>
                     </div>
-                    <div class="item">
-                        <img src="" alt="..." >
+                   @foreach($images as $image)
+                    <div class="item ">
+                        <img src="{{url($image['icon'])}}" alt="..." style="height=450px;">
                         <div class="carousel-caption">
                         </div>
                     </div>
-                    <div class="item">
-                        <img src="" alt="...">
-                        <div class="carousel-caption">
-                        </div>
-                    </div>
+                       @endforeach
                 </div>
 
                 <!-- Controls -->

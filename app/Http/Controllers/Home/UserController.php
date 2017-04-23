@@ -238,7 +238,7 @@ class UserController extends Controller
         $uid = Auth::user()->id;
         if($request->hasFile('pic')){
             $iconname = md5(time()).'.jpg';
-            dd($request->file('pic')->move('home/upImg',$iconname));
+            $request->file('pic')->move('home/upImg',$iconname);
             $photos = photo::where('name','我的头像')->get()->toArray();
             if ($photos){
                 $icons =  new icon();

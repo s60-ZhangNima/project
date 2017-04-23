@@ -72,12 +72,12 @@ class RoleController extends Controller
             //获取当前用户的角色
             $role = Role::find($role_id);
             DB::table('permission_role')->where('role_id', $role_id)->delete();
-            foreach($request->input('permission_id') as $permission_id){
-                $result =  DB::table('permission_role')->insert([
-                    'permission_id'=>$permission_id,
-                    'role_id' => $role_id,
-                ]);
+            if($request->input('permission_id')){
+                foreach($request->input('permission_id') as $permission_id){
+                    $role->attachPermission(Permission::find($permission_id));
+                }
             }
+
             return redirect('admin/role-list');
         }
 

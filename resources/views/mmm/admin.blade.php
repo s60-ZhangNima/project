@@ -43,7 +43,7 @@
                                     <a href="./activity">用户管理</a>
                                 </li>
                                 <li>
-                                    <a href="./activity">会员管理</a>
+                                    <a href="{{url('admin/link-list')}}">友情链接</a>
                                 </li>
                                 <li>
                                     <a href="./activity">相册管理</a>
@@ -67,7 +67,7 @@
                     </form> -->
                     <ul class="nav pull-right">
                         <li>
-                            <a>欢迎 【 {{Auth::user()->name}} 】</a>
+                            <a>欢迎 【 {{Auth::user()['name']}} 】</a>
                         </li>
                         <li>
                             <a href="./login">退出</a>
