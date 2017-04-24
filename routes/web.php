@@ -123,6 +123,10 @@ Route::get('home/buy_goods','Home\UserController@buyGoods');
 //跳转到我兑换的页面
 Route::get('home/exchange','Home\UserController@exchange');
 
+//删除我的订单
+Route::get('home/delOr/{id}','Home\UserController@delOr');
+
+
 //登入页
 Route::get('/', 'LoginController@login');
 //前台首页

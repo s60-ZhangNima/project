@@ -10,6 +10,7 @@
                         <th></th>
                         <th>人品值</th>
                         <th>TIME</th>
+                        <th>ACTION</th>
                     </tr>
                     @foreach($exchange as $ex)
                     <tr>
@@ -18,6 +19,7 @@
                         </td>
                         <td>{{$ex->need_qua}}</td>
                         <td>{{date('Y-m-d H:i:s',$ex->time)}}</td>
+                        <td><a href="{{url('home/delOr/'.$ex->id)}}">删除</a></td>
                     </tr>
                     @endforeach
                 </table>

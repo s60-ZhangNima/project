@@ -774,12 +774,20 @@ class UserController extends Controller
 
     public function exchange()
     {
-       $exchange = exchange::where('uid',Auth::user()->id)->get();
+        $exchange = exchange::where('uid',Auth::user()->id)->get();
         $users = users::select('name','icon')->where('id',Auth::user()->id)->get();
         $quans = quantity::select('level','surplus')->where('uid',Auth::user()->id)->get();
 
 
        return view('home/per_exchange',compact('exchange','users','quans'));
+    }
+
+    public function delOr($id)
+    {
+
+        $or = exchange::find($id);
+        $or->delete();
+        return back();
     }
 
 
