@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->tinyInteger('confirmed_code')->default(0);
+            $table->tinyInteger('prohibit')->default(0);
         });
 
     }

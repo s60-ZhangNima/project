@@ -111,13 +111,22 @@
                             RP商品管理</a>
                     </li>
                     <li>
-                        <a href="{{url('admin/exchange')}}"><i class="icon-envelope"></i> RP兑换</a>
+                        <a href="{{url('admin/exchange')}}"><svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-yingyong"></use>
+                            </svg> RP订单兑换</a>
                     </li>
                     <li>
-                        <a href="{{url('admin/files')}}"><i class="icon-file"></i> 文件</a>
+                        <a href="{{url('admin/user_quan')}}">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-yonghu"></use>
+                            </svg>用户RP </a>
                     </li>
                     <li>
-                        <a href="{{url('admin/activity')}}"><i class="icon-list-alt"></i> 用户列表</a>
+                        <a href="{{url('admin/activity')}}">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-id_card"></use>
+                            </svg>
+                            用户列表</a>
                     </li>
                     <li class="nav-header">
                         权限管理

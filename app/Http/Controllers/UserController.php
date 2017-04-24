@@ -72,6 +72,10 @@ class UserController extends Controller
         Auth::attempt(['email' => $request->input('email'),'password' => $request->input('password')]);
         //dd($flag);
 
+        $pro = users::select('prohibit')->where('id',Auth::user()->id)->get()->toArray();
+        if($pro[0]['prohibit'] == 1){
+            return back();
+        }
         //邮箱判断
         $result = User::where('email',$request->input('email'))->get()->toArray();
             if ($result[0]['is_confirmed'] == 0) {
@@ -96,6 +100,7 @@ class UserController extends Controller
             $add = quantity::find(Auth::user()->id);
             $add->surplus += 30;
             $add->login_time = $now;
+            $add->rand_get = 0;
             $add->save();
         }
         return redirect('/index');

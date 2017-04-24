@@ -18,7 +18,7 @@
 
       <h2>感情信息</h2>
          @if($feeling->isEmpty())
-            暂无信息
+            暂无信息  <a href="{{url('admin/showFeel/'.$id)}}" class="btn btn-default">添加</a>
          @else
          @foreach($feeling as $feel)
        目前感情： <input type="text" class="form-control" value="{{$feel->feeling}}" disabled>
@@ -48,7 +48,7 @@
 
    <h2>基本信息</h2>
       @if($info->isEmpty())
-         暂无信息
+         暂无信息 <a href="{{url('admin/showBase/'.$id)}}" class="btn btn-default">添加</a>
       @else
       @foreach($info as $infos)
       <form action="{{url('/admin/info/baseInfo')}}" method="post">
@@ -73,7 +73,12 @@
           </div>
           <div class="form-group">
               <label for="exampleInputPassword1">用户地址：</label>
-              <input type="text" name='address' class="form-control" value="{{$infos->address}}" name="address">
+              <input type="text" name='address' class="form-control" value="{{$infos->address}}" name="address" disabled>
+              <br>
+              <select name="prov" id="prov" class="form-control"></select>
+              <select name="city" id="city" class="form-control"></select>
+              <select name="area" id="area" class="form-control"></select>
+              <select name="street" id="street" class="form-control"></select>
           </div>
           <input type="submit" class="btn btn-default" value="编辑">
           <a href="{{url('/admin/baseInfo/'.$infos->id)}}" class="btn btn-default">删除</a>
@@ -85,7 +90,7 @@
          <br>
    <h2>学校信息</h2>
          @if($school->isEmpty())
-            暂无信息
+            暂无信息 <a href="{{url('admin/showSchool/'.$id)}}" class="btn btn-default">添加</a>
          @else
           @foreach($school as $schools)
           <form action="{{url('/admin/info/school')}}"  method="post" >
@@ -123,7 +128,7 @@
 
          <h2>工作信息</h2>
          @if($work->isEmpty())
-            暂无信息
+            暂无信息 <a href="{{url('admin/showWork/'.$id)}}" class="btn btn-default">添加</a>
          @else
          @foreach($work as $works)
           <form action="{{url('/admin/info/work')}}"  method="post">
@@ -157,7 +162,7 @@
 
          <h2>爱好信息</h2>
          @if($like->isEmpty())
-            暂无信息
+            暂无信息 <a href="{{url('admin/showLike/'.$id)}}" class="btn btn-default">添加</a>
          @else
           @foreach($like as $likes)
           <form action="{{url('/admin/info/like')}}"  method="post">
@@ -199,5 +204,61 @@
          <br>
          <br>
 
+   <script>
+       $(function(){
+           //1、载入页面完成后即对php请求数据添加省一级列表项
+           $.ajax({
+               url:"{{url('home/per_info/upid')}}",
+               data:{'upid':0},
+               success:function(data){
+                   for (var i = 0;i < data.length; i++ ) {
+                       $('#prov').append("<option value='"+data[i].id+"' name='"+data[i].name+"'>"+data[i].name+" </option>");
+                   };
+               },
+               error:function(){
+                   alert('失败！');
+               },
+               dataType:'json',
+               //同步，如果没有第一级的数据第二级触发时自动为0
+               async:false
+           });
+
+           //2、当前三级出现change事件时触发ajax获取value当作upid寻找下一级数据
+           $('#prov,#city,#area').change(function(){
+               var $upid = $(this).val();
+               //在外层用变量存储$(this);
+               var $_this = $(this);
+
+               //根据传入的upid为下一级select添加选项
+               $.ajax({
+                   url:"{{url('home/per_info/upid')}}",
+                   data:{'upid':$upid},
+                   success:function(data){
+                       if(!data){
+                           //判断数据是否存在，如果没有隐藏下几级
+                           $_this.nextAll('select').hide();
+                           return;
+                       }
+
+                       //在添加新数据之前清空select
+                       $_this.next('select').empty().show();
+
+                       for (var i = 0;i < data.length; i++ ) {
+
+                           $_this.next('select').append("<option value='"+data[i].id+"' name='"+data[i].name+"'>"+data[i].name+" </option>");
+                       };
+                       //添加完为下一级选中一下
+                       $_this.next('select').trigger('change');
+                   },
+                   error:function(){
+                       alert('失败！');
+                   },
+                   dataType:'json'
+               });
+           })
+
+           $('#prov').trigger('change');
+       })
+   </script>
 
 @endsection

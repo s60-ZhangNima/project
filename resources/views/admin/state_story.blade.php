@@ -4,6 +4,7 @@
 
 @section('content')
    <h1>状态</h1> <a href="{{url('/admin/activity')}}" class="btn btn-default pull-right">返回用户列表</a>
+   <a href="{{url('admin/showState/'.$id)}}">添加</a>
    @if($states->isEmpty())
       暂无数据
    @else
@@ -18,7 +19,7 @@
                <span class="glyphicon glyphicon-trash"></span>
             </button>
              <button class="pull-right count" value="{{$state->id}}" style="background-color: inherit;border: none;cursor: default"></button>
-            <a href="{{url('admin/showComments/'.$state->id)}}" class="pull-right">查看评论&nbsp;&nbsp;</a>
+            <a href="{{url('admin/showComments/'.$state->id)}}" class="pull-right">查看评论</a>
             {{date('Y-m-d H:i:s',$state->create_time)}}
 
          </div>
@@ -34,9 +35,6 @@
              </div>
              <input type="hidden"  class='faceCon' value="{{$state->content}}">
              <textarea name="content" id="aaa" cols="30" rows="2" style="resize: none"></textarea>
-             <span class="emotion"><i class="iconfont icon-expression"></i>表情</span>
-
-             {{--<br>--}}
              <input type="submit" value="修改状态" class="btn btn-default">
 
          </div>
@@ -45,6 +43,7 @@
       @endforeach
    @endif
    <h1>故事</h1>
+   <a href="{{url('admin/showStory/'.$id)}}" >添加</a>
    @if($stories->isEmpty())
       暂无数据
    @else
@@ -144,6 +143,7 @@
               })
           })
 
+
       })
 
       function replace_em(str){
@@ -159,15 +159,6 @@
           return str;
 
       }
-     $('.emotion').qqFace({
-
-                  id : 'facebox',
-
-                  assign:'aaa',
-
-                  path:'/home/arclist/'	//表情存放的路径
-
-              });
 
               $(".faceCon").val(function(){
                   var str = $(this).val();

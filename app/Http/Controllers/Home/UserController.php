@@ -781,4 +781,6 @@ class UserController extends Controller
 
        return view('home/per_exchange',compact('exchange','users','quans'));
     }
+
+
 }

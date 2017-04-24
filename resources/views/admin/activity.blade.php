@@ -5,6 +5,7 @@
 					<h1>
 						用户管理
 					</h1>
+					<a href="{{url('/admin/addUsers')}}">添加用户</a>
 					<table class="table table-bordered table-striped">
 						<thead>
 							<tr>
@@ -50,12 +51,6 @@
 								</th>
 								<th>
 									<svg class="icon" aria-hidden="true">
-										<use xlink:href="#icon-yingyong"></use>
-									</svg>
-									应用
-								</th>
-								<th>
-									<svg class="icon" aria-hidden="true">
 										<use xlink:href="#icon-shanchu"></use>
 									</svg>
 									操作
@@ -82,10 +77,12 @@
 									<a href="{{url('admin/friends_focus/'.$item->id)}}">Friends/Focus</a>
 								</td>
 								<td>
-									<a href="{{url('admin/app/'.$item->id)}}">APP</a>
-								</td>
-								<td>
 									<a href="{{url('admin/delete/'.$item->id)}}">删除</a>
+									@if($item->prohibit == 1)
+										<a href="{{url('admin/canProhibit/'.$item->id)}}">取消禁用</a>
+									@else
+										<a href="{{url('admin/prohibit/'.$item->id)}}">禁用</a>
+									@endif
 								</td>
 							</tr>
 						@endforeach

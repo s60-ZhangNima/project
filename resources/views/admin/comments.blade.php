@@ -34,6 +34,8 @@
         @endforeach
     @endif
     <h6>评论</h6>
+    <a href="{{url('admin/showCom/'.$id)}}">添加</a>
+    <br>
     @if($comments->isEmpty())
         暂无数据
     @else
@@ -76,6 +78,7 @@
                     type:'get'
                 })
             })
+
 
         });
 

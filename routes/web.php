@@ -170,6 +170,10 @@ Route::get('/admin/activity','activityController@activity');
 
 //用户管理：
 
+//用户禁用
+Route::get('admin/prohibit/{id}','activityController@prohibit');
+Route::get('admin/canProhibit/{id}','activityController@canProhibit');
+
 //用户信息
 Route::get('/admin/info/{id}','activityController@showInfo');
 //编辑感情
@@ -182,6 +186,61 @@ Route::post('/admin/info/like','activityController@writeLike');
 Route::post('/admin/info/work','activityController@writeWork');
 //编辑学校信息
 Route::post('/admin/info/school','activityController@writeSchool');
+//用户的添加页面
+Route::get('admin/addUsers','activityController@addUsers');
+//用户添加
+Route::post('admin/doAdd','activityController@doAdd');
+
+//感情信息的添加页面
+Route::get('admin/showFeel/{uid}','activityController@showFeel');
+//学校信息添加页面
+Route::get('admin/showSchool/{uid}','activityController@showSchool');
+//喜欢信息添加页面
+Route::get('admin/showLike/{uid}','activityController@showLike');
+//工作信息的添加页面
+Route::get('admin/showWork/{uid}','activityController@showWork');
+//基本信息的添加页面
+Route::get('admin/showBase/{uid}','activityController@showBase');
+
+//感情添加
+Route::post('admin/addFeeling','activityController@addFeel');
+
+//工作添加
+Route::post('admin/addWork','activityController@addWork');
+
+//喜欢添加
+Route::post('admin/addLike','activityController@addLike');
+
+//学校添加
+Route::post('admin/addSchool','activityController@addSchool');
+
+//基本信息添加
+Route::post('admin/addBase','activityController@addBase');
+
+//显示state的添加页面
+Route::get('admin/showState/{uid}','activityController@showState');
+//显示story的页面
+Route::get('admin/showStory/{uid}','activityController@showStory');
+
+//添加状态
+Route::post('admin/addState','activityController@addState');
+
+//添加故事
+Route::post('admin/addStory','activityController@addStory');
+
+//查看评论页面
+Route::get('admin/showCom/{uid}','activityController@showCom');
+
+
+//添加评论
+Route::post('admin/addCom/{sid}','activityController@addCom');
+
+
+//查看用户RP
+Route::get('admin/user_quan','activityController@user_quan');
+
+//删除RP用户
+Route::get('admin/RP_del/{id}','activityController@RP_del');
 
 
 //删除感情信息
@@ -238,10 +297,6 @@ Route::get('/admin/delOrAddFri/{id}/{fid}','activityController@delOrAddFri');
 //取消关注和关注
 Route::get('/admin/delOrAddMind/{id}/{fid}','activityController@delOrAddMind');
 
-//查看评论
-Route::get('admin/showComments/{id}','activityController@showComents');
-//删除评论
-Route::get('admin/delComment/{id}','activityController@delComments');
 
 //人品管理
 Route::get('admin/quantity','activityController@showQuantity');
@@ -258,8 +313,7 @@ Route::post('admin/addGoods','activityController@addGoods');
 Route::get('admin/exchange','activityController@exchange');
 //删除订单
 Route::get('admin/deleteEx/{id}','activityController@exchangeDel');
-//我的应用
-Route::get('admin/app/{id}','activityController@myApp');
+
 
 
 

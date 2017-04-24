@@ -8,7 +8,9 @@ use App\Model\feeling;
 use App\Model\focus;
 use App\Model\goods;
 use App\Model\info;
+use App\Model\lamp_district;
 use App\Model\like;
+use App\Model\quantity;
 use App\Model\school;
 use App\Model\states;
 use App\Model\story;
@@ -22,7 +24,7 @@ class activityController extends Controller
 {
     public function activity()
     {
-        $all = users::select('email','id')->orderBy('id','asc')->get();
+        $all = users::select('email','id','prohibit')->orderBy('id','asc')->get();
         return view('admin.activity',compact('all'));
     }
 
@@ -42,7 +44,7 @@ class activityController extends Controller
     {
         $states = states::where('uid',$id)->get();
         $stories = story::where('uid',$id)->get();
-        return view('admin.state_story',compact('states','stories'));
+        return view('admin.state_story',compact('states','stories','id'));
 
     }
 
@@ -94,14 +96,25 @@ class activityController extends Controller
 
     public function writeInfo(Request $request)
     {
+            $prov = lamp_district::select('name')->where('id',$request->input('prov'))->get()->toArray();
+            $prov = $prov[0]['name'];
+            //市
+            $city = lamp_district::select('name')->where('id',$request->input('city'))->get()->toArray();
+            $city = $city[0]['name'];
+            //城镇
+            $area = lamp_district::select('name')->where('id',$request->input('area'))->get()->toArray();
+            $area = $area[0]['name'];
+            //街道
+            $street = lamp_district::select('name')->where('id',$request->input('street'))->get()->toArray();
+            $street = $street[0]['name'];
+            $address = $prov.'-'.$city.'-'.$area.'-'.$street;
             $id = info::where('uid',$request->input('uid'))->get()->toArray();
             $inf = info::find($id[0]['id']);
             $inf->realname = $request->input('realname');
             $inf->nickname = $request->input('nickname');
             $inf->sex = $request->input('sex');
-            $inf->address = $request->input('address');
+            $inf->address = $address;
             $inf->birthday = $request->input('birthday');
-            $inf->address = $request->input('address');
             $inf->save();
         return redirect('admin/info/'.$request->input('uid'));
     }
@@ -195,7 +208,7 @@ class activityController extends Controller
     {
         $comments = comments::where('sid',$id)->get();
         $states = states::where('id',$id)->get();
-        return view('admin.comments',compact('comments','states'));
+        return view('admin.comments',compact('comments','states','id'));
     }
 
     public function delComments()
@@ -489,4 +502,198 @@ class activityController extends Controller
         $del->delete();
         return back();
     }
+
+    public function addUsers()
+    {
+        return view('admin/usersAdd');
+    }
+
+    public function showFeel($uid)
+    {
+        return view('admin/addFeel',compact('uid'));
+    }
+
+    public function showBase($uid)
+    {
+        return view('admin/showBase',compact('uid'));
+    }
+
+    public function showLike($uid)
+    {
+        return view('admin/showLike',compact('uid'));
+    }
+
+    public function showWork($uid)
+    {
+        return view('admin/showWork',compact('uid'));
+    }
+
+    public function showSchool($uid)
+    {
+        return view('admin/showSchool',compact('uid'));
+    }
+
+    public function addFeel(Request $request)
+    {
+        $feel = new feeling();
+        $feel->uid = $request->input('uid');
+        $feel->feeling = $request->input('feeling');
+        $feel->save();
+        return redirect('admin/info/'.$request->input('uid'));
+    }
+
+    public function  addWork(Request $request)
+    {
+        $work = new work();
+        $work->uid = $request->input('uid');
+        $work->company = $request->input('company');
+        $work->industry = $request->input('industry');
+        $work->pp = $request->input('pp');
+        $work->work_time = $request->input('work_time');
+        $work->save();
+        return redirect('admin/info/'.$request->input('uid'));
+    }
+
+    public function  addLike(Request $request)
+    {
+        $like = new like();
+        $like->uid = $request->input('uid');
+        $like->music = $request->input('music');
+        $like->hobby = $request->input('hobby');
+        $like->book = $request->input('book');
+        $like->movie = $request->input('movie');
+        $like->game = $request->input('game');
+        $like->animation = $request->input('animation');
+        $like->sport = $request->input('sport');
+        $like->save();
+        return redirect('admin/info/'.$request->input('uid'));
+    }
+
+    public function  addSchool(Request $request)
+    {
+        $school = new school();
+        $school->uid = $request->input('uid');
+        $school->college = $request->input('college');
+        $school->dept = $request->input('dept');
+        $school->prof = $request->input('prof');
+        $school->class = $request->input('class');
+        $school->stn = $request->input('stn');
+        $school->save();
+        return redirect('admin/info/'.$request->input('uid'));
+    }
+
+    public function  addBase(Request $request)
+    {
+
+        $prov = lamp_district::select('name')->where('id',$request->input('prov'))->get()->toArray();
+        $prov = $prov[0]['name'];
+        //市
+        $city = lamp_district::select('name')->where('id',$request->input('city'))->get()->toArray();
+        $city = $city[0]['name'];
+        //城镇
+        $area = lamp_district::select('name')->where('id',$request->input('area'))->get()->toArray();
+        $area = $area[0]['name'];
+        //街道
+        $street = lamp_district::select('name')->where('id',$request->input('street'))->get()->toArray();
+        $street = $street[0]['name'];
+        $address = $prov.'-'.$city.'-'.$area.'-'.$street;
+        $school = new info();
+        $school->uid = $request->input('uid');
+        $school->realname = $request->input('realname');
+        $school->nickname = $request->input('nickname');
+        $school->sex = $request->input('sex');
+        $school->birthday = $request->input('birthday');
+        $school->address = $address;
+        $school->save();
+        return redirect('admin/info/'.$request->input('uid'));
+    }
+
+    public function doAdd(Request $request)
+    {
+        if ($request->hasFile('pic')){
+           $picname = md5(time()).'.jpg';
+            $request->file('pic')->move('home/upImg',$picname);
+
+        } else {
+            $picname = 'men_main.jpg';
+        }
+        $user = new users();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = bcrypt($request->input('password'));
+        $user->icon = $picname;
+        $user->is_confirmed = 1;
+        $user->confirmed_code = str_random(10);
+        $user->save();
+        return redirect('admin/activity');
+    }
+
+    public function showState($uid)
+    {
+        return view('admin/showState',compact('uid'));
+    }
+
+    public function showStory($uid)
+    {
+        return view('admin/showStory',compact('uid'));
+    }
+
+    public function addState(Request $request)
+    {
+        $state = new states();
+        $state->content = $request->input('content');
+        $state->uid = $request->input('uid');
+        $state->create_time = time();
+        $state->save();
+        return redirect('admin/state_story/'.$request->input('uid'));
+    }
+
+    public function addStory(Request $request)
+    {
+        $story = new story();
+        $story->content = $request->input('content');
+        $story->uid = $request->input('uid');
+        $story->happen_time = time();
+        $story->desc = $request->input('desc');
+        $story->who = $request->input('who');
+        $story->save();
+        return redirect('admin/state_story/'.$request->input('uid'));
+    }
+
+    public function showCom($sid)
+    {
+        return view('admin/showCom',compact('sid'));
+    }
+
+    public function user_quan()
+    {
+        $quan = quantity::all();
+        return view('admin/user_quan',compact('quan'));
+    }
+
+    public function RP_del($id)
+    {
+        $res= quantity::find($id);
+        $res->surplus = 0 ;
+        $res->rand_get = 0 ;
+        $res->save();
+        return back();
+    }
+
+    public function canProhibit($id)
+    {
+        $user = users::find($id);
+        $user->prohibit = 0;
+        $user->save();
+        return back();
+    }
+
+    public function prohibit($id)
+    {
+        $user = users::find($id);
+        $user->prohibit = 1;
+        $user->save();
+        return back();
+    }
+
 }

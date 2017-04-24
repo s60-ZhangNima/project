@@ -1,11 +1,5 @@
 @extends('layouts.master')
-@section('mycss')
 
-    .qqFace { margin-top: 4px; background: #fff; padding: 2px; border: 1px #dfe6f6 solid; }
-    .qqFace table td { padding: 0px; }
-    .qqFace table td img { cursor: pointer; border: 1px #fff solid; }
-    .qqFace table td img:hover { border: 1px #0066cc solid; }
-    @endsection
 
 @section('content')
     <div class="container" style="width: 800px;height: auto">

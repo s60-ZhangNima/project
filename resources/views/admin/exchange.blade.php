@@ -1,7 +1,6 @@
 @extends('mmm\admin')
 @section('content')
-    <h4>RP商品管理</h4>
-    <a href="{{url('admin/RP')}}"> 添加商品</a>
+    <h4>RP订单管理</h4>
 
     <table class="table">
         <tr>
@@ -26,7 +25,6 @@
                     <td>{{$ex->need_qua}}</td>
                     <td>{{date('Y-m-d H:i:s',$ex->time)}}</td>
                     <td>
-                        <a href="{{url('admin/editEx/'.$ex->id)}}">编辑</a>
                         <a href="{{url('admin/deleteEx/'.$ex->id)}}">删除</a>
                     </td>
                 </tr>
