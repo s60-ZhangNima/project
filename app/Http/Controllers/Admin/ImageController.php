@@ -17,8 +17,8 @@ class ImageController extends Controller
     public function ImageList()
     {
 
-        $images = Image::all();
-        //dd($images);
+        $images = Image::paginate(2);
+        ///dd($images);
         return view('admin/image_List',compact('images'));
     }
 
@@ -48,10 +48,51 @@ class ImageController extends Controller
 
     }
 
+    public function ImageUpdate($id)
+    {
+        return view('admin.image_update')->with('id',$id);
+    }
+
+
+    public function Update(Request $request,$id)
+    {
+        if (!$request->hasFile('icon'))
+        {
+            return back();
+        }
+
+        $aa = Image::find($id);
+        $bb = $aa->toArray();
+        $cc = $bb['icon'];
+       // dd($request->hasFile('icon'));
+
+        $iconname = md5(time()).'.jpg';
+
+        $request->icon->move("img/lunbo",$iconname);
+
+        $date='img/lunbo/'.$iconname.'';
+
+        $aa->icon=$date;
+
+        $result = $aa->save();
+
+        if ($result)
+        {
+            unlink($cc);
+        }
+        $images = Image::all();
+        //dd($images);
+        return view('admin/image_List',compact('images'));
+
+    }
+
+
     public function ImageDelete($image_id)
     {
-
-        Image::destroy($image_id);
+        //dd($image_id);
+//        Image::destroy($image_id);
+        $res = Image::find($image_id);
+        $res->delete();
         return redirect('admin/image-list');
     }
 

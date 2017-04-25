@@ -39,6 +39,7 @@
                                 <li>
                                     <a href="{{url('admin/image-list')}}">封面管理</a>
                                 </li>
+
                                 <li>
                                     <a href="./activity">用户管理</a>
                                 </li>
@@ -108,6 +109,10 @@
                     <li>
                     <li>
                         <a href="{{url('admin/role-list')}}"><i class="icon-list-alt"></i> 角色管理</a>
+                    </li>
+
+                    <li>
+                        <a href="{{url('admin/serve-list')}}"><i class="icon-list-alt"></i> 服务管理</a>
                     </li>
                     {{--<li>
                         <a href="./alter"><i class="icon-user"></i> 修改</a>

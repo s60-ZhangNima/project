@@ -102,14 +102,6 @@ Route::post('home/per_changepwd','Home\Usercontroller@changePwd');
 Route::post('home/per_changeEmail','Home\Usercontroller@changeEmaile');
 
 
-//登入页
-Route::get('/', 'LoginController@login');
-//前台首页
-Route::get('/index', 'IndexController@index');
-Route::any('/singin', 'UserController@singin');
-//注册页
-Route::get('/home/register', 'UserController@register');
-Route::post('/store','UserController@store');
 
 
 Route::get('/verify/{confirmed_code}', 'UserController@emailConfirm');
@@ -143,6 +135,23 @@ Route::get('/home/createphoto','createphotoController@createphoto');
 Route::get('/home/photolist','photolistController@photolist');
 Route::get('/home/board','boardController@board');
 
+
+//主模板
+Route::get('/layouts/master', 'MasterController@Master');
+
+
+//前台登入页
+Route::get('/', 'LoginController@login');
+//注销
+Route::get('/home/logout','UserController@logout');
+//前台首页
+Route::get('/home/index', 'IndexController@index');
+Route::any('/singin', 'UserController@singin');
+//注册页
+Route::get('/home/register', 'UserController@register');
+Route::post('/store','UserController@store');
+
+
 //后台登录
 Route::get('/admin/login','AdminLoginController@login');
 //后台登录判断
@@ -154,7 +163,7 @@ Route::any('/admin/login-verify','Admin\LoginController@loginVerify');
     //权限列表,分页显示
 Route::get('/admin/privilege','Auth\PermissionController@privilege')->middleware('rbac');
     //添加
-Route::any('/admin/profile','Auth\PermissionController@permissionAdd');
+Route::any('/admin/profile','Auth\PermissionController@permissionAdd')->middleware('rbac');
     //修改
 Route::any('/admin/alter/{permission_id}', 'Auth\PermissionController@permissionUpdate')->middleware('rbac');
     //删除
@@ -169,23 +178,25 @@ Route::any('/admin/role-add', 'Admin\RoleController@roleAdd')->middleware('rbac'
     //修改
 Route::any('/admin/role-update/{role_id}', 'Admin\RoleController@roleUpdate')->middleware('rbac');
     //删除
-Route::get('/admin/role-delete/{role_id}', 'Admin\RoleController@roledelete')->middleware('rbac');
+Route::get('/admin/role-delete/{role_id}', 'Admin\RoleController@roledelete');
     //分配权限
 Route::any('/admin/assignment/{role_id}', 'Admin\RoleController@assignment')->middleware('rbac');
 
 
 //管理员管理
 Route::get('/admin/user-list', 'Admin\UserController@userList')->middleware('rbac') ;
-Route::any('/admin/user-add', 'Admin\UserController@userAdd');
-Route::any('/admin/user-update/{user_id}', 'Admin\UserController@userupdate');
+Route::any('/admin/user-add', 'Admin\UserController@userAdd')->middleware('rbac');
+Route::any('/admin/user-update/{user_id}', 'Admin\UserController@userupdate')->middleware('rbac');
 Route::any('/admin/user-delete/{user_id}', 'Admin\UserController@userdelete');
-Route::any('/admin/attach-role/{user_id}', 'Admin\UserController@allotrole');
+Route::any('/admin/attach-role/{user_id}', 'Admin\UserController@allotrole')->middleware('rbac');
 
 
 //轮播图管理
 Route::get('/admin/image-list','Admin\ImageController@ImageList');
 Route::post('/admin/image-add','Admin\ImageController@imageAdd');
-Route::get('/admin/image-delete/{image_id}','Admin\ImageController@imageDelete');
+Route::any('/admin/image-update/{image_id}','Admin\ImageController@ImageUpdate');
+Route::get('/admin/image-delete/{image_id}','Admin\ImageController@ImageDelete');
+Route::post('/admin/Update/{id}','Admin\ImageController@Update');
 
 
 //友情链接
@@ -193,6 +204,26 @@ Route::get('/admin/link-list','Admin\LinkController@LinkList');
 Route::any('/admin/link-add','Admin\LinkController@LinkAdd');
 Route::any('/admin/link-update/{link_id}','Admin\LinkController@LinkUpdate');
 Route::get('/admin/link-delete/{link_id}','Admin\LinkController@LinkDelete');
+
+
+//应用
+Route::get('/home/apply','Home\ApplyController@Apply');
+
+
+//产品与服务
+    //前台页面
+Route::any('/home/serve','Home\ServeController@Serve');
+    //后台列表
+Route::get('/admin/serve-list','Admin\ServeController@ServeList');
+Route::any('/admin/serve-add','Admin\ServeController@ServeAdd');
+Route::get('/admin/serve-delete/{serve_id}','Admin\ServeController@ServeDelete');
+    //显示修改页面
+Route::get('/admin/serve-update/{serve_id}','Admin\ServeController@ServeUpdate');
+Route::post('/admin/serve-updates/{id}','Admin\ServeController@ServeUpdates');
+
+
+
+
 
 
 

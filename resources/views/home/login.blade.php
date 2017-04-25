@@ -23,10 +23,10 @@
         {{--左边--}}
         <br>
         <div class="col-md-3 col-md-offset-1 clearfix" style="margin-left: 13%;">
-            <form class="form-signin" action="/singin" method="post">
+            <form class="form-signin" action="{{url('/singin')}}" method="post">
                 {{csrf_field()}}
                 <br>
-                <img src="/home/img/head.jpg" alt="" class="img-circle img-responsive center-block " style="width:50%">
+                <img src="{{asset('/home/img/head.jpg')}}" alt="" class="img-circle img-responsive center-block " style="width:50%">
                 <br>
                 {{--显示错误信息--}}
                 @if(count($errors) > 0)
@@ -89,13 +89,13 @@
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox" id="lunbotu">
                     <div class="item active">
-                        <img src="{{url('img/lunbo/2f06037ab0c506ad4c165c9c564cf335.jpg')}}" alt="..." style="height=450px;">
+                        <img src="{{url('img/lunbo/1.jpg')}}" alt="..." style="height=450px;">
                         <div class="carousel-caption">
                         </div>
                     </div>
                    @foreach($images as $image)
                     <div class="item ">
-                        <img src="{{url($image['icon'])}}" alt="..." style="height=450px;">
+                        <img src="{{asset($image['icon'])}}" alt="..." style="height=450px;">
                         <div class="carousel-caption">
                         </div>
                     </div>
@@ -148,11 +148,9 @@
                 </li>
                 <li>
                     <b>友情链接</b>
-                    <p><a href="http://www.jingwei.com/" target="_blank">经纬网</a></p>
-                    <p><a href="http://wan.renren.com/" target="_blank">人人游戏</a></p>
-                    <p><a href="http://fenqi.renren.com/" target="_blank">人人分期</a></p>
-                    <p> <a href="http://www.nic.ren/" target="_blank">.ren注册局</a></p>
-
+                    @foreach($links as $link)
+                    <p><a href="" target="_blank">{{$link['name']}}</a></p>
+                    @endforeach
                 </li>
             </ul>
             <dl class="clearfix">

@@ -10,7 +10,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="{{asset('home/img/logo.jpg')}}" />
 <script type="text/javascript" src="{{asset('home/js/jquery-1.8.3.min.js')}}"></script>
 <link rel="stylesheet" type="text/css" href="{{asset('home/css/thems.css')}}">
-    <link rel="stylesheet" href="/css/bootstrap.css">
+
     <style>
         @yield('style')
         a:hover{
@@ -25,7 +25,7 @@
 	<div class="top">
         欢迎 【 {{Auth::user()->name}} 】
         <a href="{{url('home/per_home')}}">个人主页</a>|
-        <a href="contact.html">与我相关
+        <a href="{{url('home/logout')}}">退出
 
         </a>
 
@@ -61,7 +61,7 @@
             </li>
             <li>
                 <div class="li_m">
-                    <a href="case.html">
+                    <a href="{{url('home/apply')}}">
                         <span>应用中心</span>
                         Success
                     </a>
@@ -70,8 +70,8 @@
             <li>
                 <div class="li_m">
                     <a href="news.html">
-                        <span>我的应用</span>
-                        News
+                        <span>反馈</span>
+                        Feedback
                     </a>
                 </div>
             </li>
@@ -80,12 +80,7 @@
 </div>
 <!--头部-->
 @section('content')
-    <div>
-        1111
-        22222
-        3333
-        4444
-    </div>
+
 @show
 <div class="f_bg">
 	<div class="f_nav clearfix">
@@ -108,6 +103,7 @@
             	<b>公司信息</b>
                 <p><a href="http://www.renren-inc.com/zh/product/renren.html" target="_blank">关于我们</a></p>
                 <p><a href="http://page.renren.com/gongyi" target="_blank">人人公益</a></p>
+                <p><a href="{{url('home/serve')}}" target="_blank">产品与服务</a></p>
                 <p><a href="http://www.renren-inc.com/zh/hr/" target="_blank">招聘</a></p>
             </li>
             <li>
@@ -116,7 +112,9 @@
                 <p><a href="http://wan.renren.com/" target="_blank">人人游戏</a></p>
                 <p><a href="http://fenqi.renren.com/" target="_blank">人人分期</a></p>
                 <p> <a href="http://www.nic.ren/" target="_blank">.ren注册局</a></p>
-
+                {{--@foreach($links as $link)
+                    <p><a href="" target="_blank">{{$link['name']}}</a></p>
+                @endforeach--}}
             </li>
         </ul>
         <dl class="clearfix">

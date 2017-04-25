@@ -15,7 +15,7 @@ class RoleController extends Controller
     public function roleList()
     {
         $roles = Role::paginate(2);
-
+//        dd($roles);
         foreach ($roles as $role){
             $perms = array();
 

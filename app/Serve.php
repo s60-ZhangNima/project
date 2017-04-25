@@ -4,13 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Image extends Model
+class Serve extends Model
 {
-
-    protected $table = 'images';
+    //
+    protected $table = 'serve';
 
     public  $fillable = ['id','icon'];
-
     public $timestamps = false;
-
 }

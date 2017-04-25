@@ -40,7 +40,7 @@
             <li>
                 <div class="li_m">
                     <div class="li_m">
-                        <a href="/register">
+                        <a href="/home/register">
                             <span><h4>注册</h4></span>
 
                         </a>

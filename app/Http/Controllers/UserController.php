@@ -86,10 +86,15 @@ class UserController extends Controller
 
     }
 
-        return redirect('/index');
+        return redirect('/home/index');
 
     }
 
 
-
+    //退出
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
+    }
 }
