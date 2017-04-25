@@ -624,17 +624,12 @@ class UserController extends Controller
     public function changePwd(Request $request)
     {
 
-        $opwd = $request->input('opwd');
+        $code = $request->input('code');
+        if ($code != session('code')){
+            return back();
+        }
         $npwd = $request->input('npwd');
-        $rpwd = $request->input('repwd');
-        if ($npwd != $rpwd){
-            return back();
-        }
 
-        $res = users::where('id',Auth::user()->id)->select('password')->first();
-        if(!Hash::check($opwd, $res->password)){
-            return back();
-        }
         $result = users::find(Auth::user()->id);
         $result->password = bcrypt($npwd);
         $result->save();
@@ -665,12 +660,12 @@ class UserController extends Controller
 
     public function sendSMS()
     {
-
+        $tel = $_GET['tel'];
         $sms = new SendTemplateSMS();
-        $result = $sms->sendSMS('15005732802', array('1234', 5), 1);
-        dd($result);
-//
-//        return $result->toJosn();
+        $arr = substr(md5(time()),2,4);
+        session(['code'=>$arr]);
+        $result = $sms->sendSMS($tel, array($arr, 5), 1);
+        return $result->toJosn();
     }
 
     public function showCharacter()

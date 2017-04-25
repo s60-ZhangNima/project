@@ -24,7 +24,7 @@
                     </div>
                     <div class="panel-footer">已设置 ********
                     <span class="glyphicon glyphicon-ok-circle" style="color:limegreen"></span></div>
-                    <span>&nbsp;&nbsp;&nbsp;修改密码时，需要输入原密码和新密码。</span>
+                    <span>&nbsp;&nbsp;&nbsp;修改密码时，需要输入进行手机验证。</span>
                 </div>
             </div>
         </a>
@@ -68,18 +68,23 @@
                 </div>
                     <div id="pwd" style="display: none">
                         <form style="padding:10px;" action="{{url('home/per_changepwd')}}" method="post">
-                            <div class="form-group" style="width:200px"　>
                                 {{csrf_field()}}
-                                <label for="exampleInputFile">　原密码：</label>
-                                　<input type="password" class="form-control" id="opwd" placeholder="原密码" name="opwd">
+                            <div class="form-group" style="width:400px">
+                                <label for="exampleInputFile" style="float: left">手机号码：</label>
+                                <br>
+                                <br>
+                                <input type="text" name="tel" id="tel" required  class="form-control" style="float: left;width: 200px;margin-right: 10px">
+                                    <span class="btn btn-default" id="get_code" style="float: left">获取验证码</span>
+                                <br>
+                                <br>
+                            </div>
+                            <div class="form-group" style="width:200px">
+                                <label for="exampleInputFile" style="float: left">填写验证码：</label>
+                                　<input type="text" class="form-control" id="write_code" placeholder="填写验证码" name="code" disabled="true" >
                             </div>
                             <div class="form-group" style="width:200px">
                                 <label for="exampleInputFile">　新密码：</label>
                                 　<input type="password" class="form-control" id="npwd" placeholder="新密码" name="npwd">
-                            </div>
-                            <div class="form-group" style="width:200px">
-                                <label for="exampleInputFile">　再次确认：</label>
-                                　<input type="password" class="form-control" id="repwd" placeholder="再次确认" name="repwd">
                             </div>
                             <input type="submit" value="提交" class="btn btn-default" id="changePwd">
                             <button class="btn btn-default" onclick="cancel(2)">取消</button>
@@ -116,6 +121,33 @@
             break;
         }
     }
+    $(function(){
+        $('#get_code').click(function(){
+            var pattern = /^1[34578]\d{9}$/; //对输入的手机号进行验证
+
+            if (pattern.test($('#tel').val())){
+                $.ajax({
+                url:"{{url('home/get_code')}}",
+                data:{'tel':$('#tel').val()},
+                success:function(data){
+                eval('var obj ='+data);
+                if(obj.status == 0){
+                alert('发送成功！');
+                $('#write_code').attr('disabled',false);
+                }else{
+                alert('发送失败！请重新尝试');
+                }
+                },
+                error:function(){
+                alert('失败！');
+                }
+                })
+            }else{
+                alert('请输入的有效的手机号');
+            }
+
+        })
+    })
 
 </script>
 @endsection

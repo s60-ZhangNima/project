@@ -52,7 +52,8 @@ Route::get('/home/per_state','Home\UserController@perState');
 //点赞
 Route::get('/home/praises','Home\UserController@perPraise');
 
-
+//获取短信验证码
+Route::get('/home/get_code','Home\UserController@sendSMS');
 
 //关注
 Route::get('/home/per_focus','Home\UserController@perFocus');
@@ -169,7 +170,6 @@ Route::get('/home/createphoto','createphotoController@createphoto');
 Route::get('/home/photolist','photolistController@photolist');
 Route::get('/home/board','boardController@board');
 Route::get('/admin/activity','activityController@activity');
-
 
 
 //用户管理：
