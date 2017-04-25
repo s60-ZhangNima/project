@@ -26,9 +26,16 @@
 <div class="t_bg">
 	<div class="top">
         欢迎 【 {{Auth::user()->name}} 】
+<<<<<<< HEAD
         <a href="{{url('home/per_home')}}">个人主页</a> |
         <a href="{{url('home/per_character')}}">我的人品</a>
         <!-- Single button -->
+=======
+        <a href="{{url('home/per_home')}}">个人主页</a>|
+        <a href="{{url('home/logout')}}">退出
+
+        </a>
+>>>>>>> e41957e048fab85fd9fd77343e2e0a6c53357049
 
     </div>
 </div>
@@ -62,7 +69,7 @@
             </li>
             <li>
                 <div class="li_m">
-                    <a href="case.html">
+                    <a href="{{url('home/apply')}}">
                         <span>应用中心</span>
                         Success
                     </a>
@@ -71,8 +78,8 @@
             <li>
                 <div class="li_m">
                     <a href="news.html">
-                        <span>我的应用</span>
-                        News
+                        <span>反馈</span>
+                        Feedback
                     </a>
                 </div>
             </li>
@@ -82,12 +89,7 @@
 </div>
 <!--头部-->
 @section('content')
-    <div>
-        1111
-        22222
-        3333
-        4444
-    </div>
+
 @show
 <div class="f_bg">
 	<div class="f_nav clearfix">
@@ -110,6 +112,7 @@
             	<b>公司信息</b>
                 <p><a href="http://www.renren-inc.com/zh/product/renren.html" target="_blank">关于我们</a></p>
                 <p><a href="http://page.renren.com/gongyi" target="_blank">人人公益</a></p>
+                <p><a href="{{url('home/serve')}}" target="_blank">产品与服务</a></p>
                 <p><a href="http://www.renren-inc.com/zh/hr/" target="_blank">招聘</a></p>
             </li>
             <li>
@@ -118,7 +121,9 @@
                 <p><a href="http://wan.renren.com/" target="_blank">人人游戏</a></p>
                 <p><a href="http://fenqi.renren.com/" target="_blank">人人分期</a></p>
                 <p> <a href="http://www.nic.ren/" target="_blank">.ren注册局</a></p>
-
+                {{--@foreach($links as $link)
+                    <p><a href="" target="_blank">{{$link['name']}}</a></p>
+                @endforeach--}}
             </li>
         </ul>
         <dl class="clearfix">

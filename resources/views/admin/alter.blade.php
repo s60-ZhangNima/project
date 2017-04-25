@@ -29,7 +29,7 @@
                 <br><br>
                 <tr>
                     <td><b>描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;述</b>:   </td>
-                    <td><textarea class="form-control" rows="3" name="description" value="{{$alters->description}}"></textarea></td>
+                    <td><textarea class="form-control" rows="3" name="description" value="">{{$alters->description}}</textarea></td>
                 </tr>
                 <br><br>
                 <tr>

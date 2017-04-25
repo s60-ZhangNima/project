@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\User;
 use Closure;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 class Rbac
@@ -18,12 +19,15 @@ class Rbac
     public function handle($request, Closure $next)
     {
 
-        /*$route = Route::current()->uri();
-        dump($route);
-        $user = User::find(8);
+        $id=Auth::user()->id;
+        $route = Route::current()->uri();
+
+
+        $user = User::find($id);
+        //dump($user->can($route));
             if (!$user->can($route)){
                 return back();
-            }*/
-        return $next($request);
+            }
+       return $next($request);
     }
 }

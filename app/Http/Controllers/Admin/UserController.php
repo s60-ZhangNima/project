@@ -10,27 +10,26 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+    //用户列表
     public function userList()
     {
 
-        $users = User::all();
+        $users = User::paginate(2);
         foreach ($users as $user) {
-            $perms = array();
+            $roles = array();
+            //dd($user);
             //dd($user->perms);
-
-
-            foreach ($user->perms as $perm) {
-
-                $perms[] = $perm->display_name;
-//                dump($perm->display_name);
+            foreach ($user->roles as $role) {
+                $roles[] = $role->display_name;
+                //dump($role->display_name);
             }
-            $user->perms = implode(',', $perms);
-            dd($users);
+            $user->roles = implode(',', $roles);
+            //dd($users);
         }
         return view('admin/userlist', compact('users'));
-
     }
 
+    //新增用户
     public function useradd(Request $request)
     {
         $confirmed_code = str_random('10');
@@ -42,7 +41,7 @@ class UserController extends Controller
         return view('admin/useradd');
     }
 
-
+    //修改
     public function userupdate(Request $request, $user_id)
     {
 //        Role::
@@ -55,7 +54,7 @@ class UserController extends Controller
         $user = User::findOrFail($user_id);
         return view('admin/userupdate', compact('user'));
     }
-
+    //分配用户
     public function userdelete($user_id)
     {
         User::destroy($user_id);
@@ -71,12 +70,10 @@ class UserController extends Controller
 
 //dd($request->input('permission_id'));
             DB::table('role_user')->where('user_id', $user_id)->delete();
-            foreach($request->input('role_id') as $role_id){
-
-                $result =  DB::table('role_user')->insert([
-                    'role_id'=>$role_id,
-                    'user_id' => $user_id,
-                ]);
+            if($request->input('role_id')) {
+                foreach ($request->input('role_id') as $role_id) {
+                    $user->attachRole(Role::find($role_id));
+                }
             }
 
             return redirect('admin/user-list');

@@ -56,10 +56,14 @@
                                     <a href="{{url('admin/user-list')}}">管理员管理</a>
                                 </li>
                                 <li>
+                                    <a href="{{url('admin/image-list')}}">封面管理</a>
+                                </li>
+
+                                <li>
                                     <a href="./activity">用户管理</a>
                                 </li>
                                 <li>
-                                    <a href="./activity">会员管理</a>
+                                    <a href="{{url('admin/link-list')}}">友情链接</a>
                                 </li>
                                 <li>
                                     <a href="./activity">相册管理</a>
@@ -83,7 +87,7 @@
                     </form> -->
                     <ul class="nav pull-right">
                         <li>
-                            <a href="profile.htm">用户</a>
+                            <a>欢迎 【 {{Auth::user()['name']}} 】</a>
                         </li>
                         <li>
                             <a href="./login">退出</a>
@@ -137,6 +141,10 @@
                     <li>
                     <li>
                         <a href="{{url('admin/role-list')}}"><i class="icon-list-alt"></i> 角色管理</a>
+                    </li>
+
+                    <li>
+                        <a href="{{url('admin/serve-list')}}"><i class="icon-list-alt"></i> 服务管理</a>
                     </li>
                     {{--<li>
                         <a href="./alter"><i class="icon-user"></i> 修改</a>

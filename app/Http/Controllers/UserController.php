@@ -82,9 +82,15 @@ class UserController extends Controller
                 return back();
             }
         $res = users::where('email',$request->input('email'))->get()->toArray();
-        if(!Hash::check($request->input('password'), $res[0]['password'])){
-        return back();
+        if (empty($res)) {
+            return back();
+        }else{
+            if(!Hash::check($request->input('password'), $res[0]['password'])){
+                return back();
+        }
+
     }
+<<<<<<< HEAD
    $has = quantity::where('uid',Auth::user()->id)->get();
         if ($has->isEmpty()){
             $login_time = time();
@@ -104,9 +110,18 @@ class UserController extends Controller
             $add->save();
         }
         return redirect('/index');
+=======
+
+        return redirect('/home/index');
+>>>>>>> e41957e048fab85fd9fd77343e2e0a6c53357049
 
     }
 
 
-
+    //退出
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
+    }
 }

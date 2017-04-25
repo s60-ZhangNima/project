@@ -26,7 +26,7 @@
                     <td>{{$user->id}}</td>
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
-                    <td>{{$user->perms}}</td>
+                    <td>{{$user->roles}}</td>
                     <td>
                         <a href="attach-role/{{$user->id}}">分配角色</a>
                         <a href="user-update/{{$user->id}}">修改</a>
@@ -38,9 +38,9 @@
 
         </table>
 
-        {{--<div class="pagination">--}}
-            {{--{{$users->links()}}--}}
-        {{--</div>--}}
+        <div class="pagination">
+            {{$users->links()}}
+        </div>
     </div>
 @endsection
 

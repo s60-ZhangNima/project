@@ -26,7 +26,7 @@ class UserLoginRequest extends FormRequest
         return [
             'email' => 'required',
             'password' => 'required',
-            'code' => 'captcha'
+            'code' => 'required|captcha',
         ];
     }
 
@@ -36,6 +36,7 @@ class UserLoginRequest extends FormRequest
             'email.required' => '邮箱不能为空',
             'password.required' => '密码不能为空',
             'code.captcha' => '验证码错误',
+            'code.required' => '验证码不能为空',
         ];
     }
 }
