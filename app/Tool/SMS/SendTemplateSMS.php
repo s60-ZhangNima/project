@@ -17,14 +17,14 @@ use App\Tool\Result;
 class SendTemplateSMS
 {
     //主帐号,对应开官网发者主账号下的 ACCOUNT SID
-    private $accountSid= '8a216da856c131340156d0c4fe9e0b44';
+    private $accountSid= '8a216da85a362949015b9bf6be1c21a3';
 
     //主帐号令牌,对应官网开发者主账号下的 AUTH TOKEN
-    private $accountToken= 'ae05519a188c400cad4e5956f3ab5735';
+    private $accountToken= '1aa696cf188243cb8a04e2dafbf891a6';
 
     //应用Id，在官网应用列表中点击应用，对应应用详情中的APP ID
     //在开发调试的时候，可以使用官网自动为您分配的测试Demo的APP ID
-    private $appId='8aaf07085a3c0ea1015a590d520c09d4';
+    private $appId='8a216da85a362949015b9bf6be3921a4';
 
     //请求地址
     //沙盒环境（用于应用开发调试）：sandboxapp.cloopen.com

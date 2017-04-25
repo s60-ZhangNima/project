@@ -38,7 +38,7 @@
         <ul class="nav clearfix">
             <li>
                 <div class="li_m">
-                    <a href="{{url('home/index')}}">
+                    <a href="{{url('index')}}">
                         <span>首页</span>
                         Index
                     </a>

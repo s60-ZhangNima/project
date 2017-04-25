@@ -665,10 +665,10 @@ class UserController extends Controller
 
     public function sendSMS()
     {
-        return 1111;
-//        $sms = new SendTemplateSMS();
-//        $result = $sms->sendSMS('15801986376', array('1234', 5), 1);
-//        //dd($result);
+
+        $sms = new SendTemplateSMS();
+        $result = $sms->sendSMS('15005732802', array('1234', 5), 1);
+        dd($result);
 //
 //        return $result->toJosn();
     }
