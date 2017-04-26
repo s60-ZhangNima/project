@@ -9,5 +9,5 @@ class Link extends Model
     //
     protected $table = 'link';
     public $timestamps = false;
-    public  $fillable = ['id','name'];
+    public  $fillable = ['id','name','url'];
 }

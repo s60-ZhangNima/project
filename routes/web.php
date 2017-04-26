@@ -167,7 +167,7 @@ Route::any('/admin/profile','Auth\PermissionController@permissionAdd')->middlewa
     //修改
 Route::any('/admin/alter/{permission_id}', 'Auth\PermissionController@permissionUpdate')->middleware('rbac');
     //删除
-Route::get('/admin/delete/{permission_id}', 'Auth\PermissionController@permissionDelete');
+Route::get('/admin/delete/{permission_id}', 'Auth\PermissionController@permissionDelete')->middleware('rbac')   ;
 
 
 //角色管理
@@ -178,7 +178,7 @@ Route::any('/admin/role-add', 'Admin\RoleController@roleAdd')->middleware('rbac'
     //修改
 Route::any('/admin/role-update/{role_id}', 'Admin\RoleController@roleUpdate')->middleware('rbac');
     //删除
-Route::get('/admin/role-delete/{role_id}', 'Admin\RoleController@roledelete');
+Route::get('/admin/role-delete/{role_id}', 'Admin\RoleController@roledelete')->middleware('rbac');
     //分配权限
 Route::any('/admin/assignment/{role_id}', 'Admin\RoleController@assignment')->middleware('rbac');
 
@@ -187,7 +187,7 @@ Route::any('/admin/assignment/{role_id}', 'Admin\RoleController@assignment')->mi
 Route::get('/admin/user-list', 'Admin\UserController@userList')->middleware('rbac') ;
 Route::any('/admin/user-add', 'Admin\UserController@userAdd')->middleware('rbac');
 Route::any('/admin/user-update/{user_id}', 'Admin\UserController@userupdate')->middleware('rbac');
-Route::any('/admin/user-delete/{user_id}', 'Admin\UserController@userdelete');
+Route::any('/admin/user-delete/{user_id}', 'Admin\UserController@userdelete')->middleware('rbac');
 Route::any('/admin/attach-role/{user_id}', 'Admin\UserController@allotrole')->middleware('rbac');
 
 
@@ -200,14 +200,25 @@ Route::post('/admin/Update/{id}','Admin\ImageController@Update');
 
 
 //友情链接
-Route::get('/admin/link-list','Admin\LinkController@LinkList');
+Route::get('/admin/link-list','Admin\LinkController@LinkList')  ;
 Route::any('/admin/link-add','Admin\LinkController@LinkAdd');
 Route::any('/admin/link-update/{link_id}','Admin\LinkController@LinkUpdate');
 Route::get('/admin/link-delete/{link_id}','Admin\LinkController@LinkDelete');
 
 
 //应用
-Route::get('/home/apply','Home\ApplyController@Apply');
+    //前台页面
+Route::any('/home/apply','Home\ApplyController@Apply');
+    //后台列表页
+Route::get('/admin/apply-list','Home\ApplyController@ApplyList');
+    //新增应用
+Route::any('/admin/apply-add','Home\ApplyController@Applyadd');
+Route::any('/admin/apply-update/{Apply_id}','Home\ApplyController@ApplyUpdate');
+Route::get('/admin/apply-delete/{Apply_id}','Home\ApplyController@ApplyDelete');
+
+
+
+
 
 
 //产品与服务

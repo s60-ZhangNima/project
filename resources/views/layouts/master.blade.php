@@ -101,20 +101,19 @@
             </li>
             <li>
             	<b>公司信息</b>
-                <p><a href="http://www.renren-inc.com/zh/product/renren.html" target="_blank">关于我们</a></p>
+                <p><a href="{{url('/home/serve')}}" target="_blank">关于我们</a></p>
                 <p><a href="http://page.renren.com/gongyi" target="_blank">人人公益</a></p>
-                <p><a href="{{url('home/serve')}}" target="_blank">产品与服务</a></p>
                 <p><a href="http://www.renren-inc.com/zh/hr/" target="_blank">招聘</a></p>
             </li>
             <li>
             	<b>友情链接</b>
-                <p><a href="http://www.jingwei.com/" target="_blank">经纬网</a></p>
-                <p><a href="http://wan.renren.com/" target="_blank">人人游戏</a></p>
-                <p><a href="http://fenqi.renren.com/" target="_blank">人人分期</a></p>
-                <p> <a href="http://www.nic.ren/" target="_blank">.ren注册局</a></p>
-                {{--@foreach($links as $link)
-                    <p><a href="" target="_blank">{{$link['name']}}</a></p>
-                @endforeach--}}
+                {{--<p><a href="http://www.jingwei.com/" target="_blank">经纬网</a></p>--}}
+                {{--<p><a href="http://wan.renren.com/" target="_blank">人人游戏</a></p>--}}
+                {{--<p><a href="http://fenqi.renren.com/" target="_blank">人人分期</a></p>--}}
+                {{--<p> <a href="http://www.nic.ren/" target="_blank">.ren注册局</a></p>--}}
+                @foreach($links as $link)
+                    <p><a href="{{url($link['url'])}}" target="_blank">{{$link['name']}}</a></p>
+                @endforeach
             </li>
         </ul>
         <dl class="clearfix">

@@ -35,6 +35,7 @@ class ImageController extends Controller
 
                 $iconname = md5(time()).'.jpg';
                 $request ->icon->move('img/lunbo/',$iconname);
+
                 $date=[
                     'icon'=>'img/lunbo/'.$iconname,
                 ];

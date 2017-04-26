@@ -10,6 +10,10 @@
                 <tr>
                     <td><b>连接名称</b>:   </td>
                     <td><input type="text" class="form-control" placeholder="" name="name" value="{{$link->name}}"></td>
+                </tr> <br><br>
+                <tr>
+                    <td><b>连接地址</b>:   </td>
+                    <td><input type="text" class="form-control" placeholder="" name="url" value="{{$link->url}}"></td>
                 </tr>
 
                 <br><br>

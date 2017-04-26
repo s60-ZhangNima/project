@@ -17,7 +17,7 @@
 <body class="home contact">
 <div class="all">
     <div class="header clearfix">
-        <div class="logo"><a href="/zh/index.html"><img src="{{url('home/img/login.jpg')}}"  width="166" height="33"   alt="人人" title="Renren - 人人" /></a></div>
+        <div class="logo"><a><img src="{{url('home/img/login.jpg')}}"  width="166" height="33"   alt="人人" title="Renren - 人人" /></a></div>
         <div class="nav">
             <ul class="clearfix">
                 <li><a href=""></a></li>
@@ -65,9 +65,14 @@
 
 
                     <div class="serve" style="background-color: #00B7D8; width: 670px; ">
+
+                        @foreach($serves as $se)
+
                         <div class="serve_1" style=" width: 335px ; height: 300px; border-top: 1px solid #E5E5E5; float: left;">
-                            <img src="{{url('home/img/1.jpg')}}" style="margin-top: 18px;">
+                            {{--{{$se->id}}--}}
+                            <img src="{{asset($se->icon)}}" style="margin-top: 18px;">
                         </div>
+                            @endforeach
                     </div>
 
                 </div>

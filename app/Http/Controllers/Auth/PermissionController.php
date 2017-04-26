@@ -14,7 +14,7 @@ class PermissionController extends Controller
     public function Privilege()
     {
         //查询所有的权限,分页显示
-        $activitys = Permission::paginate(2);
+        $activitys = Permission::paginate(6);
         return view('admin.privilege', compact('activitys'));
     }
 

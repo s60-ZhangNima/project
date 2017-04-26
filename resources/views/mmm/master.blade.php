@@ -98,7 +98,7 @@
             </li>
             <li>
                 <b>公司信息</b>
-                <p><a href="http://www.renren-inc.com/zh/product/renren.html" target="_blank">关于我们</a></p>
+                <p><a href="{{url('home/serve')}}" target="_blank">关于我们</a></p>
                 <p><a href="http://page.renren.com/gongyi" target="_blank">人人公益</a></p>
                 <p><a href="http://www.renren-inc.com/zh/hr/" target="_blank">招聘</a></p>
             </li>

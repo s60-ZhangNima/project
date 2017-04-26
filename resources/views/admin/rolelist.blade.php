@@ -7,21 +7,21 @@
 
     <div>
         <ul>
-            <li><a href="{{url('admin/role_add')}}">新增角色</a></li>
+            <li><a href="{{url('/admin/role-add')}}">新增角色</a></li>
         </ul>
     </div>
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped" style="width: 100%;">
         <thead>
         <tr>
             <th>Id</th>
-            <th>权限路由</th>
-            <th>权限名称</th>
-            <th>权限描述</th>
-            <th>角色权限</th>
-            <th>操作</th>
+            <th style="width: 60px;">权限路由</th>
+            <th style="width: 80px;">权限名称</th>
+            <th style="width: 100px;">权限描述</th>
+            <th style="width: 510px;">角色权限</th>
+            <th style="width: 80px;">操作</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody style="width: 100%;">
         @foreach($roles as $role )
             <tr>
                 <td>{{$role->id}}</td>
@@ -30,9 +30,11 @@
                 <td>{{$role->description}}</td>
                 <td>{{$role->perms}}</td>
                 <td>
-                    <a href="assignment/{{$role->id}}">分配权限</a>
-                    <a href="/admin/role-update/{{$role->id}}">修改</a>
-                    <a href="role-delete/{{$role->id}}">删除</a>
+                    <a href="{{url('assignment/'.$role->id)}}">分配权限</a>
+                    <br>
+                    <a href="{{url('/admin/role-update/'.$role->id)}}">修改</a>
+                    <br>
+                    <a href="{{'role-delete/'.$role->id}}">删除</a>
                 </td>
             </tr>
         @endforeach

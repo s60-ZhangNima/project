@@ -51,14 +51,9 @@
                                 </li>
                                 <li class="divider">
                                 </li>
-                                <li class="nav-header">
-                                    应用
-                                </li>
+
                                 <li>
-                                    <a href="./activity">我的应用</a>
-                                </li>
-                                <li>
-                                    <a href="./activity">应用管理</a>
+                                    <a href="{{url('admin/apply-list')}}">应用管理</a>
                                 </li>
                             </ul>
                         </li>
@@ -129,11 +124,9 @@
                         应用
                     </li>
                     <li>
-                        <a href="./gallery"><i class="icon-picture"></i> 应用管理</a>
+                        <a href="{{url('admin/apply-list')}}"><i class="icon-picture"></i> 应用管理</a>
                     </li>
-                    <li>
-                        <a href="./blank"><i class="icon-stop"></i> 我的应用</a>
-                    </li>
+
                 </ul>
             </div>
         </div>

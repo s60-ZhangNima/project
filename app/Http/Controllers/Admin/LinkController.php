@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Link;
-use App\Model\like;
-use App\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -20,9 +18,16 @@ class LinkController extends Controller
     //增加
     public function LinkAdd(Request $request)
     {
+        //dd($request->all());
         if ($request->isMethod('post')) {
-            $inset = Link::create($request->all());
-//            dd($inset);
+            $link = new Link();
+            $link->url=$request->input('url');
+            $link->name=$request->input('name');
+//            dd($link->toArray());
+            $link->save();
+
+//            $inset = Link::create($request->all());
+//            dd(Link::create($request->all()));
             return redirect('admin/link-list');
         }
         return view('admin/link_add');
@@ -31,6 +36,7 @@ class LinkController extends Controller
     //删除
     public function LinkDelete($link_id)
     {
+        //dd($link_id);
         Link::destroy($link_id);
         return redirect('admin/link-list');
     }
@@ -40,6 +46,7 @@ class LinkController extends Controller
     {
         if ($request->isMethod('post')){
             $link = Link::findOrFail($link_id);
+            //dd($request->all());
             $link -> update($request->all());
             return redirect('admin/link-list');
         }

@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\DB;
 
 class ServeController extends Controller
 {
+    //显示前台页面
+
+
+
     //列表
     public function ServeList()
     {

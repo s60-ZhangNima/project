@@ -20,14 +20,17 @@ class Rbac
     {
 
         $id=Auth::user()->id;
+
         $route = Route::current()->uri();
 
 
         $user = User::find($id);
-        //dump($user->can($route));
-            if (!$user->can($route)){
+        dump($id);
+        dump($user->name);
+        dump($user->can($route));
+            /*if (!$user->can($route)){
                 return back();
-            }
+            }*/
        return $next($request);
     }
 }

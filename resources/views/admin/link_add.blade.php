@@ -11,6 +11,11 @@
                 </tr>
                 <br><br>
                 <tr>
+                    <td><b>连接地址</b>:   </td>
+                    <td><input type="text" class="form-control" placeholder="" name="url"></td>
+                </tr>
+                <br><br>
+                <tr>
                     <td></td>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <td>

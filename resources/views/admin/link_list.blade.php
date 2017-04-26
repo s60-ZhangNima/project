@@ -7,14 +7,15 @@
 
         <div>
             <ul>
-                <li><a href="/admin/link-add">新增连接</a></li>
+                <li><a href="{{url('/admin/link-add')}}">新增连接</a></li>
             </ul>
         </div>
         <table class="table table-bordered table-striped">
             <thead>
             <tr>
                 <th>Id</th>
-                <th>友情链接</th>
+                <th>链接名称</th>
+                <th>链接地址</th>
                 <th>操作</th>
             </tr>
             </thead>
@@ -23,9 +24,10 @@
                 <tr>
                     <td>{{$link->id}}</td>
                     <td>{{$link->name}}</td>
+                    <td>{{$link->url}}</td>
                     <td>
-                        <a href="link-update/{{$link->id}}">修改</a>
-                        <a href="link-delete/{{$link->id}}">删除</a>
+                        <a href="{{url('/admin/link-update/'.$link->id)}}">修改</a>
+                        <a href="{{url('/admin/link-delete/'.$link->id)}}">删除</a>
                     </td>
                 </tr>
             @endforeach
