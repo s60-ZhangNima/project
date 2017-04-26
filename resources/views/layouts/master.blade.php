@@ -10,6 +10,9 @@
 <link rel="shortcut icon" type="image/x-icon" href="{{asset('home/img/logo.jpg')}}" />
 <script type="text/javascript" src="{{asset('home/js/jquery-1.8.3.min.js')}}"></script>
 <link rel="stylesheet" type="text/css" href="{{asset('home/css/thems.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('home/css/theme.min.css')}}">
+    <script type="text/javascript" src="{{asset('home/js/jquery-2.1.4.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('home/js/bootstrap.min.js')}}"></script>
     <script  src="{{asset('home/js/jquery.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('home/js/jquery.qqFace.js')}}"></script>
     <link rel="stylesheet" type="text/css" href="{{asset('home/face/iconfont.css')}}">
@@ -18,6 +21,8 @@
         a:hover{
             text-decoration: none;
         }
+        .head .nav {
+            width: 820px;}
     </style>
 </head>
 
@@ -39,7 +44,7 @@
         <ul class="nav clearfix">
             <li>
                 <div class="li_m">
-                    <a href="{{url('index')}}">
+                    <a href="{{url('home/index')}}">
                         <span>首页</span>
                         Index
                     </a>
@@ -47,7 +52,7 @@
             </li>
             <li>
                 <div class="li_m">
-                    <a href="./photo">
+                    <a href="{{url('home/photo')}}">
                         <span>我的相册</span>
                        My Photo
                     </a>
@@ -71,10 +76,31 @@
             </li>
             <li>
                 <div class="li_m">
-                    <a href="news.html">
+                    <a href="{{url('home/feedback')}}">
                         <span>反馈</span>
                         Feedback
                     </a>
+                </div>
+            </li>
+            <li>
+                <div class="li_m">
+                    <a href={{url('home/board')}}>
+                        <span>留言板</span>
+                        message board
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="li_m">
+                    <div class=dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <a href="#"><span>日志</span>
+                            daily</a>
+
+                    </div>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="{{url('home/daily')}}">日志发表</a></li>
+                        <li><a href="{{url('home/mydaily')}}">我的日志</a></li>
+                    </ul>
                 </div>
             </li>
 
@@ -138,6 +164,6 @@
 </div>
 <div class="bq_bg">
 </div>
-
+@yield('script')
 </body>
 </html>

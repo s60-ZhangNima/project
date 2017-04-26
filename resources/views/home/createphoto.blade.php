@@ -5,8 +5,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('home/css/theme.min.css')}}">
 @endsection
 @section('script')
-    <script type="text/javascript" src="{{asset('home/js/jquery-2.1.4.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('home/js/bootstrap.min.js')}}"></script>
+    <script type="text/javascript" src="{{('home/js/jquery-2.1.4.min.js')}}"></script>
+    <script type="text/javascript" src="{{('home/js/bootstrap.min.js')}}"></script>
 @endsection
 @section('content')
 @section('style')
@@ -53,31 +53,39 @@
     <h3 class="text-muted">
         创建新相册
     </h3>
+
     <div class="jumbotron min-a">
-        <form class="form-horizontal">
+        @if(count($errors) >0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{$error}}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <form class="form-horizontal" action="./createphoto" method="post">
+                {{csrf_field()}}
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">名称</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputEmail3" placeholder="相册名称">
+                    <input type="text" class="form-control" id="inputEmail3" placeholder="相册名称" name="name">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">描述</label>
                 <div class="col-sm-10">
-                    <textarea class="form-control" rows="5"></textarea>
+                    <textarea class="form-control" rows="5" name="desc"></textarea>
                 </div>
             </div>
             <div class="form-group ab" style="....">
                 <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">公开
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"name="display">公开
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                         <li><a href="#">公开</a></li>
-                        <li><a href="#">好友可见</a></li>
-                        <li><a href="#">密码可见</a></li>
-                        <li><a href="#">自定义隐私</a></li>
-                        <li><a href="#">仅自己可见</a></li>
+                        <li><a href="#">非公开</a></li>
                     </ul>
                 </div>
                 <div class="form-actions ti">

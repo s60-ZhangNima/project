@@ -5,8 +5,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('home/css/theme.min.css')}}">
 @endsection
 @section('script')
-    <script type="text/javascript" src="{{asset('home/js/jquery-2.1.4.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('home/js/bootstrap.min.js')}}"></script>
+    <script type="text/javascript" src="{{('home/js/jquery-2.1.4.min.js')}}"></script>
+    <script type="text/javascript" src="{{('home/js/bootstrap.min.js')}}"></script>
 @endsection
 @section('style')
 
@@ -24,30 +24,15 @@
     img{
     margin-top:10px ;
     margin-left:15px;
+    width:242px;
+    height:220px;
     }
 @endsection
 @section('content')
     <div class='min pre-scrollable' >
-        <img  class="abc" src="{{asset('home/img/dog.jpg')}}" alt="">
-        <img  class="abc" src="{{asset('home/img/dog.jpg')}}" alt="">
-        <img  class="abc" src="{{asset('home/img/dog.jpg')}}" alt="">
-        <img  class="abc" src="{{asset('home/img/dog.jpg')}}" alt="">
-        <img  class="abc" src="{{asset('home/img/dog.jpg')}}" alt="">
-        <img  class="abc" src="{{asset('home/img/dog.jpg')}}" alt="">
-        <img  class="abc" src="{{asset('home/img/dog.jpg')}}" alt="">
-        <img  class="abc" src="{{asset('home/img/dog.jpg')}}" alt="">
-        <img  class="abc" src="{{asset('home/img/dog.jpg')}}" alt="">
-        <img  class="abc" src="{{asset('home/img/dog.jpg')}}" alt="">
-        <img  class="abc" src="{{asset('home/img/dog.jpg')}}" alt="">
-        <img  class="abc" src="{{asset('home/img/dog.jpg')}}" alt="">
-        <img  class="abc" src="{{asset('home/img/dog.jpg')}}" alt="">
-        <img  class="abc" src="{{asset('home/img/dog.jpg')}}" alt="">
-        <img  class="abc" src="{{asset('home/img/dog.jpg')}}" alt="">
-        <img  class="abc" src="{{asset('home/img/dog.jpg')}}" alt="">
-        <img  class="abc" src="{{asset('home/img/dog.jpg')}}" alt="">
-        <img  class="abc" src="{{asset('home/img/dog.jpg')}}" alt="">
-        <img  class="abc" src="{{asset('home/img/dog.jpg')}}" alt="">
-        <img  class="abc" src="{{asset('home/img/dog.jpg')}}" alt="">
+        @foreach($result as $rel)
+        <img  class="abc" src="{{asset('home/upImg/'.$rel->pic)}}" alt="">
+        @endforeach
     </div>
 
 

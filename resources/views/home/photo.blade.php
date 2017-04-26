@@ -46,13 +46,13 @@
                     <li class="right">
 
                             <button type="button" class="btn btn-default btn-lg " aria-label="Left Align">
-                                <a href="./per_photo"><span class="glyphicon glyphicon-open" aria-hidden="true">上传照片</span></a>
+                                <a href="{{url('home/imgs')}}"><span class="glyphicon glyphicon-open" aria-hidden="true">上传照片</span></a>
                             </button>
 
                     </li>
                     <li class="left">
                         <button type="button" class="btn btn-default btn-lg" aria-label="Left Align">
-                            <a href="./createphoto"><span class="glyphicon glyphicon-plus" aria-hidden="true">新建相册</span></a>
+                            <a href="{{url('home/createphoto')}}"><span class="glyphicon glyphicon-plus" aria-hidden="true">新建相册</span></a>
                         </button>
                     </li>
                 </ul>
@@ -69,18 +69,19 @@
                             <img  class="abc" src="{{asset('home/img/dog.jpg')}}" alt="">
                         </div>
                     </div>
-                    <div role="tabpanel" class="tab-pane" id="messages">
-                        <div class="fh5co-gallery">
-
-                            <a class="gallery-item" href="./photolist">
-                                <img  class="abc" src="{{asset('home/img/dog.jpg')}}" alt="">
+                    <div role="tabpanel" class="tab-pane pre-scrollable " id="messages">
+                        @foreach($result as $rel)
+                        <div class="fh5co-gallery " style="float: left ;margin-left:10PX">
+                            <a class="gallery-item" href="{{url('home/photolist/').$rel->id}}}}">
+                                <img  class="abc" src="{{asset('home/img/default.jpg')}}" alt="">
                                 <span class="overlay">
-						<h2>生活</h2>
-						<span>煎熬的日子</span>
+						<h2>{{$rel->name}}</h2>
+						<span>{{$rel->desc}}</span>
 					</span>
                             </a>
 
                         </div>
+                            @endforeach
                     </div>
                 </div>
 

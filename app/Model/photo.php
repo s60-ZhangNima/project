@@ -8,6 +8,5 @@ class photo extends Model
 {
     //
     public $timestamps = false;
-    public $table = 'photo';
 
 }

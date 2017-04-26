@@ -268,16 +268,11 @@ class UserController extends Controller
             $iconname = md5(time()).'.jpg';
 
            $request->file('pic')->move('home/upImg',$iconname);
-
-            $request->file('pic')->move('home/upImg',$iconname);
-
             $photos = photo::where('name','我的头像')->get()->toArray();
             if ($photos){
                 $icons =  new icon();
-                $icons->pid = $photos[0]['id'];
-                $icons->name =  $iconname;
-                $icons->desc = '我的头像';
-                $icons->create_time = time();
+                $icons->gid = $photos[0]['id'];
+                $icons->pic =  $iconname;
                 $icons->save();
                 $id = $icons->id;
                 session(['cid'=>$id]);
@@ -290,15 +285,12 @@ class UserController extends Controller
                 $pho->uid = $uid;
                 $pho->name = '我的头像';
                 $pho->desc = '存放头像';
-                $pho->create_time = time();
                 $pho->save();
-
-                $id = photo::where('name','我的头像')->get()->toArray();
+                $id = $pho->id;
+//                $id = photo::where('name','我的头像')->get()->toArray();
                 $icons =  new icon();
-                $icons->pid = $id[0]['id'];
-                $icons->name = $iconname;
-                $icons->create_time = time();
-                $icons->desc = '我的头像';
+                $icons->gid = $id;
+                $icons->pic = $iconname;
                 $icons->save();
                 session(['cid'=>$id]);
                 $uicon = users::find($uid);
@@ -619,9 +611,11 @@ class UserController extends Controller
         }
         $friends = focus::where('uid', Auth::user()->id)->get()->toArray();
         $nums = $friends[0]['frid'];
+        $imin = $friends[0]['imid'];
         $arr = explode(',',$nums);
+        $arr2 = explode(',',$imin);
 
-        return view('home/per_FocusMe',compact('mmid','arr'));
+        return view('home/per_FocusMe',compact('mmid','arr','arr2'));
 
     }
 

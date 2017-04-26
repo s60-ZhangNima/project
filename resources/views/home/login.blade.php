@@ -89,13 +89,13 @@
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox" id="lunbotu">
                     <div class="item active">
-                        <img src="{{url('img/lunbo/1.jpg')}}" alt="..." style="height=450px;">
+                        <img src="{{url('img/lunbo/1.jpg')}}" alt="..." style="height:450px;">
                         <div class="carousel-caption">
                         </div>
                     </div>
                    @foreach($images as $image)
                     <div class="item ">
-                        <img src="{{asset($image['icon'])}}" alt="..." style="height=450px;">
+                        <img src="{{asset($image['icon'])}}" alt="..." style="height:450px;width: 660px">
                         <div class="carousel-caption">
                         </div>
                     </div>

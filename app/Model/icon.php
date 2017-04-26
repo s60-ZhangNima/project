@@ -8,5 +8,5 @@ class icon extends Model
 {
     //
     public $timestamps = false;
-    public $table = 'icon';
+    public $table = 'photolist';
 }

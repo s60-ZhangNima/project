@@ -166,6 +166,27 @@
                     <li>
                         <a href="./blank"><i class="icon-stop"></i> 我的应用</a>
                     </li>
+                    <li class="nav-header">
+                        各类管理
+                    </li>
+                    <li>
+                        <a href="{{url('admin/adminphoto')}}"><i class="icon-picture"></i>相册管理</a>
+                    </li>
+                    <li>
+                        <a href="{{url('admin/admindaily')}}"><i class="icon-stop"></i> 日志管理</a>
+                    </li>
+                    <li>
+                        <a href="{{url('admin/adminadvert')}}"><i class="icon-picture"></i>广告管理</a>
+                    </li>
+                    <li>
+                        <a href="{{url('admin/adminboard')}}"><i class="icon-stop"></i> 留言板管理</a>
+                    </li>
+                    <li class="nav-header">
+                        反馈
+                    </li>
+                    <li>
+                        <a href="{{url('admin/adminfeedback')}}"><i class="icon-picture"></i> 反馈处理</a>
+                    </li>
                 </ul>
             </div>
         </div>
