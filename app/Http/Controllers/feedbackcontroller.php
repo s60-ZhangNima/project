@@ -24,6 +24,6 @@ class feedbackcontroller extends Controller
 //        dd($date);
 
         $result = DB::table('feedback')->insert($date);
-        return view('home.feedback');
+        return back();
     }
 }

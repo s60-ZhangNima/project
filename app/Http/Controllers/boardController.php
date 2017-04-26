@@ -38,13 +38,14 @@ class boardController extends Controller
         $data=$request->all();
 //        dd($data);
         $result = DB::table('board')->insert($data);
-        return redirect('./board');
+        return redirect('home/board');
 
     }
 
     //回复留言
     public function rreport($id)
     {
+//        dd($id);
         $result = DB::select('select * from board where id ='.$id);
         return view('home.bboard')->with('result',$result);
 
@@ -55,7 +56,7 @@ class boardController extends Controller
 
         $data = $request->all();
         $result =DB::table('boardr')->insert($data);
-        return redirect('./board');
+        return redirect('home/board');
 
 
 //        return view('home.board';
@@ -65,6 +66,6 @@ class boardController extends Controller
    {
        $result = DB::table('boardr')->where('id',$id)->delete();
        $result = DB::table('board')->where('id',$id)->delete();
-       return redirect('./board');
+       return redirect('home/board');
    }
 }

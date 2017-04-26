@@ -1,10 +1,36 @@
 
 @extends('layouts.master')
+@section('style')
+    *{
+    padding:0px;
+    }
+    @endsection
 @section('content')
     <div class="container" style="margin: 30px 0">
-        <div class="row">
-            <div class="col-lg-3"></div>
+        <div class="row" style="width: 1349px;">
+            <div class="col-lg-3">
+                <div>
+                <div >
+                    <div style="font: 20px black   新宋体;text-align: center; width: 300px;height: 50px;line-height: 50px;">
+                        <a href="{{url('home/weather')}}" target='abc' id="alink">天气预报</a>
+                    </div>
+                    <div style="background-color: #ccc;width: 300px;height: 430px;background:url({{asset('home/img/tianqi.jpg')}})">
+                        {{--<img  class="abc" src="{{asset('home/img/tianqi.jpg')}}" alt="" style="width: 300px;height:400px;">--}}
+                        <iframe src="" name='abc' frameborder="0" scrolling="no" style="height: 430px;width: 300px;"></iframe>
+                    </div>
+                </div>
+                </div>
+                <div>
+                    <div style="font: 20px black   新宋体;text-align: center; width: 300px;height: 50px;line-height: 50px;">
+                        <a href="{{url('home/news')}}" target='abcd' id="alinks">时事新闻</a>
+                    </div>
+                    <div style="background-color: #ccc;width: 300px;height: 595px;background:url({{asset('home/img/new.jpg')}})">
+                        {{--<img  class="abc" src="{{asset('home/img/tianqi.jpg')}}" alt="" style="width: 300px;height:400px;">--}}
+                        <iframe src="" name='abcd' frameborder="0" scrolling="no" style="height: 595px;width: 300px;"></iframe>
+                    </div></div>
+            </div>
             <div class="col-lg-5">
+                <h1>最新动态</h1>
                 @if($sel->isEmpty())
                     暂无任何,快去写些状态吧~
                     @else
@@ -27,7 +53,7 @@
                     @endif
             </div>
             <div class="col-lg-3">
-                <div style="width:200px;height: 70px;border: 1px solid #ccc;float: right">
+                <div style="width:200px;height: 70px;border: 1px solid #ccc;">
                     <img src="{{asset('home/img/111.bmp')}}" alt="" class="pull-left">
                     @foreach($quan as $qu)
                         <a href="{{url('home/per_character')}}">
@@ -37,6 +63,27 @@
                         </a>
                     @endforeach
                 </div>
+                <div style="height: 210px;width: 200px;padding:10px;margin-top: 10px;border:1px solid #ccc">
+                    @foreach($us as $u)
+                        <div style="height: 120px;width: 160px;background-color: #ffffff;margin-left: 5px;">
+                        <img src="{{asset('home/upImg/'.$u->icon)}}" alt="" width="150px" height="110px;"style="margin-left: 5px;">
+                          </div>
+                         <div style="float: left;width: 160px;height: 120px;text-align: center;font: 16px black 楷体；">
+
+                             <b><span>{{$u->name}}</span></b><br>
+                             <spn><img src="{{asset('home/img/timg.gif')}}" alt="" style="width: 50px;height: 50px;margin-right: 10px;">{{$grade[0]->grades}}级</spn>
+
+                    </div>
+                    @endforeach
+
+                </div>
+                <div>
+                    @foreach($advert as $ad)
+                        <img src="{{asset('home/upImg/'.$ad->img)}}" alt="" width="241px">
+                        @endforeach
+                </div>
+
+
             </div>
         </div>
     </div>
@@ -145,5 +192,8 @@
             $(this).next('.showFace').append($img);
 
         });
+        document.getElementById("alink").click();
+        document.getElementById("alinks").click();
+
     </script>
 @endsection

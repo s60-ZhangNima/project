@@ -146,8 +146,8 @@ Route::get('/{confirmed_code}', 'UserController@emailConfirm');
 //李进楷
 
 //Route::get('/h','IndexController@index');
-Route::get('/home/photo','photoController@photo');
-Route::get('/home/per_photo','per_photoController@per_photo');
+//Route::get('/home/photo','photoController@photo');
+//Route::get('/home/per_photo','per_photoController@per_photo');
 //后台主页
 Route::get('/admin/admin','adminController@admin');
 
@@ -157,9 +157,9 @@ Route::get('/admin/gallery','galleryController@gallery');
 Route::get('/admin/help','activityController@help');
 Route::get('/admin/messages','messagesController@messages');
 Route::get('/admin/projects','projectsController@projects');
-Route::get('/home/createphoto','createphotoController@createphoto');
-Route::get('/home/photolist','photolistController@photolist');
-Route::get('/home/board','boardController@board');
+//Route::get('/home/createphoto','createphotoController@createphoto');
+//Route::get('/home/photolist','photolistController@photolist');
+//Route::get('/home/board','boardController@board');
 Route::get('/admin/activity','activityController@activity');
 
 
@@ -500,6 +500,7 @@ Route::post('/home/feedback','feedbackController@feedbacks');
 
 //天气
 Route::get('/home/weather','weatherController@weather');
+Route::get('/home/news','newController@news');
 
 
 

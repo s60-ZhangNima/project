@@ -97,13 +97,13 @@
                     <span>{{date('Y-m-d H:i:s',$rel->posttime)}}</span>
                 </div>
                 <div class="actions del">
-                    <a class="" onclick="" href="./comdel/{{$rel->id}}">删除</a>
-                    <a href="./daily/{{$rel->id}}" class="" id="">评论</a>
+                    <a class="" onclick="" href="{{url('home/comdel/'.$rel->id)}}">删除</a>
+                    <a href="{{url('home/daily/'.$rel->id)}}" class="" id="">评论</a>
                 </div>
             </div>
             <div class="content" style="width: 1000px; word-wrap:break-word">
                 <p style="margin-left: 20px;"><h3>标题:&nbsp;&nbsp;《{{$rel->caption}}》</h3></p>
-                <img src="{{('home/upImg/'.$rel->img)}}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+                <img src="{{asset('home/upImg/'.$rel->img)}}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
                 <p style="width: 500px;">{{$rel->content}}</p>
             </div>
             </div>
@@ -118,8 +118,8 @@
                                     <span>{{date('Y-m-d H:i:s',$rep->posttime)}}</span>
                                 </div>
                                 <div class="actions del">
-                                    <a class="" onclick="" href="./comdel/{{$rep->id}}">删除</a>
-                                    <a href="./daily/{{$rep->id}}" class="" id="">评论</a>
+                                    <a class="" onclick="" href="{{url('home/comdel/'.$rep->id)}}">删除</a>
+                                    <a href="{{url('home/comdel/'.$rep->id)}}" class="" id="">评论</a>
                                 </div>
                             </div>
                             <div class="content">

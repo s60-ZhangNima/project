@@ -79,14 +79,14 @@
     </h3>
     <div class="board">
     <div class="col-xs-6 col-sm-3 placeholder root" >
-        <img src="{{('home/img/dog.jpg')}}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-        <h4>用户名</h4>
+        <img src="{{asset('home/img/dog.jpg')}}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+        <h4></h4>
         {{--<span class="text-muted">留言条数</span>--}}
         <hr>
     </div>
     <div class="jumbotron min-a">
         <div id="hie">
-            <h2 style="margin-left: 180px;">留言回复</h2>
+            <h2 style="margin-left: 180px;"></h2>
             <form class="form-horizontal" action="" method="">
                 <div class="">
 
@@ -100,15 +100,15 @@
 
             </form>
         </div>
-        <form class="form-horizontal" action="{{('./daily')}}" method="post" enctype="multipart/form-data">
+        <form class="form-horizontal" action="{{url('home/daily')}}" method="post" enctype="multipart/form-data">
             {{csrf_field()}}
             <div class="">
-                       标题:<input type="text" name="caption"style="margin-bottom: 10px;">
+                       <b>标题:</b><input type="text" name="caption"style="margin-bottom: 10px;">
                     <textarea class="form-control" rows="6" name="content"></textarea>
                     <input type="hidden" name="uid" value="8">
                     <input type="hidden" name="posttime" value="{{time()}}">
                   <div class="liuyan" style="margin-left: 120px; margin-top: 10px;   ">
-                      <input type="file" name="img">
+                      <b>添加图片：</b><input type="file" name="img">
                       <input  style="margin-top: 10px;" type="submit" class=" btn btn-danger btn-lg " value="发表日志">
 
                   </div>

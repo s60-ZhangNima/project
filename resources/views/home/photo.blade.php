@@ -72,7 +72,7 @@
                     <div role="tabpanel" class="tab-pane pre-scrollable " id="messages">
                         @foreach($result as $rel)
                         <div class="fh5co-gallery " style="float: left ;margin-left:10PX">
-                            <a class="gallery-item" href="{{url('home/photolist/').$rel->id}}}}">
+                            <a class="gallery-item" href="{{url('home/photolist/'.$rel->id)}}">
                                 <img  class="abc" src="{{asset('home/img/default.jpg')}}" alt="">
                                 <span class="overlay">
 						<h2>{{$rel->name}}</h2>

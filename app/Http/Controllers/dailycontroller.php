@@ -73,7 +73,7 @@ class dailycontroller extends Controller
             'uid'=>$id,
         ];
         DB::table('grade')->where('uid',$id)->update($grade);
-        return redirect('./mydaily');
+        return redirect('home/mydaily');
 
     }
 
@@ -90,7 +90,7 @@ class dailycontroller extends Controller
 
         $data = $request->all();
         $result =DB::table('comment')->insert($data);
-        return redirect('./mydaily');
+        return redirect('home/mydaily');
 
 
 //        return view('home.board';

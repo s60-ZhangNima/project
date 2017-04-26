@@ -80,7 +80,7 @@
     <div class="jumbotron min-a">
         <div id="hie">
             <h2 style="margin-left: 120px">留言回复</h2>
-            <form class="form-horizontal" action="{{url('./bboard')}}" method="post">
+            <form class="form-horizontal" action="{{url('home/bboard')}}" method="post">
                 {{csrf_field()}}
                 @foreach($result as $rel)
                     {{--{{$rel->id}}--}}

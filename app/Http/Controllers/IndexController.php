@@ -26,6 +26,12 @@ class IndexController extends Controller
             ->join('states','users.id','states.uid')
             ->whereIn('uid',$res)
             ->get();
-        return view('home.index',compact('quan','sel'));
+        $us=DB::select('select * from users where id ='.Auth::user()->id);
+//        dd($us);
+        $grade=DB::select('select * from grade where uid ='.Auth::user()->id);
+//        dd($grade);
+        $advert=DB::select('select * from advert');
+//        dd($advert);
+        return view('home.index',compact('quan','sel','us','grade','advert'));
     }
 }

@@ -77,7 +77,7 @@
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                 @foreach($result as $rel)
-                                    <li><a href="{{('home/imgs/').$rel->id}}">{{$rel->name}}</a></li>
+                                    <li><a href="{{url('home/imgs/'.$rel->id)}}">{{$rel->name}}</a></li>
                                 @endforeach
                             </ul>
                         </div>

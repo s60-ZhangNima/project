@@ -79,7 +79,7 @@
     </h3>
     <div class="board">
     <div class="col-xs-6 col-sm-3 placeholder root" >
-        <img src="{{('home/img/dog.jpg')}}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+        <img src="{{asset('home/img/dog.jpg')}}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
         <h4>用户名</h4>
         <span class="text-muted">留言条数</span>
         <hr>
@@ -99,7 +99,7 @@
 
             </form>
         </div>
-        <form class="form-horizontal" action="{{('./board')}}" method="post">
+        <form class="form-horizontal" action="{{url('home/board')}}" method="post">
             {{csrf_field()}}
             <div class="">
                     <textarea class="form-control" rows="6" name="content"></textarea>
@@ -120,8 +120,8 @@
                     <span>{{date('Y-m-d H:i:s',$rel->posttime)}}</span>
                 </div>
                 <div class="actions del">
-                    <a class="" onclick="" href="./board/{{$rel->id}}">删除</a>
-                    <a href="./board/{{$rel->id}}" class="" id="">回复</a>
+                    <a class="" onclick="" href="{{url('home/boards/'.$rel->id)}}">删除</a>
+                    <a href="{{url('home/board/'.$rel->id)}}" class="" id="">回复</a>
                 </div>
             </div>
             <div class="content">
@@ -139,8 +139,8 @@
                                     <span>{{date('Y-m-d H:i:s',$rep->posttime)}}</span>
                                 </div>
                                 <div class="actions del">
-                                    <a class="" onclick="" href="./boards/{{$rep->id}}">删除</a>
-                                    <a href="./board/{{$rep->id}}" class="" id="">回复</a>
+                                    <a class="" onclick="" href="{{url('home/boards/'.$rep->id)}}">删除</a>
+                                    <a href="{{url('home/board/'.$rep->id)}}" class="" id="">回复</a>
                                 </div>
                             </div>
                             <div class="content">

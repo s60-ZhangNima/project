@@ -1,5 +1,5 @@
     @extends('mmm\master')
-@section('title','相册')
+@section('title','日志')
 @section('css')
     {{--<link rel="stylesheet" type="text/css" href="{{asset('home/css/bootstrap.min.css')}}">--}}
     <link rel="stylesheet" type="text/css" href="{{asset('home/css/theme.min.css')}}">
@@ -72,14 +72,14 @@
     </h3>
     <div class="board">
     <div class="col-xs-6 col-sm-3 placeholder root" >
-        <img src="{{url('home/img/dog.jpg')}}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+        <img src="{{asset('home/img/dog.jpg')}}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
         <h4>用户名</h4>
         <hr>
     </div>
     <div class="jumbotron min-a">
         <div id="hie">
             <h2 style="margin-left: 120px">评论</h2>
-            <form class="form-horizontal" action="{{url('./comment')}}" method="post">
+            <form class="form-horizontal" action="{{url('home/comment')}}" method="post">
                 {{csrf_field()}}
                 @foreach($result as $rel)
                     {{--{{$rel->id}}--}}

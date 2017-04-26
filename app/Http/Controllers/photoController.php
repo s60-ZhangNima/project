@@ -23,6 +23,7 @@ class photoController extends Controller
  //上传照片
     public function upphoto ( $id)
     {
+//        dd($id);
         if (empty($id)){
             $id=1;
         }else{
