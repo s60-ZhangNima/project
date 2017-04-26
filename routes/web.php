@@ -192,7 +192,7 @@ Route::any('/admin/attach-role/{user_id}', 'Admin\UserController@allotrole')->mi
 
 
 //轮播图管理
-Route::get('/admin/image-list','Admin\ImageController@ImageList');
+Route::get('/admin/image-list','Admin\ImageController@ImageList')->middleware('rbac');
 Route::post('/admin/image-add','Admin\ImageController@imageAdd');
 Route::any('/admin/image-update/{image_id}','Admin\ImageController@ImageUpdate');
 Route::get('/admin/image-delete/{image_id}','Admin\ImageController@ImageDelete');

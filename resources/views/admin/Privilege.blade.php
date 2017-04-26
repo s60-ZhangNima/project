@@ -30,8 +30,8 @@
                     <td>{{$activity->display_name}}</td>
                     <td>{{$activity->description}}</td>
                     <td>
-                        <a href="alter/{{$activity->id}}">修改</a>
-                        <a href="/admin/delete/{{$activity->id}}">删除</a>
+                        <a href="{{url('/admin/alter/'.$activity->id)}}">修改</a>
+                        <a href="{{url('/admin/delete/'.$activity->id)}}">删除</a>
                     </td>
                 </tr>
             @endforeach

@@ -30,11 +30,11 @@
                 <td>{{$role->description}}</td>
                 <td>{{$role->perms}}</td>
                 <td>
-                    <a href="{{url('assignment/'.$role->id)}}">分配权限</a>
+                    <a href="{{url('/admin/assignment/'.$role->id)}}">分配权限</a>
                     <br>
                     <a href="{{url('/admin/role-update/'.$role->id)}}">修改</a>
                     <br>
-                    <a href="{{'role-delete/'.$role->id}}">删除</a>
+                    <a href="{{url('/admin/role-delete/'.$role->id)}}">删除</a>
                 </td>
             </tr>
         @endforeach

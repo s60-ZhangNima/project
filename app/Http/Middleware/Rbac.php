@@ -28,9 +28,9 @@ class Rbac
         dump($id);
         dump($user->name);
         dump($user->can($route));
-            /*if (!$user->can($route)){
-                return back();
-            }*/
+//            if (!$user->can($route)){
+//                return back();
+//            }
        return $next($request);
     }
 }
